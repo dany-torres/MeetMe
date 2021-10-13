@@ -14,6 +14,13 @@
 		B6F2551B2713DF400089FF17 /* MeetMe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6F255192713DF400089FF17 /* MeetMe.xcdatamodeld */; };
 		B6F2551D2713DF420089FF17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6F2551C2713DF420089FF17 /* Assets.xcassets */; };
 		B6F255202713DF420089FF17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6F2551E2713DF420089FF17 /* LaunchScreen.storyboard */; };
+		B6F255282714B1220089FF17 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255272714B1220089FF17 /* SignUpViewController.swift */; };
+		B6F2552A2714D6120089FF17 /* GroupBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255292714D6120089FF17 /* GroupBrowserViewController.swift */; };
+		B6F2552C271529830089FF17 /* GroupCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2552B271529830089FF17 /* GroupCreationViewController.swift */; };
+		B6F2552E2715395A0089FF17 /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2552D2715395A0089FF17 /* FriendListViewController.swift */; };
+		B6F25530271542F80089FF17 /* GroupStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2552F271542F80089FF17 /* GroupStackViewController.swift */; };
+		B6F255322715F6DF0089FF17 /* GroupSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255312715F6DE0089FF17 /* GroupSettingsViewController.swift */; };
+		B6F255342716916C0089FF17 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255332716916B0089FF17 /* CreateEventViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,13 @@
 		B6F2551C2713DF420089FF17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6F2551F2713DF420089FF17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6F255212713DF420089FF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6F255272714B1220089FF17 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		B6F255292714D6120089FF17 /* GroupBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBrowserViewController.swift; sourceTree = "<group>"; };
+		B6F2552B271529830089FF17 /* GroupCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCreationViewController.swift; sourceTree = "<group>"; };
+		B6F2552D2715395A0089FF17 /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
+		B6F2552F271542F80089FF17 /* GroupStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStackViewController.swift; sourceTree = "<group>"; };
+		B6F255312715F6DE0089FF17 /* GroupSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSettingsViewController.swift; sourceTree = "<group>"; };
+		B6F255332716916B0089FF17 /* CreateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +76,13 @@
 				B6F255122713DF400089FF17 /* SceneDelegate.swift */,
 				B6F255142713DF400089FF17 /* ViewController.swift */,
 				B6F255162713DF400089FF17 /* Main.storyboard */,
+				B6F255312715F6DE0089FF17 /* GroupSettingsViewController.swift */,
+				B6F2552F271542F80089FF17 /* GroupStackViewController.swift */,
+				B6F2552D2715395A0089FF17 /* FriendListViewController.swift */,
+				B6F2552B271529830089FF17 /* GroupCreationViewController.swift */,
+				B6F255292714D6120089FF17 /* GroupBrowserViewController.swift */,
+				B6F255272714B1220089FF17 /* SignUpViewController.swift */,
+				B6F255332716916B0089FF17 /* CreateEventViewController.swift */,
 				B6F2551C2713DF420089FF17 /* Assets.xcassets */,
 				B6F2551E2713DF420089FF17 /* LaunchScreen.storyboard */,
 				B6F255212713DF420089FF17 /* Info.plist */,
@@ -141,10 +162,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6F2552A2714D6120089FF17 /* GroupBrowserViewController.swift in Sources */,
+				B6F2552C271529830089FF17 /* GroupCreationViewController.swift in Sources */,
 				B6F2551B2713DF400089FF17 /* MeetMe.xcdatamodeld in Sources */,
+				B6F255322715F6DF0089FF17 /* GroupSettingsViewController.swift in Sources */,
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
+				B6F2552E2715395A0089FF17 /* FriendListViewController.swift in Sources */,
 				B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */,
+				B6F255342716916C0089FF17 /* CreateEventViewController.swift in Sources */,
 				B6F255132713DF400089FF17 /* SceneDelegate.swift in Sources */,
+				B6F25530271542F80089FF17 /* GroupStackViewController.swift in Sources */,
+				B6F255282714B1220089FF17 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
