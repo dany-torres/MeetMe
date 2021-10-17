@@ -21,6 +21,11 @@
 		B6F25530271542F80089FF17 /* GroupStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2552F271542F80089FF17 /* GroupStackViewController.swift */; };
 		B6F255322715F6DF0089FF17 /* GroupSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255312715F6DE0089FF17 /* GroupSettingsViewController.swift */; };
 		B6F255342716916C0089FF17 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255332716916B0089FF17 /* CreateEventViewController.swift */; };
+		B6F25536271BE43A0089FF17 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F25535271BE43A0089FF17 /* SettingsViewController.swift */; };
+		B6F25538271BE4530089FF17 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F25537271BE4530089FF17 /* SearchViewController.swift */; };
+		B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F25539271BE4690089FF17 /* NotificationsViewController.swift */; };
+		B6F2553C271BE4800089FF17 /* MyStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2553B271BE4800089FF17 /* MyStackViewController.swift */; };
+		B6F2553E271BFA260089FF17 /* MeetMeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		B6F2552F271542F80089FF17 /* GroupStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStackViewController.swift; sourceTree = "<group>"; };
 		B6F255312715F6DE0089FF17 /* GroupSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSettingsViewController.swift; sourceTree = "<group>"; };
 		B6F255332716916B0089FF17 /* CreateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		B6F25535271BE43A0089FF17 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B6F25537271BE4530089FF17 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B6F25539271BE4690089FF17 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		B6F2553B271BE4800089FF17 /* MyStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStackViewController.swift; sourceTree = "<group>"; };
+		B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetMeTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +86,11 @@
 				B6F255122713DF400089FF17 /* SceneDelegate.swift */,
 				B6F255142713DF400089FF17 /* ViewController.swift */,
 				B6F255162713DF400089FF17 /* Main.storyboard */,
+				B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */,
+				B6F25535271BE43A0089FF17 /* SettingsViewController.swift */,
+				B6F25537271BE4530089FF17 /* SearchViewController.swift */,
+				B6F25539271BE4690089FF17 /* NotificationsViewController.swift */,
+				B6F2553B271BE4800089FF17 /* MyStackViewController.swift */,
 				B6F255312715F6DE0089FF17 /* GroupSettingsViewController.swift */,
 				B6F2552F271542F80089FF17 /* GroupStackViewController.swift */,
 				B6F2552D2715395A0089FF17 /* FriendListViewController.swift */,
@@ -166,13 +181,18 @@
 				B6F2552C271529830089FF17 /* GroupCreationViewController.swift in Sources */,
 				B6F2551B2713DF400089FF17 /* MeetMe.xcdatamodeld in Sources */,
 				B6F255322715F6DF0089FF17 /* GroupSettingsViewController.swift in Sources */,
+				B6F2553E271BFA260089FF17 /* MeetMeTabBarController.swift in Sources */,
+				B6F2553C271BE4800089FF17 /* MyStackViewController.swift in Sources */,
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
+				B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */,
 				B6F2552E2715395A0089FF17 /* FriendListViewController.swift in Sources */,
 				B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */,
 				B6F255342716916C0089FF17 /* CreateEventViewController.swift in Sources */,
+				B6F25538271BE4530089FF17 /* SearchViewController.swift in Sources */,
 				B6F255132713DF400089FF17 /* SceneDelegate.swift in Sources */,
 				B6F25530271542F80089FF17 /* GroupStackViewController.swift in Sources */,
 				B6F255282714B1220089FF17 /* SignUpViewController.swift in Sources */,
+				B6F25536271BE43A0089FF17 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
