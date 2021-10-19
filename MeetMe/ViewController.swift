@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -22,6 +23,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
+        let email = usernameTextField.text!
+        let password = passwordTextField.text!
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+          guard let strongSelf = self else { return }
+            print("Account: \(email)")
+            print("Password: \(password)")
+          // ...
+        }
     }
+    
+    
 }
 

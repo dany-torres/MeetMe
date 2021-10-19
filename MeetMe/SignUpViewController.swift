@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: UIViewController {
 
@@ -23,7 +24,46 @@ class SignUpViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func validateFields() -> String? {
+        // Check if all of them have an empty string
+        validateName()
+        validateUsername()
+//        validatePassword()
+        return nil
+    }
+    
+    func validateName() {
+        
+    }
+    
+    func validateUsername(){
+        
+    }
+    
+    func validatePassword() -> Bool {
+        return false
+    }
+    
+    func validateLocation() {
+        
+    }
+    
+    func validatePhoneNumber() {
+        
+    }
+    
     @IBAction func signUpButtonPressed(_ sender: Any) {
+        // Check fields
+        // Create the new user
+        let email = usernameTextField.text!
+        let password = passwordTextField.text!
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+          // ...
+            print("Account: \(email)")
+            print("Password: \(password)")
+        }
+        // Populate the fields
+        // Go to the homescreen
     }
     
     /*
