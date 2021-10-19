@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11FC8FC271E25C3005C37B1 /* GroupsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */; };
+		A11FC8FE271E279F005C37B1 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FD271E279F005C37B1 /* UserClass.swift */; };
 		B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255102713DF400089FF17 /* AppDelegate.swift */; };
 		B6F255132713DF400089FF17 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255122713DF400089FF17 /* SceneDelegate.swift */; };
 		B6F255152713DF400089FF17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255142713DF400089FF17 /* ViewController.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsClass.swift; sourceTree = "<group>"; };
+		A11FC8FD271E279F005C37B1 /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		B6F2550D2713DF400089FF17 /* MeetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F255102713DF400089FF17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6F255122713DF400089FF17 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 				B6F2552D2715395A0089FF17 /* FriendListViewController.swift */,
 				B6F2552B271529830089FF17 /* GroupCreationViewController.swift */,
 				B6F255292714D6120089FF17 /* GroupBrowserViewController.swift */,
+				A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */,
+				A11FC8FD271E279F005C37B1 /* UserClass.swift */,
 				B6F255272714B1220089FF17 /* SignUpViewController.swift */,
 				B6F255332716916B0089FF17 /* CreateEventViewController.swift */,
 				B6F2551C2713DF420089FF17 /* Assets.xcassets */,
@@ -182,6 +188,7 @@
 				B6F2551B2713DF400089FF17 /* MeetMe.xcdatamodeld in Sources */,
 				B6F255322715F6DF0089FF17 /* GroupSettingsViewController.swift in Sources */,
 				B6F2553E271BFA260089FF17 /* MeetMeTabBarController.swift in Sources */,
+				A11FC8FE271E279F005C37B1 /* UserClass.swift in Sources */,
 				B6F2553C271BE4800089FF17 /* MyStackViewController.swift in Sources */,
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
 				B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */,
@@ -192,6 +199,7 @@
 				B6F255132713DF400089FF17 /* SceneDelegate.swift in Sources */,
 				B6F25530271542F80089FF17 /* GroupStackViewController.swift in Sources */,
 				B6F255282714B1220089FF17 /* SignUpViewController.swift in Sources */,
+				A11FC8FC271E25C3005C37B1 /* GroupsClass.swift in Sources */,
 				B6F25536271BE43A0089FF17 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
