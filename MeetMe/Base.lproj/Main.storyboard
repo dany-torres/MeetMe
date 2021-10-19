@@ -60,7 +60,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uBB-oa-cbK"/>
-                                    <segue destination="rbh-V1-zSj" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" id="okx-z5-mS4"/>
+                                    <segue destination="dE9-hu-tUU" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" id="Vbv-4e-OlO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BL-I0-oZV">
@@ -150,10 +150,10 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EPR-JA-mvK">
-                                <rect key="frame" x="0.0" y="157" width="414" height="607"/>
+                                <rect key="frame" x="0.0" y="157" width="414" height="656"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="hPG-EU-Vwe" detailTextLabel="Sm8-Ck-F8T" imageView="f1Z-fx-Sn7" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="Quk-ES-FPl">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="hPG-EU-Vwe" detailTextLabel="Sm8-Ck-F8T" imageView="f1Z-fx-Sn7" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="Quk-ES-FPl">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Quk-ES-FPl" id="DPh-jZ-7rm">
@@ -181,7 +181,6 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <accessibility key="accessibilityConfiguration" identifier="pop"/>
                                         <connections>
                                             <segue destination="fup-V8-17t" kind="show" identifier="GroupSegue" id="aRt-p5-l7b"/>
                                         </connections>
@@ -398,7 +397,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z3t-4z-rFV" userLabel="LocationTextField">
-                                <rect key="frame" x="55" y="413.5" width="290" height="34"/>
+                                <rect key="frame" x="55" y="453" width="290" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="SkP-dN-SRQ"/>
                                     <constraint firstAttribute="width" constant="290" id="UsO-oR-fnh"/>
@@ -407,7 +406,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5s-iS-7fp">
-                                <rect key="frame" x="55" y="385.5" width="57" height="20"/>
+                                <rect key="frame" x="55" y="425" width="57" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -425,7 +424,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7N-pM-CBP">
-                                <rect key="frame" x="86" y="486.5" width="85" height="60"/>
+                                <rect key="frame" x="86" y="526" width="85" height="20.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -439,28 +438,24 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends can" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv9-y1-hvB">
                                 <rect key="frame" x="55" y="585" width="83" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="cyC-04-rYB"/>
-                                    <constraint firstAttribute="height" constant="20" id="rQA-0M-3Rp"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSz-5d-0IJ">
-                                <rect key="frame" x="157" y="329" width="69" height="20"/>
+                                <rect key="frame" x="157" y="349" width="69" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-Rv-bme">
-                                <rect key="frame" x="268" y="320.5" width="62" height="20"/>
+                                <rect key="frame" x="268" y="350" width="62" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="11:00 AM" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W6Y-sd-Jnd" userLabel="StartTimeTextField">
-                                <rect key="frame" x="157" y="351" width="75" height="16.5"/>
+                                <rect key="frame" x="157" y="371" width="75" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="Stg-xG-IsY"/>
                                 </constraints>
@@ -468,7 +463,7 @@
                                 <textInputTraits key="textInputTraits" textContentType="date-time"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="2:00PM" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WPg-5o-iF9" userLabel="EndTimeTextField">
-                                <rect key="frame" x="268" y="342.5" width="75" height="34"/>
+                                <rect key="frame" x="268" y="372" width="75" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="qZb-zo-fps"/>
                                 </constraints>
@@ -491,7 +486,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80N-sD-fXI">
-                                <rect key="frame" x="234" y="480" width="110.5" height="0.0"/>
+                                <rect key="frame" x="234" y="519.5" width="110.5" height="33.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Set reminder">
                                     <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -503,7 +498,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rLC-ER-kkO" userLabel="NotificationsButton">
-                                <rect key="frame" x="44" y="481" width="44" height="71"/>
+                                <rect key="frame" x="44" y="520.5" width="44" height="31.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="">
                                     <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
@@ -514,11 +509,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create polls" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOB-C7-PdP">
-                                <rect key="frame" x="84" y="623.5" width="83" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="6IN-rM-eKu"/>
-                                    <constraint firstAttribute="height" constant="20" id="GcE-xm-xod"/>
-                                </constraints>
+                                <rect key="frame" x="84" y="624" width="83" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -536,10 +527,6 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="As6-DV-Foz">
                                 <rect key="frame" x="84" y="670.5" width="72" height="19.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="nuv-vo-Tfo"/>
-                                    <constraint firstAttribute="height" constant="19.5" id="vuS-QA-I9k"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -566,11 +553,8 @@
                                     <action selector="messagesBoxPressed:" destination="ZNC-ES-8eU" eventType="touchUpInside" id="xMN-e0-SNY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Send messages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tj4-zY-zdo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Send messages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tj4-zY-zdo">
                                 <rect key="frame" x="247" y="623" width="104" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="bQ3-Kb-eeV"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -727,9 +711,6 @@
                                 </segments>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="selectedSegmentTintColor" red="0.81633752579999996" green="0.71577680109999997" blue="0.98042279480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <connections>
-                                    <action selector="adminRunSegCtrl:" destination="Lxf-oT-TQw" eventType="valueChanged" id="tdy-fe-dEq"/>
-                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsB-Uy-lHD">
                                 <rect key="frame" x="83" y="593" width="110" height="34"/>
@@ -746,6 +727,23 @@
                                 <connections>
                                     <action selector="addFriendsButtonPressed:" destination="Lxf-oT-TQw" eventType="touchUpInside" id="6uT-l8-RR5"/>
                                     <segue destination="3AQ-8R-Tax" kind="show" identifier="AddFriendsSegue" id="wSe-l3-ryt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBu-V4-U10">
+                                <rect key="frame" x="152" y="574" width="110" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Noj-WY-iOj"/>
+                                    <constraint firstAttribute="width" constant="110" id="VOw-kv-Xlv"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Create">
+                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="createButtonPressed:" destination="Lxf-oT-TQw" eventType="touchUpInside" id="kcj-Qe-SXP"/>
+                                    <segue destination="fup-V8-17t" kind="show" identifier="CreateGroupSegue" id="jrk-Lf-LFT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3D-6M-Tc3">
@@ -811,25 +809,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBu-V4-U10">
-                                <rect key="frame" x="152" y="666" width="110" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="Ifi-rq-QlG"/>
-                                    <constraint firstAttribute="height" constant="34" id="Noj-WY-iOj"/>
-                                    <constraint firstAttribute="width" constant="110" id="VOw-kv-Xlv"/>
-                                    <constraint firstAttribute="height" constant="34" id="aT3-pP-akK"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Create">
-                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="createButtonPressed:" destination="Lxf-oT-TQw" eventType="touchUpInside" id="kcj-Qe-SXP"/>
-                                    <segue destination="fup-V8-17t" kind="show" identifier="CreateGroupSegue" id="jrk-Lf-LFT"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TNe-jM-hPq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -840,7 +819,6 @@
                             <constraint firstItem="a29-fZ-Shx" firstAttribute="centerX" secondItem="TNe-jM-hPq" secondAttribute="centerX" id="ABl-Nf-oUl"/>
                             <constraint firstItem="wsI-lN-Sn9" firstAttribute="top" secondItem="12y-E9-A6A" secondAttribute="bottom" constant="52" id="DKa-Q8-bsn"/>
                             <constraint firstItem="a29-fZ-Shx" firstAttribute="top" secondItem="TNe-jM-hPq" secondAttribute="top" constant="96" id="EQt-nk-xWu"/>
-                            <constraint firstItem="iBu-V4-U10" firstAttribute="top" secondItem="TNe-jM-hPq" secondAttribute="top" constant="578" id="Eeq-nc-Vec"/>
                             <constraint firstItem="TNe-jM-hPq" firstAttribute="trailing" secondItem="J3D-6M-Tc3" secondAttribute="trailing" constant="83" id="Hu6-FM-tSF"/>
                             <constraint firstItem="SYq-ZI-zYU" firstAttribute="top" secondItem="luX-Ce-a8F" secondAttribute="bottom" constant="41" id="MfH-rX-Gto"/>
                             <constraint firstItem="SYq-ZI-zYU" firstAttribute="leading" secondItem="12y-E9-A6A" secondAttribute="leading" id="NNO-Fe-kVQ"/>
@@ -854,6 +832,7 @@
                             <constraint firstItem="Lt0-Ta-jpq" firstAttribute="top" secondItem="12y-E9-A6A" secondAttribute="bottom" constant="24" id="ecb-ri-4AB"/>
                             <constraint firstItem="TNe-jM-hPq" firstAttribute="trailing" secondItem="SYq-ZI-zYU" secondAttribute="trailing" constant="245" id="hVP-56-n9e"/>
                             <constraint firstItem="12y-E9-A6A" firstAttribute="leading" secondItem="TNe-jM-hPq" secondAttribute="leading" constant="78" id="jut-jj-Vrx"/>
+                            <constraint firstItem="TNe-jM-hPq" firstAttribute="bottom" secondItem="iBu-V4-U10" secondAttribute="bottom" constant="205" id="kin-XG-LS5"/>
                             <constraint firstItem="Lt0-Ta-jpq" firstAttribute="leading" secondItem="TNe-jM-hPq" secondAttribute="leading" constant="78" id="o8D-Du-koB"/>
                             <constraint firstItem="wsI-lN-Sn9" firstAttribute="top" secondItem="Lt0-Ta-jpq" secondAttribute="bottom" constant="8" symbolic="YES" id="qN5-RC-IhM"/>
                             <constraint firstItem="Lt0-Ta-jpq" firstAttribute="leading" secondItem="wsI-lN-Sn9" secondAttribute="leading" id="sRu-oY-535"/>
@@ -885,7 +864,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="Search username" id="O0q-FI-Haw">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search username" id="O0q-FI-Haw">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1068,7 +1047,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="signUpButtonPressed:" destination="4TD-Sb-ugb" eventType="touchUpInside" id="MJ2-SU-FPD"/>
-                                    <segue destination="rbh-V1-zSj" kind="presentation" modalPresentationStyle="fullScreen" id="GmH-YM-Guf"/>
+                                    <segue destination="dE9-hu-tUU" kind="presentation" modalPresentationStyle="fullScreen" id="z62-Ba-u86"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anp-rE-6cJ">
@@ -1162,147 +1141,33 @@
             </objects>
             <point key="canvasLocation" x="845" y="-670"/>
         </scene>
-        <!--Groups-->
+        <!--Navigation Controller-->
         <scene sceneID="zlY-xX-dAf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dE9-hu-tUU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Groups" selectedImage="person.3" catalog="system" id="HCA-uk-QYU">
-                        <imageReference key="image" image="person.3" catalog="system" symbolScale="large"/>
-                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nNR-2k-EWe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="i5y-mC-aTU" kind="relationship" relationship="rootViewController" id="poy-Bu-gkU"/>
+                        <segue destination="i5y-mC-aTU" kind="relationship" relationship="rootViewController" id="Xj7-HA-5na"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXI-QU-cOT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="844.92753623188412" y="103.79464285714285"/>
         </scene>
-        <!--MyStack-->
-        <scene sceneID="Wm1-50-bW0">
-            <objects>
-                <viewController id="jeJ-fS-TXF" customClass="MyStackViewController" customModule="MeetMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="K3g-nW-IHL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="8th-3d-HsL"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="MyStack" id="OEW-zb-yoN">
-                        <imageReference key="image" image="clock.badge.checkmark" catalog="system" symbolScale="large"/>
-                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <imageReference key="selectedImage" image="clock.badge.checkmark" catalog="system" symbolScale="medium"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gjK-hd-b4I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-432" y="917"/>
-        </scene>
-        <!--Search View Controller-->
-        <scene sceneID="zGT-sP-4Kp">
-            <objects>
-                <viewController id="up3-7R-BA0" customClass="SearchViewController" customModule="MeetMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4RI-gJ-o5e">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="5A2-Ga-dFa"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="IgU-SG-oRe">
-                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gUi-dn-OcH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="405" y="896"/>
-        </scene>
-        <!--Meet Me Tab Bar Controller-->
-        <scene sceneID="VMN-ud-tA3">
-            <objects>
-                <tabBarController id="rbh-V1-zSj" customClass="MeetMeTabBarController" customModule="MeetMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="uUM-ml-HO3"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YOX-Vx-U1h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <tabBarAppearance key="standardAppearance" backgroundEffect="regular">
-                            <color key="selectionIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </tabBarAppearance>
-                    </tabBar>
-                    <connections>
-                        <segue destination="jeJ-fS-TXF" kind="relationship" relationship="viewControllers" id="S4N-wi-V8F"/>
-                        <segue destination="up3-7R-BA0" kind="relationship" relationship="viewControllers" id="Y0x-tf-afo"/>
-                        <segue destination="dE9-hu-tUU" kind="relationship" relationship="viewControllers" id="SfR-O7-mS1"/>
-                        <segue destination="r1T-IX-u0K" kind="relationship" relationship="viewControllers" id="a2X-BR-zDl"/>
-                        <segue destination="Uef-zc-bCY" kind="relationship" relationship="viewControllers" id="NN4-3E-40b"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GT7-Cm-gcU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1388" y="881"/>
-        </scene>
-        <!--Notifications-->
-        <scene sceneID="qL8-C8-vtS">
-            <objects>
-                <viewController id="r1T-IX-u0K" customClass="NotificationsViewController" customModule="MeetMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Kwh-XV-PqX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="SYA-T3-RaZ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Notifications" id="mT9-IX-czu">
-                        <imageReference key="image" image="bell.badge" catalog="system" symbolScale="large"/>
-                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <imageReference key="selectedImage" image="bell.badge" catalog="system" symbolScale="large"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="85V-zX-L0j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2420" y="886"/>
-        </scene>
-        <!--Settings-->
-        <scene sceneID="0gn-5T-S0w">
-            <objects>
-                <viewController id="Uef-zc-bCY" customClass="SettingsViewController" customModule="MeetMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zY9-2u-44Z">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="fpq-zz-mJ3"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Settings" selectedImage="gear" catalog="system" id="NGS-tf-WP7">
-                        <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
-                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rap-2i-2f2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3316" y="896"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="okx-z5-mS4"/>
+        <segue reference="Vbv-4e-OlO"/>
         <segue reference="aRt-p5-l7b"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="bell.badge" catalog="system" width="128" height="124"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
-        <image name="clock.badge.checkmark" catalog="system" width="128" height="113"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="person.3" catalog="system" width="128" height="62"/>
         <image name="square" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

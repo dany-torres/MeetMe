@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol GroupsPage {
     func addGroup(newGroup:Group)
