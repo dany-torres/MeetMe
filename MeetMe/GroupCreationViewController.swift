@@ -22,6 +22,9 @@ class GroupCreationViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func adminRunSegCtrl(_ sender: Any) {
+    }
+    
     @IBAction func cameraButtonPressed(_ sender: Any) {
     }
     

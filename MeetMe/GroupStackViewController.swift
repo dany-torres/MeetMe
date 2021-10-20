@@ -9,6 +9,7 @@ import UIKit
 
 class GroupStackViewController: UIViewController {
 
+    @IBOutlet weak var eventStack: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
