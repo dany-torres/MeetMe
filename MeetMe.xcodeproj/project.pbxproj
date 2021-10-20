@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D22CE24271CE300001BE602 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D22CE23271CE300001BE602 /* Event.swift */; };
 		B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255102713DF400089FF17 /* AppDelegate.swift */; };
 		B6F255132713DF400089FF17 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255122713DF400089FF17 /* SceneDelegate.swift */; };
 		B6F255152713DF400089FF17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255142713DF400089FF17 /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D22CE23271CE300001BE602 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		B6F2550D2713DF400089FF17 /* MeetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F255102713DF400089FF17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6F255122713DF400089FF17 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		B6F2550F2713DF400089FF17 /* MeetMe */ = {
 			isa = PBXGroup;
 			children = (
+				8D22CE23271CE300001BE602 /* Event.swift */,
 				B6F255102713DF400089FF17 /* AppDelegate.swift */,
 				B6F255122713DF400089FF17 /* SceneDelegate.swift */,
 				B6F255142713DF400089FF17 /* ViewController.swift */,
@@ -183,6 +186,7 @@
 				B6F255322715F6DF0089FF17 /* GroupSettingsViewController.swift in Sources */,
 				B6F2553E271BFA260089FF17 /* MeetMeTabBarController.swift in Sources */,
 				B6F2553C271BE4800089FF17 /* MyStackViewController.swift in Sources */,
+				8D22CE24271CE300001BE602 /* Event.swift in Sources */,
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
 				B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */,
 				B6F2552E2715395A0089FF17 /* FriendListViewController.swift in Sources */,

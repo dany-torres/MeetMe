@@ -24,29 +24,216 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
     
+    var reminderChoice = ""
+    var startTimeChosen = ""
+    var endTimeChosen = ""
+    
+    var delegate: UIViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Setting up button images for selected state
+        let checkmark = UIImage(systemName: "checkmark.square")
+        let square = UIImage(systemName: "square")
+        notificationsButton.setImage(checkmark, for: .selected)
+        notificationsButton.setImage(square, for: .normal)
+        
+        pollsButton.setImage(checkmark, for: .selected)
+        pollsButton.setImage(square, for: .normal)
+        
+        editEventButton.setImage(checkmark, for: .selected)
+        editEventButton.setImage(square, for: .normal)
+        
+        messagesButton.setImage(checkmark, for: .selected)
+        messagesButton.setImage(square, for: .normal)
+        
+        // Setting up the curr date for date label
+        let today = Date()
+        let weekday = Calendar.current.component(.weekday, from: today)
+        let month = Calendar.current.component(.month, from: today)
+        let date = Calendar.current.component(.day, from: today)
+
+        let weekdayText = Calendar.current.shortWeekdaySymbols[weekday-1]
+        let monthText = "\(Calendar.current.shortMonthSymbols[month-1]) \(date)"
+        
+        currentDateLabel.text = "\(weekdayText) \(monthText)"
+        
+        
     }
     
+    
+    
+    @IBAction func startTimeChosen(_ sender: Any) {
+        let timeChosen = startTimePicker.date
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        
+        startTimeChosen = dateFormatter.string(from: timeChosen)
+    }
+    
+    
+    @IBAction func endTimeChosen(_ sender: Any) {
+        let timeChosen = endTimePicker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        
+        endTimeChosen = dateFormatter.string(from: timeChosen)
+        
+    }
     @IBAction func setReminderButtonPressed(_ sender: Any) {
+        
+        //this will prompt an action sheet where
+        //the user can pick how many hours/minutes before to send the people in the event reminders that the event is about to start
+        
+        let controller = UIAlertController(
+            title: "Remind your friends about your event",
+            message: "Choose a time:",
+            preferredStyle: .actionSheet)
+        
+        let atTimeAction = UIAlertAction(
+            title: "At time of event",
+            style: .default,
+            handler: {(action) in self.reminderChoice = "At time of event"})
+        controller.addAction(atTimeAction)
+        
+        let fifteenAction = UIAlertAction(
+            title: "15 minutes before",
+            style: .default,
+            handler: {(action) in self.reminderChoice = "15 minutes before"})
+        controller.addAction(fifteenAction)
+        
+        let thirtyAction = UIAlertAction(
+            title: "30 minutes before",
+            style: .default,
+            handler: {(action) in self.reminderChoice = "30 minutes before"})
+        controller.addAction(thirtyAction)
+        
+        let oneHourAction = UIAlertAction(
+            title: "1 hour before",
+            style: .default,
+            handler: {(action) in self.reminderChoice = "1 hour before"})
+        controller.addAction(oneHourAction)
+        
+        let twoHoursAction = UIAlertAction(
+            title: "No Reminder",
+            style: .destructive,
+            handler: {(action) in self.reminderChoice = "No Reminder"})
+        controller.addAction(twoHoursAction)
+        
+        present(controller, animated: true, completion: nil)
         
     }
     
     @IBAction func notificationsBoxPressed(_ sender: Any) {
+        
+        if(notificationsButton.isSelected){
+            notificationsButton.isSelected = false
+        }else{
+            notificationsButton.isSelected = true
+        }
+        
     }
     
     @IBAction func pollsBoxPressed(_ sender: Any) {
+        if(pollsButton.isSelected){
+            pollsButton.isSelected = false
+        }else{
+            pollsButton.isSelected = true
+        }
     }
     
     @IBAction func editBoxPressed(_ sender: Any) {
+        if(editEventButton.isSelected){
+            editEventButton.isSelected = false
+        }else{
+            editEventButton.isSelected = true
+        }
     }
     
     @IBAction func messagesBoxPressed(_ sender: Any) {
+        if(messagesButton.isSelected){
+            messagesButton.isSelected = false
+        }else{
+            messagesButton.isSelected = true
+        }
     }
     
     @IBAction func createButtonPressed(_ sender: Any) {
+        switch true {
+        case eventNameTextField.text == "":
+                let controller = UIAlertController(
+                    title: "Missing Event Name",
+                    message: "Please name your event",
+                    preferredStyle: .alert)
+                controller.addAction(UIAlertAction(
+                                        title: "OK",
+                                        style: .default,
+                                        handler: nil))
+                present(controller,
+                        animated: true,
+                        completion: nil)
+        case locationTextField.text == "":
+                let controller = UIAlertController(
+                    title: "Missing location",
+                    message: "Please give your event a location",
+                    preferredStyle: .alert)
+                controller.addAction(UIAlertAction(
+                                        title: "OK",
+                                        style: .default,
+                                        handler: nil))
+                present(controller,
+                        animated: true,
+                        completion: nil)
+        
+        case startTimeChosen == "":
+                let controller = UIAlertController(
+                    title: "Missing Start Time",
+                    message: "Please give your event a starting time",
+                    preferredStyle: .alert)
+                controller.addAction(UIAlertAction(
+                                        title: "OK",
+                                        style: .default,
+                                        handler: nil))
+                present(controller,
+                        animated: true,
+                        completion: nil)
+            
+        case endTimeChosen == "":
+                let controller = UIAlertController(
+                    title: "Missing End Time",
+                    message: "Please give your event an ending time",
+                    preferredStyle: .alert)
+                controller.addAction(UIAlertAction(
+                                        title: "OK",
+                                        style: .default,
+                                        handler: nil))
+                present(controller,
+                        animated: true,
+                        completion: nil)
+            
+        case startTimePicker.date > endTimePicker.date:
+            let controller = UIAlertController(
+                title: "Incorrect End Time",
+                message: "The event end time can't be set before the start time",
+                preferredStyle: .alert)
+            controller.addAction(UIAlertAction(
+                                    title: "OK",
+                                    style: .default,
+                                    handler: nil))
+            present(controller,
+                    animated: true,
+                    completion: nil)
+        
+        default:
+        
+        let otherVC = delegate as! AddNewEvent
+        let newEvent = Event(eventName:eventNameTextField.text!, eventDate:currentDateLabel.text!, startTime:startTimeChosen, endTime:endTimeChosen, location:locationTextField.text!, notifications: notificationsButton.isSelected, reminderChoice: reminderChoice, polls: pollsButton.isSelected, messages:messagesButton.isSelected, editEvents:editEventButton.isSelected)
+        
+        otherVC.addNewEvent(newEvent: newEvent)
+            
+        }
     }
     
     @IBAction func startTimeChosen(_ sender: Any) {
@@ -62,7 +249,19 @@ class CreateEventViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        //WE ARE GOING TO HAVE TO HAVE TO PASS ALL OF THE INFO TO THE STACK PAGE
     }
     */
+    
+    
+    // code to enable tapping on the background to remove software keyboard
+        func textFieldShouldReturn(textField:UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+        }
+
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
 
 }
