@@ -335,17 +335,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z3t-4z-rFV" userLabel="LocationTextField">
-                                <rect key="frame" x="55" y="413.5" width="290" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="SkP-dN-SRQ"/>
-                                    <constraint firstAttribute="width" constant="290" id="UsO-oR-fnh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5s-iS-7fp">
-                                <rect key="frame" x="55" y="425" width="57" height="20"/>
+                                <rect key="frame" x="55" y="407" width="57" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -378,21 +369,21 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends can" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv9-y1-hvB">
                                 <rect key="frame" x="55" y="585" width="83" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="cyC-04-rYB"/>
+                                    <constraint firstAttribute="height" constant="22" id="cyC-04-rYB"/>
                                     <constraint firstAttribute="height" constant="20" id="rQA-0M-3Rp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Start Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSz-5d-0IJ">
-                                <rect key="frame" x="157" y="329" width="69" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Start Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSz-5d-0IJ">
+                                <rect key="frame" x="179" y="336" width="69" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-Rv-bme">
-                                <rect key="frame" x="268" y="320.5" width="62" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-Rv-bme">
+                                <rect key="frame" x="276" y="336" width="62" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -438,7 +429,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create polls" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOB-C7-PdP">
                                 <rect key="frame" x="84" y="623.5" width="83" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="6IN-rM-eKu"/>
+                                    <constraint firstAttribute="height" constant="22" id="6IN-rM-eKu"/>
                                     <constraint firstAttribute="height" constant="20" id="GcE-xm-xod"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -459,7 +450,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="As6-DV-Foz">
                                 <rect key="frame" x="84" y="670.5" width="72" height="19.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="nuv-vo-Tfo"/>
+                                    <constraint firstAttribute="height" constant="22" id="nuv-vo-Tfo"/>
                                     <constraint firstAttribute="height" constant="19.5" id="vuS-QA-I9k"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -491,14 +482,14 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Send messages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tj4-zY-zdo">
                                 <rect key="frame" x="247" y="623" width="104" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="bQ3-Kb-eeV"/>
+                                    <constraint firstAttribute="height" constant="22" id="bQ3-Kb-eeV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="fpC-jF-NSl">
-                                <rect key="frame" x="157" y="350" width="81" height="31"/>
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="fpC-jF-NSl">
+                                <rect key="frame" x="167" y="364" width="81" height="34.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="XN2-64-gXM"/>
                                     <constraint firstAttribute="width" constant="81" id="ydK-fY-VCm"/>
@@ -507,8 +498,8 @@
                                     <action selector="startTimeChosen:" destination="ZNC-ES-8eU" eventType="valueChanged" id="LWf-rU-8LJ"/>
                                 </connections>
                             </datePicker>
-                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="I0T-8a-5QH">
-                                <rect key="frame" x="268" y="343" width="87" height="31"/>
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="I0T-8a-5QH">
+                                <rect key="frame" x="264" y="364" width="87" height="34.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="emx-Fp-4Vu"/>
                                     <constraint firstAttribute="width" constant="83" id="tB8-PN-Aae"/>
@@ -517,10 +508,20 @@
                                     <action selector="endTimeChosen:" destination="ZNC-ES-8eU" eventType="valueChanged" id="wER-Td-n6Z"/>
                                 </connections>
                             </datePicker>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z3t-4z-rFV" userLabel="LocationTextField">
+                                <rect key="frame" x="55" y="431" width="290" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="SkP-dN-SRQ"/>
+                                    <constraint firstAttribute="width" constant="290" id="UsO-oR-fnh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="taF-ur-hg3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="taF-ur-hg3" firstAttribute="bottom" secondItem="fpC-jF-NSl" secondAttribute="bottom" constant="365.5" id="08x-wk-gIZ"/>
                             <constraint firstItem="Vv9-y1-hvB" firstAttribute="leading" secondItem="Ldh-Cf-ddD" secondAttribute="leading" id="10k-3G-W7A"/>
                             <constraint firstItem="Z3t-4z-rFV" firstAttribute="top" secondItem="l5s-iS-7fp" secondAttribute="bottom" constant="8" symbolic="YES" id="17G-Gd-Ad1"/>
                             <constraint firstItem="CJi-PE-Bqa" firstAttribute="top" secondItem="G78-rR-WCI" secondAttribute="bottom" constant="39" id="2Q3-qN-6ej"/>
@@ -540,6 +541,7 @@
                             <constraint firstItem="I0T-8a-5QH" firstAttribute="leading" secondItem="g4s-Rv-bme" secondAttribute="leading" id="Akh-JF-AFe"/>
                             <constraint firstItem="taF-ur-hg3" firstAttribute="trailing" secondItem="gOB-C7-PdP" secondAttribute="trailing" constant="247" id="B7N-mJ-u9n"/>
                             <constraint firstItem="tj4-zY-zdo" firstAttribute="top" secondItem="80N-sD-fXI" secondAttribute="bottom" constant="71" id="Bx0-iy-HFF"/>
+                            <constraint firstItem="taF-ur-hg3" firstAttribute="bottom" secondItem="I0T-8a-5QH" secondAttribute="bottom" constant="365.5" id="CQe-Eh-1AU"/>
                             <constraint firstItem="Z3t-4z-rFV" firstAttribute="leading" secondItem="1vG-Zj-qb3" secondAttribute="leading" id="EUF-Td-X92"/>
                             <constraint firstItem="l5s-iS-7fp" firstAttribute="leading" secondItem="taF-ur-hg3" secondAttribute="leading" constant="55" id="Eop-u3-Ga5"/>
                             <constraint firstItem="80N-sD-fXI" firstAttribute="centerY" secondItem="O7N-pM-CBP" secondAttribute="centerY" id="FX2-LG-0Om"/>

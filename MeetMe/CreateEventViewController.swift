@@ -62,26 +62,6 @@ class CreateEventViewController: UIViewController {
         
     }
     
-    
-    
-    @IBAction func startTimeChosen(_ sender: Any) {
-        let timeChosen = startTimePicker.date
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        
-        startTimeChosen = dateFormatter.string(from: timeChosen)
-    }
-    
-    
-    @IBAction func endTimeChosen(_ sender: Any) {
-        let timeChosen = endTimePicker.date
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        
-        endTimeChosen = dateFormatter.string(from: timeChosen)
-        
-    }
     @IBAction func setReminderButtonPressed(_ sender: Any) {
         
         //this will prompt an action sheet where
@@ -232,14 +212,27 @@ class CreateEventViewController: UIViewController {
         let newEvent = Event(eventName:eventNameTextField.text!, eventDate:currentDateLabel.text!, startTime:startTimeChosen, endTime:endTimeChosen, location:locationTextField.text!, notifications: notificationsButton.isSelected, reminderChoice: reminderChoice, polls: pollsButton.isSelected, messages:messagesButton.isSelected, editEvents:editEventButton.isSelected)
         
         otherVC.addNewEvent(newEvent: newEvent)
-            
+        _ = navigationController?.popViewController(animated: true)
         }
+        
+        
     }
     
     @IBAction func startTimeChosen(_ sender: Any) {
+        let timeChosen = startTimePicker.date
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        
+        startTimeChosen = dateFormatter.string(from: timeChosen)
     }
     
     @IBAction func endTimeChosen(_ sender: Any) {
+        let timeChosen = endTimePicker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        
+        endTimeChosen = dateFormatter.string(from: timeChosen)
     }
     
     /*
