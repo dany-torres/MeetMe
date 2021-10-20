@@ -1094,7 +1094,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="9hC-BH-k2C"/>
                     <connections>
-                        <outlet property="cellNumberTextField" destination="ZF8-Fp-Clz" id="CYT-Wa-p15"/>
                         <outlet property="confirmPasswordTextField" destination="l5K-O3-iKL" id="Ljc-e6-5lO"/>
                         <outlet property="emailTextField" destination="ZF8-Fp-Clz" id="VY8-XV-iqa"/>
                         <outlet property="locationTextField" destination="zTJ-AT-hSZ" id="npw-b9-XbI"/>
