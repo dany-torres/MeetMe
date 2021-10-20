@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F85FB49DC5633D465DEEB0A /* Pods_MeetMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D3BBCC3F2A88E9EE86116B8 /* Pods_MeetMe.framework */; };
 		A11FC8FC271E25C3005C37B1 /* GroupsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */; };
 		A11FC8FE271E279F005C37B1 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FD271E279F005C37B1 /* UserClass.swift */; };
 		B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255102713DF400089FF17 /* AppDelegate.swift */; };
@@ -31,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D3BBCC3F2A88E9EE86116B8 /* Pods_MeetMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		950969C9331FA89E3709A4D8 /* Pods-MeetMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetMe.debug.xcconfig"; path = "Target Support Files/Pods-MeetMe/Pods-MeetMe.debug.xcconfig"; sourceTree = "<group>"; };
 		A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsClass.swift; sourceTree = "<group>"; };
 		A11FC8FD271E279F005C37B1 /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		B6F2550D2713DF400089FF17 /* MeetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +57,7 @@
 		B6F25539271BE4690089FF17 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		B6F2553B271BE4800089FF17 /* MyStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStackViewController.swift; sourceTree = "<group>"; };
 		B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetMeTabBarController.swift; sourceTree = "<group>"; };
+		FF084C7046CCC534A8DE10A9 /* Pods-MeetMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetMe.release.xcconfig"; path = "Target Support Files/Pods-MeetMe/Pods-MeetMe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F247D0048CA0C3C632FD87B /* Pods_MeetMe.framework in Frameworks */,
+				8F85FB49DC5633D465DEEB0A /* Pods_MeetMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,8 +75,8 @@
 		103DE0CBAA15C4B1437FB755 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D7432972CB14E21200EB9BF9 /* Pods-MeetMe.debug.xcconfig */,
-				35FBC331EA8E5CEA48BAB02B /* Pods-MeetMe.release.xcconfig */,
+				950969C9331FA89E3709A4D8 /* Pods-MeetMe.debug.xcconfig */,
+				FF084C7046CCC534A8DE10A9 /* Pods-MeetMe.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -81,7 +85,7 @@
 		75A4D9E9708E907224B13686 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				248E8D5BF5B614659FD0C9BD /* Pods_MeetMe.framework */,
+				0D3BBCC3F2A88E9EE86116B8 /* Pods_MeetMe.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,7 +129,6 @@
 				A11FC8FD271E279F005C37B1 /* UserClass.swift */,
 				B6F255272714B1220089FF17 /* SignUpViewController.swift */,
 				B6F255332716916B0089FF17 /* CreateEventViewController.swift */,
-				5BB42597271A5DC7000C6CCE /* GoogleService-Info.plist */,
 				B6F2551C2713DF420089FF17 /* Assets.xcassets */,
 				B6F2551E2713DF420089FF17 /* LaunchScreen.storyboard */,
 				B6F255212713DF420089FF17 /* Info.plist */,
@@ -195,7 +198,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6F255202713DF420089FF17 /* LaunchScreen.storyboard in Resources */,
-				5BB42598271A5DC7000C6CCE /* GoogleService-Info.plist in Resources */,
 				B6F2551D2713DF420089FF17 /* Assets.xcassets in Resources */,
 				B6F255182713DF400089FF17 /* Main.storyboard in Resources */,
 			);
@@ -411,7 +413,7 @@
 		};
 		B6F255252713DF420089FF17 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7432972CB14E21200EB9BF9 /* Pods-MeetMe.debug.xcconfig */;
+			baseConfigurationReference = 950969C9331FA89E3709A4D8 /* Pods-MeetMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -441,7 +443,7 @@
 		};
 		B6F255262713DF420089FF17 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35FBC331EA8E5CEA48BAB02B /* Pods-MeetMe.release.xcconfig */;
+			baseConfigurationReference = FF084C7046CCC534A8DE10A9 /* Pods-MeetMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
