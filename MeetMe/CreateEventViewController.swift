@@ -16,14 +16,13 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var createEventLabel: UILabel!
     @IBOutlet weak var eventNameLabel: UILabel!
     
-    @IBOutlet weak var startTimePicker: UIDatePicker!
-    @IBOutlet weak var endTimePicker: UIDatePicker!
-    
     @IBOutlet weak var notificationsButton: UIButton!
     @IBOutlet weak var pollsButton: UIButton!
-    @IBOutlet weak var messagesButton: UIButton!
     @IBOutlet weak var editEventButton: UIButton!
+    @IBOutlet weak var messagesButton: UIButton!
     
+    @IBOutlet weak var startTimePicker: UIDatePicker!
+    @IBOutlet weak var endTimePicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
