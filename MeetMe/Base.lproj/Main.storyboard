@@ -60,7 +60,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uBB-oa-cbK"/>
-                                    <segue destination="rbh-V1-zSj" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" id="okx-z5-mS4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BL-I0-oZV">
@@ -1215,7 +1214,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="signUpButtonPressed:" destination="4TD-Sb-ugb" eventType="touchUpInside" id="MJ2-SU-FPD"/>
-                                    <segue destination="rbh-V1-zSj" kind="presentation" modalPresentationStyle="fullScreen" id="GmH-YM-Guf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anp-rE-6cJ">
@@ -1981,7 +1979,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="okx-z5-mS4"/>
         <segue reference="GOP-4q-Ftn"/>
         <segue reference="jrk-Lf-LFT"/>
     </inferredMetricsTieBreakers>
