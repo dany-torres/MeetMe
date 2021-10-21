@@ -92,7 +92,6 @@
 				C7D0EE66F11416DA690E5EA7 /* Pods-MeetMe.debug.xcconfig */,
 				72988190ACDF0A01EC9E0CE9 /* Pods-MeetMe.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -121,6 +120,7 @@
 				B6F255102713DF400089FF17 /* AppDelegate.swift */,
 				B6F255122713DF400089FF17 /* SceneDelegate.swift */,
 				B6F255142713DF400089FF17 /* ViewController.swift */,
+				B6F255272714B1220089FF17 /* SignUpViewController.swift */,
 				B6F255162713DF400089FF17 /* Main.storyboard */,
 				B6F2553F2720E5E30089FF17 /* EventDetailsViewController.swift */,
 				B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */,
@@ -135,7 +135,6 @@
 				B6F255292714D6120089FF17 /* GroupBrowserViewController.swift */,
 				A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */,
 				A11FC8FD271E279F005C37B1 /* UserClass.swift */,
-				B6F255272714B1220089FF17 /* SignUpViewController.swift */,
 				B6F255332716916B0089FF17 /* CreateEventViewController.swift */,
 				5BE927B32722005A005254BF /* GoogleService-Info.plist */,
 				B6F2551C2713DF420089FF17 /* Assets.xcassets */,
