@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    var validLogin: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,10 @@ class ViewController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return validLogin
+    }
 
     @IBAction func signUpButtonPressed(_ sender: Any) {
     }
@@ -41,6 +46,7 @@ class ViewController: UIViewController {
               email.count > 0,
               password.count > 0
         else {
+            validLogin = false
             return
         }
         
@@ -54,7 +60,7 @@ class ViewController: UIViewController {
             alert.addAction(UIAlertAction(title:"OK",style:.default))
             self.present(alert, animated: true, completion: nil)
           } else {
-//              self.validLogin = true
+              self.validLogin = true
           }
         }
     }
