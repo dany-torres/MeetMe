@@ -9,6 +9,10 @@ import UIKit
 
 class NotificationsViewController: UIViewController {
 
+    @IBOutlet weak var friendRequestTableView: UITableView!
+    @IBOutlet weak var upcomingEventsTableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

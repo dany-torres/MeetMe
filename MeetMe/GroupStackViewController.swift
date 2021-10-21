@@ -21,6 +21,12 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Change back button ot go to root rather than create group
+        var viewControllersArray = [UIViewController]()
+        viewControllersArray.append(self.navigationController!.viewControllers.first!)
+        viewControllersArray.append(self.navigationController!.viewControllers.last!)
+        self.navigationController?.setViewControllers(viewControllersArray, animated: false)
+        
         eventStack.delegate = self
         eventStack.dataSource = self
         // Do any additional setup after loading the view.

@@ -9,13 +9,38 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var displayPicture: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func cameraButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func languageSegCtrl(_ sender: Any) {
+    }
+    
+    @IBAction func modeSegCtrl(_ sender: Any) {
+    }
+    
+    @IBAction func deleteAccountButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+    
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -1,22 +1,14 @@
 //
-//  MyStackViewController.swift
+//  EventDetailsViewController.swift
 //  MeetMe
 //
-//  Created by Daniela Torres on 10/16/21.
+//  Created by Daniela Torres on 10/20/21.
 //
 
 import UIKit
 
-class MyStackViewController: UIViewController {
+class EventDetailsViewController: UIViewController {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var displayPicture: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var myStack: UITableView!
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

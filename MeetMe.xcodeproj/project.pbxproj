@@ -27,6 +27,7 @@
 		B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F25539271BE4690089FF17 /* NotificationsViewController.swift */; };
 		B6F2553C271BE4800089FF17 /* MyStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2553B271BE4800089FF17 /* MyStackViewController.swift */; };
 		B6F2553E271BFA260089FF17 /* MeetMeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */; };
+		B6F255402720E5E40089FF17 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F2553F2720E5E30089FF17 /* EventDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		B6F25539271BE4690089FF17 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		B6F2553B271BE4800089FF17 /* MyStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStackViewController.swift; sourceTree = "<group>"; };
 		B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetMeTabBarController.swift; sourceTree = "<group>"; };
+		B6F2553F2720E5E30089FF17 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				B6F255122713DF400089FF17 /* SceneDelegate.swift */,
 				B6F255142713DF400089FF17 /* ViewController.swift */,
 				B6F255162713DF400089FF17 /* Main.storyboard */,
+				B6F2553F2720E5E30089FF17 /* EventDetailsViewController.swift */,
 				B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */,
 				B6F25535271BE43A0089FF17 /* SettingsViewController.swift */,
 				B6F25537271BE4530089FF17 /* SearchViewController.swift */,
@@ -186,6 +189,7 @@
 				B6F255322715F6DF0089FF17 /* GroupSettingsViewController.swift in Sources */,
 				B6F2553E271BFA260089FF17 /* MeetMeTabBarController.swift in Sources */,
 				B6F2553C271BE4800089FF17 /* MyStackViewController.swift in Sources */,
+				B6F255402720E5E40089FF17 /* EventDetailsViewController.swift in Sources */,
 				8D22CE24271CE300001BE602 /* Event.swift in Sources */,
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
 				B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */,
