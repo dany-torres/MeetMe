@@ -9,6 +9,14 @@ import UIKit
 
 class MyStackViewController: UIViewController {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var displayPicture: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var myStack: UITableView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

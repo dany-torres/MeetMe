@@ -9,13 +9,28 @@ import UIKit
 
 class GroupSettingsViewController: UIViewController {
 
+    @IBOutlet weak var groupPicture: UIImageView!
+    @IBOutlet weak var groupNameTextField: UITextField!
+    @IBOutlet weak var groupDescriptionTextField: UITextField!
+    @IBOutlet weak var groupMembersTableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func cameraButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func addFriendsButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+    }
+    
+    
     /*
     // MARK: - Navigation
 
