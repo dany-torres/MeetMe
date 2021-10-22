@@ -30,10 +30,6 @@ class ViewController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
-    
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        return validLogin
-//    }
 
     @IBAction func signUpButtonPressed(_ sender: Any) {
 //        validLogin = true
