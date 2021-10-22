@@ -67,7 +67,7 @@ class SignUpViewController: UIViewController {
             if error == nil {
                 Auth.auth().signIn(withEmail: self.emailTextField.text!,
                                    password: self.passwordTextField.text!)
-                self.shouldPerformSegue(withIdentifier: "signInSegue", sender: nil)
+                self.shouldPerformSegue(withIdentifier: "SignUpSegue", sender: nil)
             }
         }
         self.dismiss(animated: true, completion: nil)
