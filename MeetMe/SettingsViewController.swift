@@ -41,18 +41,10 @@ class SettingsViewController: UIViewController {
     @IBAction func logoutButtonPressed(_ sender: Any) {
         do {
             try Auth.auth().signOut()
+            self.performSegue(withIdentifier: "BackToSignInSegue", sender: nil)
         } catch let signOutError as NSError {
           print("Error signing out: %@", signOutError)
         }
-        //TODO: Add funcitonality to go back to the main screen
-//        Auth.auth().addStateDidChangeListener { auth, user in
-//            if user != nil{
-//                self.performSegue(withIdentifier: "signInSegue", sender: nil)
-//                self.nameTextField.text = nil
-//                self.usernameTextField.text = nil
-//                self.locationTextField.text = nil
-//            }
-//        }
     }
     
     /*
