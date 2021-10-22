@@ -64,11 +64,12 @@ class SignUpViewController: UIViewController {
             return
         }
         Auth.auth().createUser(withEmail: email, password: password) { user, error in
-            if error == nil {
-                Auth.auth().signIn(withEmail: self.emailTextField.text!,
-                                   password: self.passwordTextField.text!)
-            }
+//            if error == nil {
+//                Auth.auth().signIn(withEmail: self.emailTextField.text!,
+//                                   password: self.passwordTextField.text!)
+//            }
         }
+        self.dismiss(animated: true, completion: nil)
         // Populate the fields
         // Go to the homescreen
     }

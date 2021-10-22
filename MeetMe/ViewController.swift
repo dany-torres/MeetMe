@@ -45,7 +45,6 @@ class ViewController: UIViewController {
               email.count > 0,
               password.count > 0
         else {
-//            validLogin = false
             return
         }
         
@@ -59,7 +58,7 @@ class ViewController: UIViewController {
             alert.addAction(UIAlertAction(title:"OK",style:.default))
             self.present(alert, animated: true, completion: nil)
           } else {
-//              self.validLogin = true
+              self.shouldPerformSegue(withIdentifier: "LoginSegue", sender: nil)
           }
         }
     }
