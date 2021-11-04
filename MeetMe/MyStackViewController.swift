@@ -19,6 +19,10 @@ class MyStackViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateLabel.text! = dateFormatter.string(from: date)
 
         // Do any additional setup after loading the view.
     }

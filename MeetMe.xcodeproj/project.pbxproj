@@ -12,6 +12,8 @@
 		8D22CE24271CE300001BE602 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D22CE23271CE300001BE602 /* Event.swift */; };
 		A11FC8FC271E25C3005C37B1 /* GroupsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */; };
 		A11FC8FE271E279F005C37B1 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FD271E279F005C37B1 /* UserClass.swift */; };
+		B61770122733566B00B026DE /* StackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61770112733566B00B026DE /* StackTableViewCell.swift */; };
+		B61770142733653000B026DE /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61770132733653000B026DE /* EventTableViewCell.swift */; };
 		B6ED5CAD2722682600D33A08 /* README.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B6ED5CAC2722682600D33A08 /* README.pdf */; };
 		B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255102713DF400089FF17 /* AppDelegate.swift */; };
 		B6F255132713DF400089FF17 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255122713DF400089FF17 /* SceneDelegate.swift */; };
@@ -41,6 +43,8 @@
 		8D22CE23271CE300001BE602 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsClass.swift; sourceTree = "<group>"; };
 		A11FC8FD271E279F005C37B1 /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
+		B61770112733566B00B026DE /* StackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackTableViewCell.swift; sourceTree = "<group>"; };
+		B61770132733653000B026DE /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		B6ED5CAC2722682600D33A08 /* README.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = README.pdf; sourceTree = "<group>"; };
 		B6F2550D2713DF400089FF17 /* MeetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F255102713DF400089FF17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 				B6F255142713DF400089FF17 /* ViewController.swift */,
 				B6F255272714B1220089FF17 /* SignUpViewController.swift */,
 				B6F255162713DF400089FF17 /* Main.storyboard */,
+				B61770112733566B00B026DE /* StackTableViewCell.swift */,
+				B61770132733653000B026DE /* EventTableViewCell.swift */,
 				B6F2553F2720E5E30089FF17 /* EventDetailsViewController.swift */,
 				B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */,
 				B6F25535271BE43A0089FF17 /* SettingsViewController.swift */,
@@ -276,6 +282,8 @@
 				8D22CE24271CE300001BE602 /* Event.swift in Sources */,
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
 				B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */,
+				B61770122733566B00B026DE /* StackTableViewCell.swift in Sources */,
+				B61770142733653000B026DE /* EventTableViewCell.swift in Sources */,
 				B6F2552E2715395A0089FF17 /* FriendListViewController.swift in Sources */,
 				B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */,
 				B6F255342716916C0089FF17 /* CreateEventViewController.swift in Sources */,

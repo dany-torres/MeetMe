@@ -13,10 +13,13 @@ protocol AddNewEvent {
 }
 
 class GroupStackViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddNewEvent {
-    public var eventList:[Event] = []
-    var delegate: UITableView!
     
     @IBOutlet weak var eventStack: UITableView!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    public var eventList:[Event] = []
+    var delegate: UITableView!
+    var halfHours:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,21 +32,63 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         
         eventStack.delegate = self
         eventStack.dataSource = self
-        // Do any additional setup after loading the view.
+        
+        setDayLabel()
+        
+        initTime()
+        setTimeLabels()
+    }
+    
+    // Initialize the halfHours array
+    func initTime(){
+        let possibleHours = ["00", "30"];
+        for i in 0...24 {
+            for item in possibleHours{
+                halfHours.append(String(i) + ":" + item);
+            }
+        }
+    }
+    
+    func setTimeLabels(){
+        
+    }
+    
+    // Sets the dat label to the current day
+    func setDayLabel(){
+        let today = Date()
+        let weekday = Calendar.current.component(.weekday, from: today)
+        let month = Calendar.current.component(.month, from: today)
+        let year =
+        Calendar.current.component(.year, from: today)
+        let date = Calendar.current.component(.day, from: today)
+
+        let weekdayText = Calendar.current.shortWeekdaySymbols[weekday-1]
+        let monthText = "\(Calendar.current.shortMonthSymbols[month-1]) \(date)"
+        
+        dateLabel.text = "\(weekdayText) \(monthText), \(year)"
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        eventList.count
+//        eventList.count
+        return halfHours.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
         
         //After creating the cell, update the properties of the cell with appropriate data values.
         let row = indexPath.row
-        cell.textLabel?.text = eventList[row].printEventDetails()
+        let event = eventList[row]
+        let time = halfHours[row]
+        cell.time.text = time
+//        cell.eventLabel.text = event.eventName
+//        cell.textLabel?.text = eventList[row].printEventDetails()
         return cell
+    }
+    
+    func setEvents(_ cell: StackTableViewCell, _ events:[Event]){
+        
     }
     
 
