@@ -251,7 +251,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WtA-NN-Dds">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WtA-NN-Dds">
                                 <rect key="frame" x="0.0" y="132" width="428" height="681"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -2221,7 +2221,9 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="displayPicture" destination="156-9y-0ci" id="ENL-a3-OhN"/>
+                        <outlet property="language" destination="2OA-1G-eX1" id="gXl-8o-bUq"/>
                         <outlet property="locationTextField" destination="W7U-nB-sQE" id="kdS-ko-VoS"/>
+                        <outlet property="mode" destination="U7d-ZA-GXa" id="ugz-IU-vUA"/>
                         <outlet property="nameTextField" destination="sOX-RD-XyQ" id="ztc-ue-PMB"/>
                         <outlet property="usernameLabel" destination="0mJ-XH-dpN" id="vJa-O0-jTS"/>
                         <outlet property="usernameTextField" destination="U18-yz-I5S" id="Btj-Kd-PUL"/>
@@ -2234,9 +2236,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OhN-LV-acH"/>
-        <segue reference="GOP-4q-Ftn"/>
-        <segue reference="jrk-Lf-LFT"/>
+        <segue reference="SEN-5B-iHA"/>
+        <segue reference="wSe-l3-ryt"/>
+        <segue reference="aRt-p5-l7b"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

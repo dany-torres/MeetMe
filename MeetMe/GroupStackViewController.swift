@@ -66,6 +66,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         let monthText = "\(Calendar.current.shortMonthSymbols[month-1]) \(date)"
         
         dateLabel.text = "\(weekdayText) \(monthText), \(year)"
+        eventStack.reloadData()
     }
     
     
@@ -76,12 +77,14 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
-        
-        //After creating the cell, update the properties of the cell with appropriate data values.
         let row = indexPath.row
-        let event = eventList[row]
         let time = halfHours[row]
         cell.time.text = time
+        
+        
+//        let event = eventList[row]
+//        let time = halfHours[row]
+//        cell.time.text = time
 //        cell.eventLabel.text = event.eventName
 //        cell.textLabel?.text = eventList[row].printEventDetails()
         return cell
@@ -98,6 +101,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
          if segue.identifier == "CreateEventSegue",
             let nextVC = segue.destination as? CreateEventViewController {
              nextVC.delegate = self
+//             TODO: PASS THE HASH AND THE NAME OF THE GROUP SEGUE
+//             nextVC.hashGroup =
+//             nextVC.nameGroup =
          
          }
      }
