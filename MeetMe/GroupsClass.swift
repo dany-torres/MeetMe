@@ -13,7 +13,7 @@ class Group{
     var groupDescr: String = ""
     var members: [User] = [] //add creator to list
     var inviteLink: String = ""
-    let admin: User = User() //set to be the current user
+//    let admin: User = User() //set to be the current user
     var groupPicture: String = ""
     
     var events: [String] = []

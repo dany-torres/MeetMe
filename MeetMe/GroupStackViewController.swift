@@ -53,6 +53,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
          if segue.identifier == "CreateEventSegue",
             let nextVC = segue.destination as? CreateEventViewController {
              nextVC.delegate = self
+//             TODO: PASS THE HASH AND THE NAME OF THE GROUP SEGUE
+//             nextVC.hashGroup =
+//             nextVC.nameGroup =
          
          }
      }

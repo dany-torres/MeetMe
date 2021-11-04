@@ -17,6 +17,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     
+    let db = Firestore.firestore()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +54,12 @@ class SignUpViewController: UIViewController {
               let password = passwordTextField.text,
               let confirm = confirmPasswordTextField.text,
               let name = nameTextField.text,
-              let user = usernameTextField.text,
+              let userName = usernameTextField.text,
               let location = locationTextField.text,
               email.count > 0,
               password.count > 0,
               name.count > 0,
-              user.count > 0,
+              userName.count > 0,
               location.count > 0,
               password == confirm
         else {
@@ -67,9 +69,46 @@ class SignUpViewController: UIViewController {
             if error == nil {
                 Auth.auth().signIn(withEmail: self.emailTextField.text!,
                                    password: self.passwordTextField.text!)
+                if Auth.auth().currentUser != nil {
+                    let user = Auth.auth().currentUser
+                    if let user = user {
+                        let uid = user.uid
+                        let userDb : [String: Any] = [
+                            "uid": uid,
+                            "name": name,
+                            "username": userName,
+                            "location": location,
+                            "language": false,
+                            "mode": false,
+                            "groupsAll": [],
+                            "groupsNotif": [],
+                            "groupsMuted": [],
+                            "events": []
+                        ]
+                        self.db.collection("Users").document(uid).setData(userDb)
+                    }
+                    
+                    
+                } else {
+                  // No user is signed in.
+                  // ...
+                }
                 self.shouldPerformSegue(withIdentifier: "signInSegue", sender: nil)
             }
         }
+        
+        
+        
+//        let userClass = User(name: "Rodrigo Estrella",
+//                        username: "restrella",
+//                        location: "USA",
+//                        language: false,
+//                        mode: false)
+//        do {
+//            try db.collection("Users").document("Rodrigo").setData(from: userClass)
+//        } catch let error {
+//            print("Error writing city to Firestore: \(error)")
+//        }
         self.dismiss(animated: true, completion: nil)
         // Populate the fields
         // Go to the homescreen
