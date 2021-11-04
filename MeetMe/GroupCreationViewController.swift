@@ -81,10 +81,10 @@ class GroupCreationViewController: UIViewController {
                         "uid": hash,
                         "name": newGroup.groupName,
                         "admin": true,
-                        "whoCreated": uid,
+                        "creator": uid,
                         "description": newGroup.groupDescr,
                         "inviteLink": "",
-                        "peopleInGroup": [],
+                        "peopleInGroup": [uid],
                         "events": []
                     ]
                     // Add it to the groups instance

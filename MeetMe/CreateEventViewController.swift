@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateEventViewController: UIViewController {
 
@@ -24,9 +25,15 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
     
+    let db = Firestore.firestore()
+    
     var reminderChoice = ""
     var startTimeChosen = ""
     var endTimeChosen = ""
+    
+    // TODO: Segue the Name of the group and the hash
+    var hashGroup = ""
+    var nameGroup = ""
     
     var delegate: UIViewController!
     
@@ -209,6 +216,47 @@ class CreateEventViewController: UIViewController {
         default:
         
         let otherVC = delegate as! AddNewEvent
+        
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+//                    let nameRef = db.collection("Users").document(uid)
+                
+//                    nameRef.getDocument { (document, error) in
+//                        if let document = document, document.exists {
+//                            let data = document.data()
+//                            let name = data!["name"] as? String ?? ""
+//
+//                        } else {
+//                            print("Document does not exist")
+//                        }
+//                    }
+                // Create hash of the groups object
+                var hasher = Hasher()
+                hasher.combine(eventNameTextField.text)
+                hasher.combine(locationTextField.text)
+                let hash = String(hasher.finalize())
+                // Create the instance object
+                let eventDb : [String: Any] = [
+                    "uid": hash,
+                    "name": eventNameTextField.text!,
+                    "creator": uid,
+                    "groupName": nameGroup,
+                    "location": locationTextField.text!,
+                    "editable": false,
+                    "attendees": [uid],
+                ]
+                // Add it to the groups instance
+                // TODO: Need the group hash
+//                self.db.collection("Groups").document(hash).setData(groupDb)
+                // Search for the user and append it to existing array
+                self.db.collection("Users").document(uid).updateData(["events": FieldValue.arrayUnion([hash])])
+                // Search for the event and store it
+                self.db.collection("Events").document(hash).setData(eventDb)
+            }
+        }
+            
         let newEvent = Event(eventName:eventNameTextField.text!, eventDate:currentDateLabel.text!, startTime:startTimeChosen, endTime:endTimeChosen, location:locationTextField.text!, notifications: notificationsButton.isSelected, reminderChoice: reminderChoice, polls: pollsButton.isSelected, messages:messagesButton.isSelected, editEvents:editEventButton.isSelected)
         
         otherVC.addNewEvent(newEvent: newEvent)
