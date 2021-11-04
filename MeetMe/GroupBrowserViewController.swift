@@ -36,10 +36,20 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: groupCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: groupCellIdentifier, for: indexPath) as! GroupsTableViewCell
         let row = indexPath.row
         let group = groups[row]
-        cell.textLabel?.text = group.groupName
+        cell.groupName.text = group.groupName
+        cell.groupDescription.text = group.groupDescr
+        //Choose pic from group
+        
+        //if (currentUser.muted.contains(group.groupHASH){
+        //      cell.mutedLabel.isHidden = false
+        //}
+        //if (currentUser.notification.contains(group.groupHASH){
+        //      cell.notificationLabel.isHidden = false
+        //}
+        
 //        cell.textLabel?.s = group.groupDescr         need to add subtitle
         return cell
     }

@@ -8,15 +8,17 @@
 import Foundation
 
 class Group{
-    var adminRun: Bool = true
-    var groupName: String = ""
-    var groupDescr: String = ""
-    var members: [User] = [] //add creator to list
-    var inviteLink: String = ""
-    let admin: User = User() //set to be the current user
-    var groupPicture: String = ""
     
-    var events: [String] = []
+    var groupHASH: String = String()
+    var groupName: String = String()
+    var groupDescr: String = String()
+    var adminRun: Bool = Bool()
+    var groupCreator: String = String()
+    
+    var members: [User] = [] //add creator to list
+    var events: [Event] = []
+    var inviteLink: String = String()
+    var groupPicture: String = ""
     
     init(){
     }
@@ -51,7 +53,7 @@ class Group{
     }
     
     //ADDING EVENT
-    func addEvent(newEvent: String){
+    func addEvent(newEvent: Event){
         if !adminRun{
             events.append(newEvent)
         }
