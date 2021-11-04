@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateEventViewController: UIViewController {
 
@@ -27,11 +28,27 @@ class CreateEventViewController: UIViewController {
     var reminderChoice = ""
     var startTimeChosen = ""
     var endTimeChosen = ""
+    var eventCreator = ""
+    var nameOfGroup = ""
+    var listOfAttendees:[User] = []
     
     var delegate: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //TODO: initialize listOfAttendees and eventCreator to something
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+          // The user's ID, unique to the Firebase project.
+          // Do NOT use this value to authenticate with your backend server,
+          // if you have one. Use getTokenWithCompletion:completion: instead.
+          let uid = user.uid
+            //eventCreator = uid
+            //query database to get name of user id
+            //set eventcreator to that
+        }
 
         // Setting up button images for selected state
         let checkmark = UIImage(systemName: "checkmark.square")
@@ -209,7 +226,7 @@ class CreateEventViewController: UIViewController {
         default:
         
         let otherVC = delegate as! AddNewEvent
-        let newEvent = Event(eventName:eventNameTextField.text!, eventDate:currentDateLabel.text!, startTime:startTimeChosen, endTime:endTimeChosen, location:locationTextField.text!, notifications: notificationsButton.isSelected, reminderChoice: reminderChoice, polls: pollsButton.isSelected, messages:messagesButton.isSelected, editEvents:editEventButton.isSelected)
+            let newEvent = Event(eventName:eventNameTextField.text!, eventDate:currentDateLabel.text!, startTime:startTimeChosen, endTime:endTimeChosen, location:locationTextField.text!, notifications: notificationsButton.isSelected, reminderChoice: reminderChoice, polls: pollsButton.isSelected, messages:messagesButton.isSelected, editEvents:editEventButton.isSelected, eventCreator: "DUMMY", nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees)
         
         otherVC.addNewEvent(newEvent: newEvent)
         _ = navigationController?.popViewController(animated: true)

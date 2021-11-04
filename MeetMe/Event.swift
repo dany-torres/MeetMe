@@ -8,8 +8,17 @@
 import Foundation
 
 class Event{
+
+//     Date Day/Month/Day --> currently a string
+//     Date StartTime --> currently a string
+//     Date EndTime --> currently a string
+//     Date Reminder --> StartTime - userinput
+//     List Attendees <User>
+
     
     var eventName: String
+    var eventCreator: String
+    var nameOfGroup: String
     var eventDate: String
     var startTime: String
     var endTime: String
@@ -19,8 +28,9 @@ class Event{
     var polls: Bool
     var messages: Bool
     var editEvents: Bool
+    var listOfAttendees:[User] = []
     
-    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool){
+    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [User]){
         
         self.eventName = eventName
         self.eventDate = eventDate
@@ -32,6 +42,9 @@ class Event{
         self.polls = polls
         self.messages = messages
         self.editEvents = editEvents
+        self.eventCreator = eventCreator
+        self.nameOfGroup = nameOfGroup
+        self.listOfAttendees = listOfAttendees
     }
     
     func printEventDetails()-> String{

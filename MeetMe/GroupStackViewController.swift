@@ -18,6 +18,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     
     @IBOutlet weak var eventStack: UITableView!
     
+    @IBOutlet weak var groupName: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +54,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
          if segue.identifier == "CreateEventSegue",
             let nextVC = segue.destination as? CreateEventViewController {
              nextVC.delegate = self
+             nextVC.nameOfGroup = (groupName.titleLabel?.text)!
          
          }
      }

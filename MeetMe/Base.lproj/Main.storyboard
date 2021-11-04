@@ -319,6 +319,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="eventStack" destination="WtA-NN-Dds" id="dxk-Ht-wzE"/>
+                        <outlet property="groupName" destination="xyq-6E-nTW" id="Rgd-YN-Gkh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMU-Zw-SXD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2167,7 +2168,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="OhN-LV-acH"/>
         <segue reference="GOP-4q-Ftn"/>
-        <segue reference="jrk-Lf-LFT"/>
+        <segue reference="aRt-p5-l7b"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
