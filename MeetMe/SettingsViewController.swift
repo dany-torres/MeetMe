@@ -15,6 +15,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var displayPicture: UIImageView!
+    @IBOutlet weak var language: UISegmentedControl!
+    @IBOutlet weak var mode: UISegmentedControl!
     
     
     override func viewDidLoad() {
