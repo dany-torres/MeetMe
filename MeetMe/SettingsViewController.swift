@@ -16,6 +16,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var displayPicture: UIImageView!
     
+    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,23 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                let userDb : [String: Any] = [
+                    "name": nameTextField.text!,
+                    "username": usernameTextField.text!,
+                    "location": locationTextField.text!
+                ]
+                self.db.collection("Users").document(uid).updateData(userDb)
+            }
+            
+            
+        } else {
+          // No user is signed in.
+          // ...
+        }
     }
     
     @IBAction func languageSegCtrl(_ sender: Any) {
@@ -36,6 +54,31 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func deleteAccountButtonPressed(_ sender: Any) {
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                db.collection("Users").document(uid).delete() { err in
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                    } else {
+                        print("Document successfully removed!")
+                        do {
+                            try Auth.auth().signOut()
+                            self.performSegue(withIdentifier: "BackToSignInSegue", sender: nil)
+                        } catch let signOutError as NSError {
+                          print("Error signing out: %@", signOutError)
+                        }
+                    }
+                }
+            }
+            
+            
+        } else {
+          // No user is signed in.
+          // ...
+        }
+        
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
