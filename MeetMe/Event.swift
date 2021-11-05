@@ -39,5 +39,12 @@ class Event{
         return cellEventDetails
     }
     
+    func getStartTime() -> String {
+        return startTime
+    }
+    
+    func getEndTime() -> String {
+        return endTime
+    }
     
 }

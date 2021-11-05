@@ -22,6 +22,7 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var editEventButton: UIButton!
     @IBOutlet weak var messagesButton: UIButton!
     
+    
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
     
@@ -262,8 +263,6 @@ class CreateEventViewController: UIViewController {
         otherVC.addNewEvent(newEvent: newEvent)
         _ = navigationController?.popViewController(animated: true)
         }
-        
-        
     }
     
     @IBAction func startTimeChosen(_ sender: Any) {
