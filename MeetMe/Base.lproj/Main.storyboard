@@ -569,7 +569,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vG-Zj-qb3" userLabel="GroupNameTextField">
-                                <rect key="frame" x="54" y="289" width="290" height="34"/>
+                                <rect key="frame" x="54" y="289" width="289" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="IwZ-QI-OM5"/>
                                     <constraint firstAttribute="width" constant="290" id="STE-W2-INP"/>
@@ -587,7 +587,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G78-rR-WCI">
-                                <rect key="frame" x="54" y="193" width="149" height="29"/>
+                                <rect key="frame" x="54" y="193" width="148" height="29"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -602,7 +602,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5s-iS-7fp">
-                                <rect key="frame" x="55" y="425" width="57" height="20"/>
+                                <rect key="frame" x="55" y="425" width="56" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -649,7 +649,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-Rv-bme">
-                                <rect key="frame" x="273.5" y="349" width="76" height="20"/>
+                                <rect key="frame" x="273" y="349" width="76" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="76" id="h38-aB-PIC"/>
                                 </constraints>
@@ -2202,8 +2202,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SEN-5B-iHA"/>
-        <segue reference="GOP-4q-Ftn"/>
-        <segue reference="1iG-eE-u3p"/>
+        <segue reference="wSe-l3-ryt"/>
+        <segue reference="jrk-Lf-LFT"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

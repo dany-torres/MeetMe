@@ -31,9 +31,9 @@ class CreateEventViewController: UIViewController {
     var startTimeChosen = ""
     var endTimeChosen = ""
     
-    // TODO: Segue the Name of the group and the hash
-    var hashGroup = ""
-    var nameGroup = ""
+    // TODO: Segue the Name of the group and the hash --> DONE
+    var hashGroup: String!
+    var nameGroup: String!
     
     var delegate: UIViewController!
     
@@ -241,26 +241,64 @@ class CreateEventViewController: UIViewController {
                 let eventDb : [String: Any] = [
                     "uid": hash,
                     "name": eventNameTextField.text!,
+                    "eventDate" : currentDateLabel.text!,
+                    "startTime" : startTimeChosen,
+                    "endTime"   : endTimeChosen,
+                    "notifications" : notificationsButton.isSelected,
+                    "reminderChoice" : reminderChoice,
+                    "polls" : pollsButton.isSelected,
+                    "messages" : messagesButton.isSelected,
+                    "editable" : editEventButton.isSelected,
                     "creator": uid,
                     "groupName": nameGroup,
                     "location": locationTextField.text!,
-                    "editable": false,
                     "attendees": [uid],
+                    
                 ]
                 // Add it to the groups instance
                 // TODO: Need the group hash
-//                self.db.collection("Groups").document(hash).setData(groupDb)
+                self.db.collection("Events").document(hash).setData(eventDb)
+                
+                var queue = DispatchQueue(label: "curr")
+                queue.async {
+                    while (self.hashGroup == nil){
+                        sleep(1)
+                    }
+                    self.db.collection("Groups").document(self.hashGroup).updateData(["events": FieldValue.arrayUnion([hash])])
+                }
                 // Search for the user and append it to existing array
                 self.db.collection("Users").document(uid).updateData(["events": FieldValue.arrayUnion([hash])])
                 // Search for the event and store it
-                self.db.collection("Events").document(hash).setData(eventDb)
+               
+                
+                queue = DispatchQueue(label: "cur")
+                queue.async {
+                    while (self.nameGroup == nil){
+                        sleep(1)
+                    }
+                    let newEvent = Event(eventName:self.eventNameTextField.text!,
+                                         eventDate:self.currentDateLabel.text!,
+                                         startTime:self.startTimeChosen,
+                                         endTime:self.endTimeChosen,
+                                         location:self.locationTextField.text!,
+                                         notifications: self.notificationsButton.isSelected,
+                                         reminderChoice: self.reminderChoice,
+                                         polls: self.pollsButton.isSelected,
+                                         messages:self.messagesButton.isSelected,
+                                         editEvents:self.editEventButton.isSelected,
+                                         eventCreator: uid,
+                                         nameOfGroup: self.nameGroup,
+                                         listOfAttendees: [uid],
+                                         eventHash: hash)
+                    otherVC.addNewEvent(newEvent: newEvent)
+                }
+                
+            
+            
+            _ = navigationController?.popViewController(animated: true)
             }
         }
-            
-        let newEvent = Event(eventName:eventNameTextField.text!, eventDate:currentDateLabel.text!, startTime:startTimeChosen, endTime:endTimeChosen, location:locationTextField.text!, notifications: notificationsButton.isSelected, reminderChoice: reminderChoice, polls: pollsButton.isSelected, messages:messagesButton.isSelected, editEvents:editEventButton.isSelected)
         
-        otherVC.addNewEvent(newEvent: newEvent)
-        _ = navigationController?.popViewController(animated: true)
         }
         
         

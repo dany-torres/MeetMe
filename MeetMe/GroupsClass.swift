@@ -15,8 +15,8 @@ class Group{
     var adminRun: Bool = Bool()
     var groupCreator: String = String()
     
-    var members: [User] = [] //add creator to list
-    var events: [Event] = []
+    var members: [String] = [] //add creator to list
+    var events: [String] = []
     var inviteLink: String = String()
     var groupPicture: String = ""
     
@@ -53,7 +53,7 @@ class Group{
     }
     
     //ADDING EVENT
-    func addEvent(newEvent: Event){
+    func addEvent(newEvent: String){
         if !adminRun{
             events.append(newEvent)
         }
