@@ -93,7 +93,7 @@ class GroupCreationViewController: UIViewController {
                     self.db.collection("Users").document(uid).updateData(["groupsAll": FieldValue.arrayUnion([hash])])
                     
                     
-                    
+    
                     
                 }
                 
