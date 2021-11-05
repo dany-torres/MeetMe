@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController {
     
     let db = Firestore.firestore()
     
+    var bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,20 +27,24 @@ class SignUpViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    // check if all the fields are valid
-    func validateFields() -> Bool {
-        // Check if all of them have an empty string
-        return validateUsername() && validatePassword() && validatePhoneNumber()
-    }
-    
-    // check if the username is unique
-    func validateUsername() -> Bool {
-        return false
-    }
-    
     // check if the password is strong by some standard
     func validatePassword() -> Bool {
-        return false
+            
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+        
+        // Check if the password is secure
+        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let secure = passwordTest.evaluate(with: cleanedPassword)
+        
+        if secure == false {
+            // Password isn't secure enough
+            // Must contain 8 characters a special character and a number
+            print(false)
+            return false
+        }
+        print(true)
+        return true
     }
     
     // check if the phone number is valid
@@ -61,57 +66,61 @@ class SignUpViewController: UIViewController {
               name.count > 0,
               userName.count > 0,
               location.count > 0,
-              password == confirm
+              password == confirm,
+              validatePassword()
         else {
             return
         }
-        Auth.auth().createUser(withEmail: email, password: password) { user, error in
-            if error == nil {
-                Auth.auth().signIn(withEmail: self.emailTextField.text!,
-                                   password: self.passwordTextField.text!)
-                if Auth.auth().currentUser != nil {
-                    let user = Auth.auth().currentUser
-                    if let user = user {
-                        let uid = user.uid
-                        let userDb : [String: Any] = [
-                            "uid": uid,
-                            "name": name,
-                            "username": userName,
-                            "location": location,
-                            "language": false,
-                            "mode": false,
-                            "groupsAll": [],
-                            "groupsNotif": [],
-                            "groupsMuted": [],
-                            "events": []
-                        ]
-                        self.db.collection("Users").document(uid).setData(userDb)
-                    }
-                    
-                    
+        
+        db.collection("Users").whereField("username", isEqualTo: userName)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    // Error finding user
+                    print("Error getting documents: \(err)")
                 } else {
-                  // No user is signed in.
-                  // ...
+                    if querySnapshot!.documents.count == 0 {
+                        // The username does not exist so we continue
+                        print("Username: \(userName) does not exist")
+                        Auth.auth().createUser(withEmail: email, password: password) { user, error in
+                            if error == nil {
+                                Auth.auth().signIn(withEmail: self.emailTextField.text!,
+                                                   password: self.passwordTextField.text!)
+                                if Auth.auth().currentUser != nil {
+                                    let user = Auth.auth().currentUser
+                                    if let user = user {
+                                        let uid = user.uid
+                                        let userDb : [String: Any] = [
+                                            "uid": uid,
+                                            "name": name,
+                                            "username": userName,
+                                            "location": location,
+                                            "language": false,
+                                            "mode": false,
+                                            "groupsAll": [],
+                                            "groupsNotif": [],
+                                            "groupsMuted": [],
+                                            "events": []
+                                        ]
+                                        self.db.collection("Users").document(uid).setData(userDb)
+                                    }
+                                    
+                                    
+                                } else {
+                                  // No user is signed in.
+                                  // ...
+                                }
+                                self.shouldPerformSegue(withIdentifier: "signInSegue", sender: nil)
+                            }
+                        }
+                    } else {
+                        // The username exists so its invalid
+                        print("Username: \(userName) EXISTS")
+                    }
+//                    }
                 }
-                self.shouldPerformSegue(withIdentifier: "signInSegue", sender: nil)
-            }
         }
         
-        
-        
-//        let userClass = User(name: "Rodrigo Estrella",
-//                        username: "restrella",
-//                        location: "USA",
-//                        language: false,
-//                        mode: false)
-//        do {
-//            try db.collection("Users").document("Rodrigo").setData(from: userClass)
-//        } catch let error {
-//            print("Error writing city to Firestore: \(error)")
-//        }
         self.dismiss(animated: true, completion: nil)
-        // Populate the fields
-        // Go to the homescreen
     }
     
     /*
