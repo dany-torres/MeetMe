@@ -18,12 +18,35 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var language: UISegmentedControl!
     @IBOutlet weak var mode: UISegmentedControl!
     
+    
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTextFields()
+    }
+    
+    func setTextFields(){
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
 
-        // Do any additional setup after loading the view.
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        print("data", data)
+                        self.nameTextField.text! = data["name"] as? String ?? ""
+                        self.usernameLabel.text! = "@" + (data["username"] as? String ?? "")
+                        self.usernameTextField.text! = data["username"] as? String ?? ""
+                        self.locationTextField.text! = data["location"] as? String ?? ""
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func cameraButtonPressed(_ sender: Any) {
