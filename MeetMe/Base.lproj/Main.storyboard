@@ -755,7 +755,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="fpC-jF-NSl">
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="fpC-jF-NSl">
                                 <rect key="frame" x="168" y="377" width="81" height="34.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="XN2-64-gXM"/>
@@ -765,7 +765,7 @@
                                     <action selector="startTimeChosen:" destination="ZNC-ES-8eU" eventType="valueChanged" id="LWf-rU-8LJ"/>
                                 </connections>
                             </datePicker>
-                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="I0T-8a-5QH">
+                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="I0T-8a-5QH">
                                 <rect key="frame" x="264" y="377" width="87" height="34.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="emx-Fp-4Vu"/>
