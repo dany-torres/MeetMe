@@ -16,7 +16,7 @@ class GroupCreationViewController: UIViewController {
     @IBOutlet weak var groupDescriptionTextField: UITextField!
     
     var delegate: UIViewController!
-    var newGroup: Group!
+    var newGroup: Group = Group()
     
     let db = Firestore.firestore()
     
