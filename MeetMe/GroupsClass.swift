@@ -8,15 +8,17 @@
 import Foundation
 
 class Group{
-    var adminRun: Bool = true
-    var groupName: String = ""
-    var groupDescr: String = ""
-    var members: [User] = [] //add creator to list
-    var inviteLink: String = ""
-    let admin: User = User() //set to be the current user
-    var groupPicture: String = ""
     
+    var groupHASH: String = String()
+    var groupName: String = String()
+    var groupDescr: String = String()
+    var adminRun: Bool = Bool()
+    var groupCreator: String = String()
+    
+    var members: [String] = [] //add creator to list
     var events: [String] = []
+    var inviteLink: String = String()
+    var groupPicture: String = ""
     
     init(){
     }

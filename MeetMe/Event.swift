@@ -19,8 +19,12 @@ class Event{
     var polls: Bool
     var messages: Bool
     var editEvents: Bool
+    var eventCreator: String
+    var nameOfGroup: String
+    var listOfAttendees:[String] = []
+    var eventHash: String
     
-    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool){
+    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String){
         
         self.eventName = eventName
         self.eventDate = eventDate
@@ -32,6 +36,10 @@ class Event{
         self.polls = polls
         self.messages = messages
         self.editEvents = editEvents
+        self.eventCreator = eventCreator
+        self.nameOfGroup = nameOfGroup
+        self.listOfAttendees = listOfAttendees
+        self.eventHash = eventHash
     }
     
     func printEventDetails()-> String{
