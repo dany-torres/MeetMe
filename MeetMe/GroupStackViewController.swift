@@ -13,17 +13,19 @@ protocol AddNewEvent {
 }
 
 class GroupStackViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddNewEvent {
-    
-    let db = Firestore.firestore()
-    
-    @IBOutlet weak var eventStack: UITableView!
-    @IBOutlet weak var dateLabel: UILabel!
-    
     public var eventList:[Event] = []
     var delegate: UITableView!
     var currGroupHASH : String!
     var currGroupName : String!
     var halfHours:[String] = []
+    
+    let db = Firestore.firestore()
+    
+    @IBOutlet weak var eventStack: UITableView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var groupNameLabel: UIButton!
+    
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         eventStack.delegate = self
         eventStack.dataSource = self
         
+        groupNameLabel.setTitle(currGroupName, for: .normal)
         setDayLabel()
         initTime()
         
@@ -92,17 +95,17 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        halfHours.count
+        return halfHours.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
-            let row = indexPath.row
-            let time = halfHours[row]
-            cell.time.text = time
-            let events = getEventsAtCellTime(startTime: time)
-            setEvents(cell:cell, events:events)
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
+        let row = indexPath.row
+        let time = halfHours[row]
+        cell.time.text = time
+        let events = getEventsAtCellTime(startTime: time)
+        setEvents(cell:cell, events:events)
+        return cell
     }
     
     // Set the events block in the cells accordingly
@@ -167,6 +170,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         dateFormatter.timeStyle = DateFormatter.Style.short
         
         var eventsAtTime = [Event]()
+        
         for event in eventList {
             let start = dateFormatter.date(from: event.startTime)
             let end = dateFormatter.date(from: event.endTime)
@@ -184,8 +188,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         
         return eventsAtTime
     }
-    
-    
 
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -193,7 +195,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
          if segue.identifier == "CreateEventSegue",
             let nextVC = segue.destination as? CreateEventViewController {
              nextVC.delegate = self
-//             TODO: PASS THE HASH AND THE NAME OF THE GROUP SEGUE
+//           TODO: PASS THE HASH AND THE NAME OF THE GROUP SEGUE
              let queue = DispatchQueue(label: "curr")
              queue.async {
                  while (self.currGroupHASH == nil){
@@ -207,47 +209,47 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     
     func rePopulateEventStack(){
         let groupRef = db.collection("Groups").document(currGroupHASH)
-                    groupRef.getDocument { (document, error) in
+        groupRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let groupEvents = data!["events"] as! [String]
+                
+                for event in groupEvents {
+                    let eventRef = self.db.collection("Events").document(event)
+                    
+                    eventRef.getDocument { (document, error) in
                         if let document = document, document.exists {
-                            let data = document.data()
-                            let groupEvents = data!["events"] as! [String]
-                            
-                            for event in groupEvents {
-                                let eventRef = self.db.collection("Events").document(event)
-                                
-                                eventRef.getDocument { (document, error) in
-                                    if let document = document, document.exists {
-                                        let eventData = document.data()
-                                        let newEvent = Event(eventName: eventData!["name"] as! String,
-                                                             eventDate: eventData!["eventDate"] as! String,
-                                                             startTime: eventData!["startTime"] as! String,
-                                                             endTime: eventData!["endTime"] as! String,
-                                                             location: eventData!["location"] as! String,
-                                                             notifications: eventData!["notifications"] as! Bool,
-                                                             reminderChoice: eventData!["reminderChoice"] as! String,
-                                                             polls: eventData!["polls"] as! Bool,
-                                                             messages: eventData!["messages"] as! Bool,
-                                                             editEvents: eventData!["editable"] as! Bool,
-                                                             eventCreator: eventData!["creator"] as! String,
-                                                             nameOfGroup: eventData!["groupName"] as! String,
-                                                             listOfAttendees: eventData!["attendees"] as! [String],
-                                                             eventHash: eventData!["uid"] as! String
-                                        )
-                                        self.addNewEvent(newEvent: newEvent)
-                                    } else {
-                                        print("Document does not exist")
-                                    }
-                                }
-                            }
+                            let eventData = document.data()
+                            let newEvent = Event(eventName: eventData!["name"] as! String,
+                                                 eventDate: eventData!["eventDate"] as! String,
+                                                 startTime: eventData!["startTime"] as! String,
+                                                 endTime: eventData!["endTime"] as! String,
+                                                 location: eventData!["location"] as! String,
+                                                 notifications: eventData!["notifications"] as! Bool,
+                                                 reminderChoice: eventData!["reminderChoice"] as! String,
+                                                 polls: eventData!["polls"] as! Bool,
+                                                 messages: eventData!["messages"] as! Bool,
+                                                 editEvents: eventData!["editable"] as! Bool,
+                                                 eventCreator: eventData!["creator"] as! String,
+                                                 nameOfGroup: eventData!["groupName"] as! String,
+                                                 listOfAttendees: eventData!["attendees"] as! [String],
+                                                 eventHash: eventData!["uid"] as! String
+                            )
+                            self.addNewEvent(newEvent: newEvent)
                         } else {
                             print("Document does not exist")
                         }
                     }
                 }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
     func addNewEvent(newEvent: Event) {
-            eventList.append(newEvent)
-            eventStack.reloadData()
-        }
+        eventList.append(newEvent)
+        eventStack.reloadData()
+    }
          
 }

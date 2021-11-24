@@ -5,6 +5,7 @@
 //  Created by Daniela Torres on 11/3/21.
 //
 import UIKit
+import Firebase
 
 class StackTableViewCell: UITableViewCell {
 

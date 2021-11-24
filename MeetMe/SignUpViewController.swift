@@ -29,21 +29,22 @@ class SignUpViewController: UIViewController {
     
     // check if the password is strong by some standard
     func validatePassword() -> Bool {
-            
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+//
+//        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+//
+//        // Check if the password is secure
+//        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+//
+//        let secure = passwordTest.evaluate(with: cleanedPassword)
+//
+//        if secure == false {
+//            // Password isn't secure enough
+//            // Must contain 8 characters a special character and a number
+//            print(false)
+//            return false
+//        }
+//        print(true)
         
-        // Check if the password is secure
-        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        let secure = passwordTest.evaluate(with: cleanedPassword)
-        
-        if secure == false {
-            // Password isn't secure enough
-            // Must contain 8 characters a special character and a number
-            print(false)
-            return false
-        }
-        print(true)
         return true
     }
     
@@ -69,6 +70,7 @@ class SignUpViewController: UIViewController {
               password == confirm,
               validatePassword()
         else {
+            print("LLEGUE ACA")
             return
         }
         

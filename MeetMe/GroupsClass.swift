@@ -21,16 +21,6 @@ class Group{
     var groupPicture: String = ""
     
     init(){
-        groupHASH = String()
-        groupName = String()
-        groupDescr = String()
-        adminRun = false
-        groupCreator = String()
-        
-        members = [] //add creator to list
-        events = []
-        inviteLink = String()
-        groupPicture = String()
     }
     
     //SETTING ADMIN

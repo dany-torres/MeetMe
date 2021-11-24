@@ -57,6 +57,7 @@ class GroupCreationViewController: UIViewController {
                 if let user = user {
                     let uid = user.uid
                     // Create hash of the groups object
+                    newGroup = Group()
                     var hasher = Hasher()
                     hasher.combine(newGroup.groupName)
                     hasher.combine(newGroup.groupDescr)
@@ -72,7 +73,6 @@ class GroupCreationViewController: UIViewController {
                         "peopleInGroup": [uid],
                         "events": []
                     ]
-                    newGroup = Group()
                     newGroup.groupName = currentName
                     newGroup.groupDescr = groupDescriptionTextField.text!
                     newGroup.groupHASH = hash
