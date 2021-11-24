@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="width" constant="300" id="dAO-o7-xcE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ndh-nD-JEH">
                                 <rect key="frame" x="58" y="315" width="37" height="20"/>
@@ -569,7 +569,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vG-Zj-qb3" userLabel="GroupNameTextField">
-                                <rect key="frame" x="54" y="289" width="289" height="34"/>
+                                <rect key="frame" x="54" y="289" width="290" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="IwZ-QI-OM5"/>
                                     <constraint firstAttribute="width" constant="290" id="STE-W2-INP"/>
@@ -587,7 +587,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G78-rR-WCI">
-                                <rect key="frame" x="54" y="193" width="148" height="29"/>
+                                <rect key="frame" x="54" y="193" width="149" height="29"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -602,7 +602,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5s-iS-7fp">
-                                <rect key="frame" x="55" y="425" width="56" height="20"/>
+                                <rect key="frame" x="55" y="425" width="57" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -649,7 +649,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-Rv-bme">
-                                <rect key="frame" x="273" y="349" width="76" height="20"/>
+                                <rect key="frame" x="273.5" y="349" width="76" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="76" id="h38-aB-PIC"/>
                                 </constraints>
@@ -874,7 +874,7 @@
                         <outlet property="messagesButton" destination="l8m-dW-2la" id="hLS-Xm-b3W"/>
                         <outlet property="notificationsButton" destination="rLC-ER-kkO" id="gEU-Rb-wXG"/>
                         <outlet property="pollsButton" destination="Ldh-Cf-ddD" id="ypS-m3-VFW"/>
-                        <outlet property="startTimePicker" destination="I0T-8a-5QH" id="wWF-yC-2eG"/>
+                        <outlet property="startTimePicker" destination="fpC-jF-NSl" id="ufu-yW-Dt2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3n-wt-K32" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
