@@ -31,9 +31,10 @@ class CreateEventViewController: UIViewController {
     var startTimeChosen = ""
     var endTimeChosen = ""
     
-    // TODO: Segue the Name of the group and the hash --> DONE
-    var hashGroup: String!
-    var nameGroup: String!
+    //passes groups hash and name event belongs to
+//    var hashGroup: String!
+//    var nameGroup: String!
+    var currGroup: Group!
     
     var delegate: UIViewController!
     
@@ -65,8 +66,6 @@ class CreateEventViewController: UIViewController {
         let monthText = "\(Calendar.current.shortMonthSymbols[month-1]) \(date)"
         
         currentDateLabel.text = "\(weekdayText) \(monthText)"
-        
-        
     }
     
     @IBAction func setReminderButtonPressed(_ sender: Any) {
@@ -215,68 +214,51 @@ class CreateEventViewController: UIViewController {
         
         default:
         
-        let otherVC = delegate as! AddNewEvent
+            let otherVC = delegate as! AddNewEvent
         
-        if Auth.auth().currentUser != nil {
-            let user = Auth.auth().currentUser
-            if let user = user {
-                let uid = user.uid
-//                    let nameRef = db.collection("Users").document(uid)
+            if Auth.auth().currentUser != nil {
+                let user = Auth.auth().currentUser
+                if let user = user {
+                    let uid = user.uid
+                    // Create hash of the groups object
+                    var hasher = Hasher()
+                    hasher.combine(eventNameTextField.text)
+                    hasher.combine(locationTextField.text)
+                    let hash = String(hasher.finalize())
                 
-//                    nameRef.getDocument { (document, error) in
-//                        if let document = document, document.exists {
-//                            let data = document.data()
-//                            let name = data!["name"] as? String ?? ""
-//
-//                        } else {
-//                            print("Document does not exist")
-//                        }
-//                    }
-                // Create hash of the groups object
-                var hasher = Hasher()
-                hasher.combine(eventNameTextField.text)
-                hasher.combine(locationTextField.text)
-                let hash = String(hasher.finalize())
-                // Create the instance object
-                let eventDb : [String: Any] = [
-                    "uid": hash,
-                    "name": eventNameTextField.text!,
-                    "eventDate" : currentDateLabel.text!,
-                    "startTime" : startTimeChosen,
-                    "endTime"   : endTimeChosen,
-                    "notifications" : notificationsButton.isSelected,
-                    "reminderChoice" : reminderChoice,
-                    "polls" : pollsButton.isSelected,
-                    "messages" : messagesButton.isSelected,
-                    "editable" : editEventButton.isSelected,
-                    "creator": uid,
-                    "groupName": nameGroup,
-                    "location": locationTextField.text!,
-                    "attendees": [uid],
-                    
-                ]
-                // Add it to the groups instance
-                // TODO: Need the group hash
-                self.db.collection("Events").document(hash).setData(eventDb)
-                
-                var queue = DispatchQueue(label: "curr")
-                queue.async {
-                    while (self.hashGroup == nil){
-                        sleep(1)
-                    }
-                    self.db.collection("Groups").document(self.hashGroup).updateData(["events": FieldValue.arrayUnion([hash])])
-                }
-                // Search for the user and append it to existing array
-                self.db.collection("Users").document(uid).updateData(["events": FieldValue.arrayUnion([hash])])
-                // Search for the event and store it
-               
-                
-                queue = DispatchQueue(label: "cur")
-                queue.async {
-                    while (self.nameGroup == nil){
-                        sleep(1)
-                    }
-                    let newEvent = Event(eventName:self.eventNameTextField.text!,
+                    let queue = DispatchQueue(label: "curr")
+                    queue.async {
+                        while (self.currGroup == nil){
+                            sleep(1)
+                        }
+                        
+                        // Create the instance object
+                        let eventDb : [String: Any] = [
+                            "uid": hash,
+                            "name": self.eventNameTextField.text!,
+                            "eventDate" : self.currentDateLabel.text!,
+                            "startTime" : self.startTimeChosen,
+                            "endTime"   : self.endTimeChosen,
+                            "notifications" : self.notificationsButton.isSelected,
+                            "reminderChoice" : self.reminderChoice,
+                            "polls" : self.pollsButton.isSelected,
+                            "messages" : self.messagesButton.isSelected,
+                            "editable" : self.editEventButton.isSelected,
+                            "creator": uid,
+                            "groupName": self.currGroup.groupName,
+                            "location": self.locationTextField.text!,
+                            "attendees": [uid],
+                        
+                        ]
+                        
+                        // Adds new event to Events db
+                        self.db.collection("Events").document(hash).setData(eventDb)
+                        // Adds new event to list of events in current group
+                        self.db.collection("Groups").document(self.currGroup.groupHASH).updateData(["events": FieldValue.arrayUnion([hash])])
+                        // Adds new event to list of events in current user
+                        self.db.collection("Users").document(uid).updateData(["events": FieldValue.arrayUnion([hash])])
+                        //creates new event object
+                        let newEvent = Event(eventName:self.eventNameTextField.text!,
                                          eventDate:self.currentDateLabel.text!,
                                          startTime:self.startTimeChosen,
                                          endTime:self.endTimeChosen,
@@ -287,21 +269,16 @@ class CreateEventViewController: UIViewController {
                                          messages:self.messagesButton.isSelected,
                                          editEvents:self.editEventButton.isSelected,
                                          eventCreator: uid,
-                                         nameOfGroup: self.nameGroup,
+                                         nameOfGroup: self.currGroup.groupName,
                                          listOfAttendees: [uid],
                                          eventHash: hash)
-                    otherVC.addNewEvent(newEvent: newEvent)
-                }
-                
-            
-            
-            _ = navigationController?.popViewController(animated: true)
+                        // Adds new event object locally
+                        otherVC.addNewEvent(newEvent: newEvent)
+                    }
+                _ = navigationController?.popViewController(animated: true)
             }
         }
-        
         }
-        
-        
     }
     
     @IBAction func startTimeChosen(_ sender: Any) {

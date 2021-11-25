@@ -19,7 +19,7 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
     let db = Firestore.firestore()
 
     let groupCellIdentifier = "Cell"
-    let groupSegue = "GoupSegue"
+    let groupSegue = "GroupSegue"
     let newGroupSegue = "NewGroupSegue"
     
     @IBOutlet weak var groupTableView: UITableView!
@@ -104,21 +104,39 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
             }
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        // Create a variable that you want to send based on the destination view controller
+//        // You can get a reference to the data by using indexPath shown below
+//        let currGroup = groups[indexPath.row]
+//
+//        // Create an instance of PlayerTableViewController and pass the variable
+//        let destination = GroupStackViewController()
+//        destination.loaded = true
+//        destination.currGroup = currGroup
+//
+//        // Let's assume that the segue name is called playerSegue
+//        // This will perform the segue and pre-load the variable for you to use
+//        destination.performSegue(withIdentifier: "GroupSegue", sender: self)
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == newGroupSegue,
            let destination = segue.destination as? GroupCreationViewController {
             destination.delegate = self
         }
-        if segue.identifier == groupSegue{
-           let destination = segue.destination as? GroupStackViewController
+        if segue.identifier == groupSegue,
+           let destination = segue.destination as? GroupStackViewController {
             let groupIndex = groupTableView.indexPathForSelectedRow?.row
             let currGroup = groups[groupIndex!]
-            destination!.currGroupHASH = currGroup.groupHASH
-            destination!.currGroupName = currGroup.groupName
-//          destination!.currGroupName = currGroup.groupName
-//            destination.timerRow = timerIndex
+            destination.loaded = true
+            destination.currGroup = currGroup
+//            destination.currGroupHASH = newGroup.groupHASH
+//            destination.currGroupName = newGroup.groupName
+
+
         }
+
     }
 
 }
+

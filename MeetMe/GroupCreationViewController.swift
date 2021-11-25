@@ -16,7 +16,8 @@ class GroupCreationViewController: UIViewController {
     @IBOutlet weak var groupDescriptionTextField: UITextField!
     
     var delegate: UIViewController!
-    var newGroup: Group = Group()
+    var newGroup: Group!
+    var adminRun: Bool = true
     
     let db = Firestore.firestore()
     
@@ -29,9 +30,9 @@ class GroupCreationViewController: UIViewController {
     @IBAction func adminRunSegCtrl(_ sender: Any) {
         switch groupTypeSegCtrl.selectedSegmentIndex {
         case 0:
-            newGroup.setAdminRun(setting: true)
+            adminRun = true
         case 1:
-            newGroup.setAdminRun(setting: false)
+            adminRun = false
         default:
             print("This shouldn't happen")
         }
@@ -66,7 +67,7 @@ class GroupCreationViewController: UIViewController {
                     let groupDb : [String: Any] = [
                         "uid": hash,
                         "name": currentName,
-                        "admin": newGroup.adminRun,
+                        "admin": adminRun,
                         "creator": uid,
                         "description": groupDescriptionTextField.text!,
                         "inviteLink": "",
@@ -109,9 +110,9 @@ class GroupCreationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CreateGroupSegue",
            let destination = segue.destination as? GroupStackViewController {
-            destination.currGroupHASH = newGroup.groupHASH
-            destination.currGroupName = newGroup.groupName
-            
+//            destination.currGroupHASH = newGroup.groupHASH
+//            destination.currGroupName = newGroup.groupName
+            destination.currGroup = newGroup
         }
     }
     

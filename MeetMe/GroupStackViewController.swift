@@ -15,8 +15,11 @@ protocol AddNewEvent {
 class GroupStackViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddNewEvent {
     public var eventList:[Event] = []
     var delegate: UITableView!
-    var currGroupHASH : String!
-    var currGroupName : String!
+//    var currGroupHASH : String!
+//    var currGroupName : String!
+    var currGroup: Group!
+    var loaded: Bool = false
+    
     var halfHours:[String] = []
     
     let db = Firestore.firestore()
@@ -29,7 +32,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Change back button ot go to root rather than create group
         var viewControllersArray = [UIViewController]()
         viewControllersArray.append(self.navigationController!.viewControllers.first!)
@@ -39,15 +41,16 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         eventStack.delegate = self
         eventStack.dataSource = self
         
-        groupNameLabel.setTitle(currGroupName, for: .normal)
+//        groupNameLabel.setTitle(currGroupName, for: .normal)
         setDayLabel()
         initTime()
         
         let queue = DispatchQueue(label: "curr")
         queue.async {
-            while (self.currGroupHASH == nil){
+            while (!self.loaded){
                 sleep(1)
             }
+            self.groupNameLabel.setTitle(self.currGroup.groupName, for: .normal)
             self.rePopulateEventStack()
         }
     }
@@ -198,23 +201,28 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
 //           TODO: PASS THE HASH AND THE NAME OF THE GROUP SEGUE
              let queue = DispatchQueue(label: "curr")
              queue.async {
-                 while (self.currGroupHASH == nil){
+                 while (self.currGroup == nil){
                      sleep(1)
                  }
-                 nextVC.hashGroup = self.currGroupHASH
-                 nextVC.nameGroup = self.currGroupName
+//                 nextVC.hashGroup = self.currGroupHASH
+//                 nextVC.nameGroup = self.currGroupName
+                 nextVC.currGroup = self.currGroup
              }
          }
      }
     
     func rePopulateEventStack(){
-        let groupRef = db.collection("Groups").document(currGroupHASH)
+        //gets current group from db
+        let groupRef = db.collection("Groups").document(currGroup.groupHASH)
         groupRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let data = document.data()
+                
+                //gets events from "events" attribute in group
                 let groupEvents = data!["events"] as! [String]
                 
                 for event in groupEvents {
+                    //matches event from Groups attributes with events from "Events" db
                     let eventRef = self.db.collection("Events").document(event)
                     
                     eventRef.getDocument { (document, error) in
@@ -237,12 +245,12 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
                             )
                             self.addNewEvent(newEvent: newEvent)
                         } else {
-                            print("Document does not exist")
+                            print("Event does not exist")
                         }
                     }
                 }
             } else {
-                print("Document does not exist")
+                print("Group does not exist")
             }
         }
     }
@@ -250,6 +258,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     func addNewEvent(newEvent: Event) {
         eventList.append(newEvent)
         eventStack.reloadData()
+//        for event in eventList{
+//            print(event.eventName)
+//        }
     }
          
 }
