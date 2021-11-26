@@ -13,6 +13,7 @@
 		A11FC8FC271E25C3005C37B1 /* GroupsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */; };
 		A11FC8FE271E279F005C37B1 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FD271E279F005C37B1 /* UserClass.swift */; };
 		A153D6312733611D00DE247E /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A153D6302733611C00DE247E /* GroupsTableViewCell.swift */; };
+		B67AA47727509187009FEEAE /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67AA47627509187009FEEAE /* EventListViewController.swift */; };
 		B698C9C8274EB0C100B608D6 /* StackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B698C9C7274EB0C000B608D6 /* StackTableViewCell.swift */; };
 		B6ED5CAD2722682600D33A08 /* README.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B6ED5CAC2722682600D33A08 /* README.pdf */; };
 		B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F255102713DF400089FF17 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 		A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsClass.swift; sourceTree = "<group>"; };
 		A11FC8FD271E279F005C37B1 /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		A153D6302733611C00DE247E /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
+		B67AA47627509187009FEEAE /* EventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		B698C9C7274EB0C000B608D6 /* StackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackTableViewCell.swift; sourceTree = "<group>"; };
 		B6ED5CAC2722682600D33A08 /* README.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = README.pdf; sourceTree = "<group>"; };
 		B6F2550D2713DF400089FF17 /* MeetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +152,7 @@
 				B6F2551E2713DF420089FF17 /* LaunchScreen.storyboard */,
 				B6F255212713DF420089FF17 /* Info.plist */,
 				B6F255192713DF400089FF17 /* MeetMe.xcdatamodeld */,
+				B67AA47627509187009FEEAE /* EventListViewController.swift */,
 			);
 			path = MeetMe;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
 				A153D6312733611D00DE247E /* GroupsTableViewCell.swift in Sources */,
 				B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */,
+				B67AA47727509187009FEEAE /* EventListViewController.swift in Sources */,
 				B6F2552E2715395A0089FF17 /* FriendListViewController.swift in Sources */,
 				B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */,
 				B6F255342716916C0089FF17 /* CreateEventViewController.swift in Sources */,

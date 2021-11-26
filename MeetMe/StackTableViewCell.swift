@@ -14,6 +14,11 @@ class StackTableViewCell: UITableViewCell {
     @IBOutlet weak var event2: UILabel!
     @IBOutlet weak var event3: UILabel!
     
+    var eventOne:Event? = nil
+    var eventTwo:Event? = nil
+    var eventThree:[Event] = []
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

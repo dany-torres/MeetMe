@@ -17,7 +17,10 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     var delegate: UITableView!
     var currGroupHASH : String!
     var currGroupName : String!
+    
     var halfHours:[String] = []
+    var tappedEvent:Event!
+    var tappedMoreEvents:[Event] = []
     
     let db = Firestore.firestore()
     
@@ -25,8 +28,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var groupNameLabel: UIButton!
     
-   
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,11 +94,12 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         eventStack.reloadData()
     }
     
-    
+    // Set number of cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return halfHours.count
     }
     
+    // Populate cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
         let row = indexPath.row
@@ -107,6 +109,25 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         setEvents(cell:cell, events:events)
         return cell
     }
+    
+    // function to make something unselectable
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
+    }
+    
+    // Tap recognizers
+    @IBAction func event1TapRecognizer(_ sender: Any) {
+        
+    }
+    
+    @IBAction func event2TapRecognizer(_ sender: Any) {
+        
+    }
+    
+    @IBAction func event3TapRecognizer(_ sender: Any) {
+        
+    }
+    
     
     // Set the events block in the cells accordingly
     func setEvents(cell:StackTableViewCell, events:[Event]) {
@@ -125,7 +146,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
             if events.count > 3 {
                 setFirstEventBlock(cell:cell, event:events[0])
                 setSecondEventBlock(cell:cell, event:events[1])
-                setMoreThanThreeEvents(cell:cell, extraEvents:events.count - 2)
+                setMoreThanThreeEvents(cell:cell, extraEvents:Array(events[2...events.count]))
             }
             break
         }
@@ -135,24 +156,32 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     func setFirstEventBlock(cell:StackTableViewCell, event:Event){
         cell.event1.isHidden = false
         cell.event1.text = event.eventName
+        cell.eventOne = event
+        tappedEvent = event
     }
     
     // Set the second event block
     func setSecondEventBlock(cell:StackTableViewCell, event:Event){
         cell.event2.isHidden = false
         cell.event2.text = event.eventName
+        cell.eventTwo = event
+        tappedEvent = event
     }
     
     // Set the third event block
     func setThirdEventBlock(cell:StackTableViewCell, event:Event){
         cell.event3.isHidden = false
         cell.event3.text = event.eventName
+        cell.eventThree = [event]
+        tappedEvent = event
     }
     
     // Set the third event block when there are more events
-    func setMoreThanThreeEvents(cell:StackTableViewCell, extraEvents:Int){
+    func setMoreThanThreeEvents(cell:StackTableViewCell, extraEvents:[Event]){
         cell.event3.isHidden = false
-        cell.event3.text = String(extraEvents) + " More Events"
+        cell.event3.text = String(extraEvents.count) + " More Events"
+        cell.eventThree = extraEvents
+        tappedMoreEvents = extraEvents
     }
     
     
@@ -195,7 +224,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
          if segue.identifier == "CreateEventSegue",
             let nextVC = segue.destination as? CreateEventViewController {
              nextVC.delegate = self
-//           TODO: PASS THE HASH AND THE NAME OF THE GROUP SEGUE
+             // TODO: PASS THE HASH AND THE NAME OF THE GROUP SEGUE
              let queue = DispatchQueue(label: "curr")
              queue.async {
                  while (self.currGroupHASH == nil){
@@ -205,6 +234,25 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
                  nextVC.nameGroup = self.currGroupName
              }
          }
+         
+         // More events, need to segue into list of events
+         if segue.identifier == "eventListSegue" && tappedEvent == nil,
+            let destination = segue.destination as? EventListViewController {
+                 destination.delegate = self
+                 destination.events = tappedMoreEvents
+         }
+         
+         // Check if we are navigating to the text change VC
+         if segue.identifier == "event1Identifier"
+            || segue.identifier == "event2Identifier"
+            || segue.identifier == "eventListSegue"
+            && tappedEvent != nil,
+            let destination = segue.destination as? EventDetailsViewController {
+             destination.delegate = self
+             destination.event = tappedEvent
+             tappedEvent = nil
+         }
+         
      }
     
     func rePopulateEventStack(){
