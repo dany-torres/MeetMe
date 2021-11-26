@@ -316,8 +316,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahQ-FY-NuQ">
                                                     <rect key="frame" x="100" y="0.0" width="314" height="70"/>
                                                     <subviews>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1R-0g-CqC">
-                                                            <rect key="frame" x="10" y="6.5" width="94" height="57"/>
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1R-0g-CqC">
+                                                            <rect key="frame" x="10" y="-0.5" width="94" height="71"/>
                                                             <color key="backgroundColor" red="0.81633752579999996" green="0.71577680109999997" blue="0.98042279480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -327,8 +327,8 @@
                                                                 <outletCollection property="gestureRecognizers" destination="lu9-09-nGT" appends="YES" id="5UI-mU-DjC"/>
                                                             </connections>
                                                         </label>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event 2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNA-om-kei">
-                                                            <rect key="frame" x="111.5" y="6.5" width="94.5" height="57"/>
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNA-om-kei">
+                                                            <rect key="frame" x="111.5" y="-0.5" width="94.5" height="71"/>
                                                             <color key="backgroundColor" red="0.81633752579999996" green="0.71577680109999997" blue="0.98042279480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -338,8 +338,8 @@
                                                                 <outletCollection property="gestureRecognizers" destination="yoP-4M-Mc1" appends="YES" id="KNc-3B-Vah"/>
                                                             </connections>
                                                         </label>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7T-uB-rMh">
-                                                            <rect key="frame" x="213.5" y="6.5" width="94" height="57"/>
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7T-uB-rMh">
+                                                            <rect key="frame" x="213.5" y="-0.5" width="94" height="71"/>
                                                             <color key="backgroundColor" red="0.81633752579999996" green="0.71577680109999997" blue="0.98042279480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -360,7 +360,7 @@
                                                         <constraint firstItem="S7T-uB-rMh" firstAttribute="width" secondItem="fNA-om-kei" secondAttribute="width" id="hwf-Bt-cEP"/>
                                                         <constraint firstItem="fNA-om-kei" firstAttribute="centerY" secondItem="T1R-0g-CqC" secondAttribute="centerY" id="kJE-XG-Xsl"/>
                                                         <constraint firstItem="T1R-0g-CqC" firstAttribute="centerY" secondItem="ahQ-FY-NuQ" secondAttribute="centerY" id="kZj-cS-9ut"/>
-                                                        <constraint firstItem="T1R-0g-CqC" firstAttribute="height" secondItem="ahQ-FY-NuQ" secondAttribute="height" multiplier="0.8" constant="0.80000000000000004" id="nql-s0-iWO"/>
+                                                        <constraint firstItem="T1R-0g-CqC" firstAttribute="height" secondItem="ahQ-FY-NuQ" secondAttribute="height" constant="1" id="nql-s0-iWO"/>
                                                         <constraint firstItem="S7T-uB-rMh" firstAttribute="leading" secondItem="fNA-om-kei" secondAttribute="trailing" constant="7.5" id="u1k-SX-cA4"/>
                                                         <constraint firstItem="fNA-om-kei" firstAttribute="leading" secondItem="T1R-0g-CqC" secondAttribute="trailing" constant="7.5" id="yvB-wr-4UB"/>
                                                         <constraint firstItem="fNA-om-kei" firstAttribute="height" secondItem="T1R-0g-CqC" secondAttribute="height" id="znW-v2-uVS"/>

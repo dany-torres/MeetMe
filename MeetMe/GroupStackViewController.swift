@@ -115,18 +115,18 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         return nil
     }
     
-    // Tap recognizers
-    @IBAction func event1TapRecognizer(_ sender: Any) {
-        
-    }
-    
-    @IBAction func event2TapRecognizer(_ sender: Any) {
-        
-    }
-    
-    @IBAction func event3TapRecognizer(_ sender: Any) {
-        
-    }
+    // Tap recognizers, maybe delete this?
+//    @IBAction func event1TapRecognizer(_ sender: Any) {
+//
+//    }
+//
+//    @IBAction func event2TapRecognizer(_ sender: Any) {
+//
+//    }
+//
+//    @IBAction func event3TapRecognizer(_ sender: Any) {
+//
+//    }
     
     
     // Set the events block in the cells accordingly
@@ -155,7 +155,10 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     // Set the first event block
     func setFirstEventBlock(cell:StackTableViewCell, event:Event){
         cell.event1.isHidden = false
-        cell.event1.text = event.eventName
+        // Check if not a longer event
+        if event.startTime == cell.time.text {
+            cell.event1.text = event.eventName
+        }
         cell.eventOne = event
         tappedEvent = event
     }
@@ -163,7 +166,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     // Set the second event block
     func setSecondEventBlock(cell:StackTableViewCell, event:Event){
         cell.event2.isHidden = false
-        cell.event2.text = event.eventName
+        if event.startTime == cell.time.text {
+            cell.event2.text = event.eventName
+        }
         cell.eventTwo = event
         tappedEvent = event
     }
@@ -171,7 +176,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     // Set the third event block
     func setThirdEventBlock(cell:StackTableViewCell, event:Event){
         cell.event3.isHidden = false
-        cell.event3.text = event.eventName
+        if event.startTime == cell.time.text {
+            cell.event3.text = event.eventName
+        }
         cell.eventThree = [event]
         tappedEvent = event
     }
@@ -213,6 +220,11 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
                 eventsAtTime.append(event)
                 // TODO: fix so that it looks like one event box
             }
+        }
+        
+        // sort from longest duration, to shortest
+        eventsAtTime.sort {
+            $0.endTime < $1.endTime
         }
         
         return eventsAtTime
