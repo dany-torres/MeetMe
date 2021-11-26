@@ -233,32 +233,33 @@ class CreateEventViewController: UIViewController {
                         }
                         
                         // Create the instance object
-                        let eventDb : [String: Any] = [
-                            "uid": hash,
-                            "name": self.eventNameTextField.text!,
-                            "eventDate" : self.currentDateLabel.text!,
-                            "startTime" : self.startTimeChosen,
-                            "endTime"   : self.endTimeChosen,
-                            "notifications" : self.notificationsButton.isSelected,
-                            "reminderChoice" : self.reminderChoice,
-                            "polls" : self.pollsButton.isSelected,
-                            "messages" : self.messagesButton.isSelected,
-                            "editable" : self.editEventButton.isSelected,
-                            "creator": uid,
-                            "groupName": self.currGroup.groupName,
-                            "location": self.locationTextField.text!,
-                            "attendees": [uid],
-                        
-                        ]
-                        
-                        // Adds new event to Events db
-                        self.db.collection("Events").document(hash).setData(eventDb)
+                        DispatchQueue.main.async {
+                            let eventDb : [String: Any] = [
+                                "uid": hash,
+                                "name": self.eventNameTextField.text!,
+                                "eventDate" : self.currentDateLabel.text!,
+                                "startTime" : self.startTimeChosen,
+                                "endTime"   : self.endTimeChosen,
+                                "notifications" : self.notificationsButton.isSelected,
+                                "reminderChoice" : self.reminderChoice,
+                                "polls" : self.pollsButton.isSelected,
+                                "messages" : self.messagesButton.isSelected,
+                                "editable" : self.editEventButton.isSelected,
+                                "creator": uid,
+                                "groupName": self.currGroup.groupName,
+                                "location": self.locationTextField.text!,
+                                "attendees": [uid],
+                            ]
+                            // Adds new event to Events db
+                            self.db.collection("Events").document(hash).setData(eventDb)
+                        }
                         // Adds new event to list of events in current group
                         self.db.collection("Groups").document(self.currGroup.groupHASH).updateData(["events": FieldValue.arrayUnion([hash])])
                         // Adds new event to list of events in current user
                         self.db.collection("Users").document(uid).updateData(["events": FieldValue.arrayUnion([hash])])
                         //creates new event object
-                        let newEvent = Event(eventName:self.eventNameTextField.text!,
+                        DispatchQueue.main.async {
+                            let newEvent = Event(eventName:self.eventNameTextField.text!,
                                          eventDate:self.currentDateLabel.text!,
                                          startTime:self.startTimeChosen,
                                          endTime:self.endTimeChosen,
@@ -271,9 +272,10 @@ class CreateEventViewController: UIViewController {
                                          eventCreator: uid,
                                          nameOfGroup: self.currGroup.groupName,
                                          listOfAttendees: [uid],
-                                         eventHash: hash)
-                        // Adds new event object locally
-                        otherVC.addNewEvent(newEvent: newEvent)
+                                        eventHash: hash)
+                            // Adds new event object locally
+                            otherVC.addNewEvent(newEvent: newEvent)
+                        }
                     }
                 _ = navigationController?.popViewController(animated: true)
             }

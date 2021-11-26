@@ -50,7 +50,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
             while (!self.loaded){
                 sleep(1)
             }
-            self.groupNameLabel.setTitle(self.currGroup.groupName, for: .normal)
+            DispatchQueue.main.async {
+                self.groupNameLabel.setTitle(self.currGroup.groupName, for: .normal)
+            }
             self.rePopulateEventStack()
         }
     }
