@@ -18,7 +18,6 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var language: UISegmentedControl!
     @IBOutlet weak var mode: UISegmentedControl!
     
-    
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
@@ -73,6 +72,65 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func languageSegCtrl(_ sender: Any) {
+        
+        switch language.selectedSegmentIndex {
+        case 0:
+            // English
+            let controller = UIAlertController(
+                title: "Cambiando el lenguaje a Ingles",
+                message: "Tienes que cerrar y volver a abrir la aplicacion para ver los cambios.",
+                preferredStyle: .alert)
+            controller.addAction(UIAlertAction(
+                                    title: "Cancel",
+                                    style: .cancel,
+                                    handler: {
+                                        (paramAction:UIAlertAction!) in
+                                        self.language.selectedSegmentIndex = 1
+                                    }
+            ))
+            controller.addAction(UIAlertAction(
+                                    title: "OK",
+                                    style: .default,
+                                    handler: {
+                                        (paramAction:UIAlertAction!) in
+                                        Bundle.setLanguage("en")
+                                        UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                                        exit(0)
+                                    }
+            ))
+            present(controller,
+                    animated: true,
+                    completion: nil)
+        case 1:
+            // Spanish
+            let controller = UIAlertController(
+                title: "Changing language to Spanish",
+                message: "You have to restart the app to make the changes.",
+                preferredStyle: .alert)
+            controller.addAction(UIAlertAction(
+                                    title: "Cancel",
+                                    style: .cancel,
+                                    handler: {
+                                        (paramAction:UIAlertAction!) in
+                                        self.language.selectedSegmentIndex = 0
+                                    }))
+            controller.addAction(UIAlertAction(
+                                    title: "OK",
+                                    style: .default,
+                                    handler: {
+                                        (paramAction:UIAlertAction!) in
+                                        UserDefaults.standard.set("es", forKey: "selectedLanguage")
+                                        Bundle.setLanguage("es")
+                                        exit(0)
+                                    }
+            ))
+            present(controller,
+                    animated: true,
+                    completion: nil)
+        default:
+            print("Error")
+        }
+//        exit(0)
     }
     
     @IBAction func modeSegCtrl(_ sender: Any) {
@@ -125,4 +183,26 @@ class SettingsViewController: UIViewController {
     }
     */
 
+}
+
+//MARK: Localization configure bundle
+extension Bundle {
+    class func setLanguage(_ language: String) {
+        var onceToken: Int = 0
+        
+        if (onceToken == 0) {
+            /* TODO: move below code to a static variable initializer (dispatch_once is deprecated) */
+            object_setClass(Bundle.main, PrivateBundle.self)
+        }
+        onceToken = 1
+        objc_setAssociatedObject(Bundle.main, &associatedLanguageBundle, (language != nil) ? Bundle(path: Bundle.main.path(forResource: language, ofType: "lproj") ?? "") : nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+}
+private var associatedLanguageBundle:Character = "0"
+
+class PrivateBundle: Bundle {
+    override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
+        let bundle: Bundle? = objc_getAssociatedObject(self, &associatedLanguageBundle) as? Bundle
+        return (bundle != nil) ? (bundle!.localizedString(forKey: key, value: value, table: tableName)) : (super.localizedString(forKey: key, value: value, table: tableName))
+    }
 }
