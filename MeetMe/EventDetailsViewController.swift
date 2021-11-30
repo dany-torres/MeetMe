@@ -41,13 +41,16 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         // Check if user can't edit event
         // Case 1: Community Run AND event is editable
         // Case 2: Admin Run AND group creator is trying to edit
-        if (!currGroup.adminRun && (event!.editEvents)) ||
+        // Case 3: Check if uneditable, but user is event creator
+        if (!currGroup.adminRun && event!.editEvents) ||
+            (!event!.editEvents && event?.eventCreator == Auth.auth().currentUser!.uid) ||
             (currGroup.adminRun && currGroup.groupCreator == Auth.auth().currentUser!.uid) {
             editButton.isHidden = false
             saveButton.isHidden = false
         }
         
-        if (currGroup.groupCreator == Auth.auth().currentUser!.uid){
+        // Check if it's the event creator
+        if (event?.eventCreator == Auth.auth().currentUser!.uid){
             deleteButton.isHidden = false
         }
         
@@ -143,11 +146,13 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     // Function to delete event
     @IBAction func deleteButtonPressed(_ sender: Any) {
-        // Delete event from Events DB collection
+        // Delete event from all attendees accepted events
         
         // Delete event from Group
         
-        // Delete event from all attendees accepted events
+        // Delete event from Events DB collection
+        
+        
     }
     
     
