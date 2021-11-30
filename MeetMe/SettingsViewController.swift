@@ -23,6 +23,10 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextFields()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         setLanguage()
     }
     
@@ -128,7 +132,14 @@ class SettingsViewController: UIViewController {
                                                 let userDb : [String: Any] = [
                                                     "language": false
                                                 ]
-                                                self.db.collection("Users").document(uid).updateData(userDb)
+                                                self.db.collection("Users").document(uid).updateData(userDb) { err in
+                                                    if let err = err {
+                                                        print("Error writing document: \(err)")
+                                                    } else {
+                                                        print("Document successfully written!")
+                                                        exit(0)
+                                                    }
+                                                }
                                             }
                                             
                                             
@@ -136,7 +147,6 @@ class SettingsViewController: UIViewController {
                                           // No user is signed in.
                                           // ...
                                         }
-                                        exit(0)
                                     }
             ))
             present(controller,
@@ -169,7 +179,14 @@ class SettingsViewController: UIViewController {
                                                 let userDb : [String: Any] = [
                                                     "language": true
                                                 ]
-                                                self.db.collection("Users").document(uid).updateData(userDb)
+                                                self.db.collection("Users").document(uid).updateData(userDb){ err in
+                                                    if let err = err {
+                                                        print("Error writing document: \(err)")
+                                                    } else {
+                                                        print("Document successfully written!")
+                                                        exit(0)
+                                                    }
+                                                }
                                             }
                                             
                                             
@@ -177,8 +194,6 @@ class SettingsViewController: UIViewController {
                                           // No user is signed in.
                                           // ...
                                         }
-                                        
-                                        exit(0)
                                     }
             ))
             present(controller,
