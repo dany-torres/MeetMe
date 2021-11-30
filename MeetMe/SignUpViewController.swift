@@ -91,10 +91,17 @@ class SignUpViewController: UIViewController {
                                     let user = Auth.auth().currentUser
                                     if let user = user {
                                         let uid = user.uid
+                                        let myColor: UIColor = .random
+                                        let red = myColor.rgba.red
+                                        let green = myColor.rgba.green
+                                        let blue = myColor.rgba.blue
                                         let userDb : [String: Any] = [
                                             "uid": uid,
                                             "name": name,
                                             "username": userName,
+                                            "red": red,
+                                            "green": green,
+                                            "blue": blue,
                                             "location": location,
                                             "language": false,
                                             "mode": false,
@@ -136,5 +143,24 @@ class SignUpViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+extension UIColor {
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+        return (red, green, blue, alpha)
+    }
+    static var random: UIColor {
+        return UIColor(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            alpha: 1.0
+        )
+    }
 }
