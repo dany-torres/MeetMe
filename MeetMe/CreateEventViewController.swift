@@ -18,9 +18,7 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var eventNameLabel: UILabel!
     
     @IBOutlet weak var notificationsButton: UIButton!
-    @IBOutlet weak var pollsButton: UIButton!
     @IBOutlet weak var editEventButton: UIButton!
-    @IBOutlet weak var messagesButton: UIButton!
     
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
@@ -47,14 +45,12 @@ class CreateEventViewController: UIViewController {
         notificationsButton.setImage(checkmark, for: .selected)
         notificationsButton.setImage(square, for: .normal)
         
-        pollsButton.setImage(checkmark, for: .selected)
-        pollsButton.setImage(square, for: .normal)
+
         
         editEventButton.setImage(checkmark, for: .selected)
         editEventButton.setImage(square, for: .normal)
         
-        messagesButton.setImage(checkmark, for: .selected)
-        messagesButton.setImage(square, for: .normal)
+
         
         // Setting up the curr date for date label
         let today = Date()
@@ -122,13 +118,7 @@ class CreateEventViewController: UIViewController {
         
     }
     
-    @IBAction func pollsBoxPressed(_ sender: Any) {
-        if(pollsButton.isSelected){
-            pollsButton.isSelected = false
-        }else{
-            pollsButton.isSelected = true
-        }
-    }
+
     
     @IBAction func editBoxPressed(_ sender: Any) {
         if(editEventButton.isSelected){
@@ -138,13 +128,7 @@ class CreateEventViewController: UIViewController {
         }
     }
     
-    @IBAction func messagesBoxPressed(_ sender: Any) {
-        if(messagesButton.isSelected){
-            messagesButton.isSelected = false
-        }else{
-            messagesButton.isSelected = true
-        }
-    }
+ 
     
     @IBAction func createButtonPressed(_ sender: Any) {
         switch true {
@@ -255,8 +239,8 @@ class CreateEventViewController: UIViewController {
                                 "endTime"   : self.endTimeChosen,
                                 "notifications" : self.notificationsButton.isSelected,
                                 "reminderChoice" : self.reminderChoice,
-                                "polls" : self.pollsButton.isSelected,
-                                "messages" : self.messagesButton.isSelected,
+                                "polls" : false,
+                                "messages" : false,
                                 "editable" : self.editEventButton.isSelected,
                                 "creator": uid,
                                 "groupName": self.currGroup.groupName,
@@ -281,8 +265,8 @@ class CreateEventViewController: UIViewController {
                              location:self.locationTextField.text!,
                              notifications: self.notificationsButton.isSelected,
                              reminderChoice: self.reminderChoice,
-                             polls: self.pollsButton.isSelected,
-                             messages:self.messagesButton.isSelected,
+                             polls: false,
+                             messages: false,
                              editEvents:self.editEventButton.isSelected,
                              eventCreator: uid,
                              nameOfGroup: self.currGroup.groupName,
