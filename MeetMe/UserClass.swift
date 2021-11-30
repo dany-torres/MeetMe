@@ -11,16 +11,12 @@ class User{
 //    String Name
     let name: String
     let username: String
-    let location: String
-    let language: Bool
-    let mode: Bool
+    let hash: String
     
-    init(name: String, username: String, location: String, language: Bool, mode: Bool){
+    init(name: String, username: String, hash: String){
         self.name = name
         self.username = username
-        self.location = location
-        self.language = language
-        self.mode = mode
+        self.hash = hash
     }
 //    String Username
 //    String Location

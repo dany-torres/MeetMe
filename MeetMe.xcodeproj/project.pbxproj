@@ -10,6 +10,7 @@
 		0D097B3D435C357ED7EB890B /* Pods_MeetMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F62E88697E24C77D8BB9A6 /* Pods_MeetMe.framework */; };
 		5BE927B42722005A005254BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BE927B32722005A005254BF /* GoogleService-Info.plist */; };
 		8D22CE24271CE300001BE602 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D22CE23271CE300001BE602 /* Event.swift */; };
+		A10ACFC72755CB9E00FEA7AA /* UserRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10ACFC62755CB9E00FEA7AA /* UserRequestTableViewCell.swift */; };
 		A11FC8FC271E25C3005C37B1 /* GroupsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */; };
 		A11FC8FE271E279F005C37B1 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FD271E279F005C37B1 /* UserClass.swift */; };
 		A153D6312733611D00DE247E /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A153D6302733611C00DE247E /* GroupsTableViewCell.swift */; };
@@ -39,9 +40,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B987BFD27544CFE0082AEC5 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
+		5B987BFE27544D000082AEC5 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		5B987BFF2754543A0082AEC5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		5B987C002754543B0082AEC5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5BE927B32722005A005254BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		72988190ACDF0A01EC9E0CE9 /* Pods-MeetMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetMe.release.xcconfig"; path = "Target Support Files/Pods-MeetMe/Pods-MeetMe.release.xcconfig"; sourceTree = "<group>"; };
 		8D22CE23271CE300001BE602 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		A10ACFC62755CB9E00FEA7AA /* UserRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestTableViewCell.swift; sourceTree = "<group>"; };
 		A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsClass.swift; sourceTree = "<group>"; };
 		A11FC8FD271E279F005C37B1 /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		A153D6302733611C00DE247E /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
@@ -148,6 +154,7 @@
 				A153D6302733611C00DE247E /* GroupsTableViewCell.swift */,
 				B6F255332716916B0089FF17 /* CreateEventViewController.swift */,
 				B698C9C7274EB0C000B608D6 /* StackTableViewCell.swift */,
+				A10ACFC62755CB9E00FEA7AA /* UserRequestTableViewCell.swift */,
 				5BE927B32722005A005254BF /* GoogleService-Info.plist */,
 				B6F2551C2713DF420089FF17 /* Assets.xcassets */,
 				B6F2551E2713DF420089FF17 /* LaunchScreen.storyboard */,
@@ -202,6 +209,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"es-419",
+				es,
 			);
 			mainGroup = B6F255042713DF3F0089FF17;
 			productRefGroup = B6F2550E2713DF400089FF17 /* Products */;
@@ -283,6 +292,7 @@
 				A11FC8FE271E279F005C37B1 /* UserClass.swift in Sources */,
 				B6F2553C271BE4800089FF17 /* MyStackViewController.swift in Sources */,
 				B6F255402720E5E40089FF17 /* EventDetailsViewController.swift in Sources */,
+				A10ACFC72755CB9E00FEA7AA /* UserRequestTableViewCell.swift in Sources */,
 				8D22CE24271CE300001BE602 /* Event.swift in Sources */,
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
 				A153D6312733611D00DE247E /* GroupsTableViewCell.swift in Sources */,
@@ -308,6 +318,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				B6F255172713DF400089FF17 /* Base */,
+				5B987BFD27544CFE0082AEC5 /* es-419 */,
+				5B987BFF2754543A0082AEC5 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -316,6 +328,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				B6F2551F2713DF420089FF17 /* Base */,
+				5B987BFE27544D000082AEC5 /* es-419 */,
+				5B987C002754543B0082AEC5 /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -327,6 +341,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -388,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

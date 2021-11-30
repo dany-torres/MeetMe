@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        let targetLang = UserDefaults.standard.object(forKey: "selectedLanguage") as? String
+                Bundle.setLanguage((targetLang != nil) ? targetLang! : "en")
         return true
     }
 

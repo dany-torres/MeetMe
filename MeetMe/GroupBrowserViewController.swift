@@ -33,6 +33,49 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
     
     // Reload stack to show any event edits
     override func viewWillAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if data["mode"] as? Bool ?? false == false {
+                            // light
+                            UIApplication.shared.windows.forEach { window in
+                                window.overrideUserInterfaceStyle = .light
+                            }
+                            self.navigationController?.navigationBar.backgroundColor = UIColor.white
+                            self.navigationController?.navigationBar.tintColor = UIColor.black
+                        } else {
+                            // dark
+                            UIApplication.shared.windows.forEach { window in
+                                window.overrideUserInterfaceStyle = .dark
+                            }
+                            self.navigationController?.navigationBar.backgroundColor = UIColor.black
+                            self.navigationController?.navigationBar.tintColor = UIColor.white
+                        }
+                    }
+                }
+            }
+        }
+//            if false {
+//                UIApplication.shared.windows.forEach { window in
+//                    window.overrideUserInterfaceStyle = .light
+//                }
+//                self.navigationController?.navigationBar.backgroundColor = UIColor.white
+//                self.navigationController?.navigationBar.tintColor = UIColor.black
+//            } else {
+//                UIApplication.shared.windows.forEach { window in
+//                    window.overrideUserInterfaceStyle = .dark
+//                }
+//                self.navigationController?.navigationBar.backgroundColor = UIColor.black
+//                self.navigationController?.navigationBar.tintColor = UIColor.white
+//            }
         groupTableView.reloadData()
     }
     
@@ -97,18 +140,32 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
                                         currGroup.events = groupsData!["events"] as! [String]
                                         self.addGroup(newGroup: currGroup)
                                     } else {
-                                        print("Document does not exist")
+                                        print("Group does not exist")
                                     }
                                 }
                             }
                         } else {
-                            print("Document does not exist")
+                            print("User does not exist")
                         }
                     }
                 }
             }
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        // Create a variable that you want to send based on the destination view controller
+//        // You can get a reference to the data by using indexPath shown below
+//        let currGroup = groups[indexPath.row]
+//
+//        // Create an instance of PlayerTableViewController and pass the variable
+//        let destination = GroupStackViewController()
+//        destination.loaded = true
+//        destination.currGroup = currGroup
+//
+//        // Let's assume that the segue name is called playerSegue
+//        // This will perform the segue and pre-load the variable for you to use
+//        destination.performSegue(withIdentifier: "GroupSegue", sender: self)
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == newGroupSegue,
@@ -122,5 +179,7 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
            destination.loaded = true
            destination.currGroup = currGroup
         }
+
     }
 }
+

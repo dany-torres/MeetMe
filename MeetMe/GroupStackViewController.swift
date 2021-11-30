@@ -20,6 +20,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                                     UITableViewDelegate, AddNewEvent, UpdateGroup, MyStackCellDelegate {
     public var eventList:[Event] = []
     var delegate: UITableView!
+//    var currGroupHASH : String!
+//    var currGroupName : String!
     var currGroup: Group!
     var loaded: Bool = false
     
@@ -34,7 +36,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Change back button ot go to root rather than create group
         var viewControllersArray = [UIViewController]()
         viewControllersArray.append(self.navigationController!.viewControllers.first!)
@@ -44,6 +45,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         eventStack.delegate = self
         eventStack.dataSource = self
         
+//        groupNameLabel.setTitle(currGroupName, for: .normal)
         setDayLabel()
         initTime()
         
@@ -269,6 +271,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                  while (self.currGroup == nil){
                      sleep(1)
                  }
+//                 nextVC.hashGroup = self.currGroupHASH
+//                 nextVC.nameGroup = self.currGroupName
                  nextVC.currGroup = self.currGroup
              }
          }
@@ -346,7 +350,28 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                                                  listOfAttendees: eventData!["attendees"] as! [String],
                                                  eventHash: eventData!["uid"] as! String
                             )
-                            self.addNewEvent(newEvent: newEvent)
+                            
+                            let today = Date()
+                            let weekday = Calendar.current.component(.weekday, from: today)
+                            let month = Calendar.current.component(.month, from: today)
+                            let date = Calendar.current.component(.day, from: today)
+
+                            let weekdayText = Calendar.current.shortWeekdaySymbols[weekday-1]
+                            let monthText = "\(Calendar.current.shortMonthSymbols[month-1]) \(date)"
+                            
+                            let todayCheck = "\(weekdayText) \(monthText)"
+                            if newEvent.eventDate == todayCheck {
+                                self.addNewEvent(newEvent: newEvent)
+                            } else {
+                                //delete event from all user accepted
+                                self.deleteEventFromUsers(newEvent: newEvent)
+                                //delete event from groups
+                                //TODO
+                                self.deleteEventFromGroups(newEvent: newEvent)
+                                //delete event from events
+                                self.db.collection("Events").document(newEvent.eventHash).delete()
+                            }
+                            
                         } else {
                             print("Event does not exist")
                         }
@@ -358,9 +383,38 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         }
     }
     
+    func deleteEventFromUsers(newEvent: Event){
+        for attendees in newEvent.listOfAttendees{
+            let nameRef = db.collection("Users").document(attendees)
+            nameRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let data = document.data()
+                    let eventsAttending = data!["events"] as! [String]
+                    let newEvents = eventsAttending.filter {$0 != newEvent.eventHash}
+                    self.db.collection("Users").document(attendees).updateData(["events": newEvents])
+                }
+            }
+        }
+    }
+    
+    func deleteEventFromGroups(newEvent: Event){
+        let nameRef = db.collection("Groups").document(currGroup.groupHASH)
+        nameRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let events = data!["events"] as! [String]
+                let newEvents = events.filter {$0 != newEvent.eventHash}
+                self.db.collection("Groups").document(self.currGroup.groupHASH).updateData(["events": newEvents])
+            }
+        }
+    }
+    
     func addNewEvent(newEvent: Event) {
         eventList.append(newEvent)
         eventStack.reloadData()
+//        for event in eventList{
+//            print(event.eventName)
+//        }
     }
     
     func updateGroup(group: Group) {

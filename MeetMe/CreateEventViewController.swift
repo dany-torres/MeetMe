@@ -66,8 +66,6 @@ class CreateEventViewController: UIViewController {
         let monthText = "\(Calendar.current.shortMonthSymbols[month-1]) \(date)"
         
         currentDateLabel.text = "\(weekdayText) \(monthText)"
-        
-        
     }
     
     @IBAction func setReminderButtonPressed(_ sender: Any) {
@@ -228,7 +226,9 @@ class CreateEventViewController: UIViewController {
                     completion: nil)
         
         default:
+        
             let otherVC = delegate as! AddNewEvent
+        
             if Auth.auth().currentUser != nil {
                 let user = Auth.auth().currentUser
                 if let user = user {
@@ -262,6 +262,7 @@ class CreateEventViewController: UIViewController {
                                 "groupName": self.currGroup.groupName,
                                 "location": self.locationTextField.text!,
                                 "attendees": [uid],
+                                "groupHash": self.currGroup.groupHASH
                             ]
                             // Adds new event to Events db
                             self.db.collection("Events").document(hash).setData(eventDb)
