@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var usersList: [String] = []
+    var usersList: [User] = []
     
     let db = Firestore.firestore()
 
@@ -32,13 +32,28 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 for document in querySnapshot!.documents {
                     let data = document.data()
                     let name = data["name"] as! String
-                    self.usersList.append(name)
+                    let username = data["username"] as! String
+                    let hash = data["uid"] as! String
+                    let newUser = User(name: name, username: username, hash: hash)
+                    self.usersList.append(newUser)
                     self.resultsTableView.reloadData()
                 }
             }
         }
         print(usersList)
         // Do any additional setup after loading the view.
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedUser = usersList[indexPath.row]
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                //Cambiar a FriendRequests para tener al interface
+                db.collection("Users").document(selectedUser.hash).updateData(["friends": FieldValue.arrayUnion([uid])])
+            }
+        }
     }
 
     
@@ -50,8 +65,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: UserCellIdentifier, for: indexPath) as! UserRequestTableViewCell
         let row = indexPath.row
         let user = usersList[row]
-        cell.nameLabel.text = user
-        cell.usernameLabel.text = "Test"
+        cell.nameLabel.text = user.name
+        cell.usernameLabel.text = user.username
         return cell
     }
 }
