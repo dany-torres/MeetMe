@@ -31,6 +31,11 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
         rePopulateGroupsTable()
     }
     
+    // Reload stack to show any event edits
+    override func viewWillAppear(_ animated: Bool) {
+        groupTableView.reloadData()
+    }
+    
     @IBAction func newGroupButtonPressed(_ sender: Any) {
     }
     

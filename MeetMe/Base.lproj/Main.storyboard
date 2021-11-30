@@ -478,14 +478,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeE-U2-tu3">
-                                <rect key="frame" x="46" y="198" width="31" height="19"/>
+                                <rect key="frame" x="50" y="198" width="31" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kz7-og-hci">
-                                <rect key="frame" x="101" y="138" width="117" height="24"/>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -496,24 +490,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Oct 21, 2021" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZPp-dD-ze8" userLabel="Date Text Field">
-                                <rect key="frame" x="46" y="219" width="109" height="30"/>
+                                <rect key="frame" x="50" y="219" width="109" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="4FH-HZ-o8M"/>
                                 </constraints>
+                                <color key="textColor" systemColor="placeholderTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGO-9h-ovC">
+                                <rect key="frame" x="285.5" y="197" width="60" height="19"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attendees" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQA-1w-jiD">
                                 <rect key="frame" x="50" y="356" width="64" height="19"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c7y-se-oFh" userLabel="Duration Text Field">
-                                <rect key="frame" x="46" y="280" width="312" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c7y-se-oFh" userLabel="Duration Text Field">
+                                <rect key="frame" x="50" y="300" width="314" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="308" id="Mv0-QC-8lh"/>
                                     <constraint firstAttribute="height" constant="30" id="wHc-2R-4uP"/>
+                                    <constraint firstAttribute="width" constant="315" id="wOZ-rt-9SV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -543,40 +544,23 @@
                                     <action selector="editButtonClicked:" destination="O6s-m2-AMY" eventType="touchUpInside" id="GXT-MA-Qbn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yye-Ya-UnS">
-                                <rect key="frame" x="270" y="350" width="88" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="nhA-jc-iLZ"/>
-                                    <constraint firstAttribute="width" constant="90" id="oTq-ZO-J2j"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Join Event">
-                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="createButtonPressed:" destination="ZNC-ES-8eU" eventType="touchUpInside" id="zZR-qg-QkE"/>
-                                    <action selector="joinEventButtonClicked:" destination="O6s-m2-AMY" eventType="touchUpInside" id="XEH-Te-0ww"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GpR-Yq-Cva">
-                                <rect key="frame" x="50" y="402" width="308" height="265"/>
+                                <rect key="frame" x="50" y="402" width="314" height="265"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="308" id="mP5-9e-Duc"/>
+                                    <constraint firstAttribute="width" constant="315" id="mP5-9e-Duc"/>
                                     <constraint firstAttribute="height" constant="265" id="zQI-Hv-3dY"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="BAw-rh-tu7" imageView="asl-GR-ceW" style="IBUITableViewCellStyleDefault" id="uDH-oc-gRo">
-                                        <rect key="frame" x="0.0" y="44.5" width="308" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="314" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uDH-oc-gRo" id="C9Q-rw-wa8">
-                                            <rect key="frame" x="0.0" y="0.0" width="308" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="314" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BAw-rh-tu7">
-                                                    <rect key="frame" x="53.75" y="0.0" width="238.25" height="43.5"/>
+                                                    <rect key="frame" x="53.75" y="0.0" width="244.25" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -635,12 +619,32 @@
                                     <action selector="endTimeChosen:" destination="ZNC-ES-8eU" eventType="valueChanged" id="a6n-oY-Vjd"/>
                                 </connections>
                             </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGO-9h-ovC">
-                                <rect key="frame" x="285.5" y="197" width="60" height="19"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Event Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fuO-mk-HYi">
+                                <rect key="frame" x="101" y="135" width="165" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="165" id="gbM-RX-ZB8"/>
+                                </constraints>
+                                <color key="textColor" systemColor="placeholderTextColor"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yye-Ya-UnS">
+                                <rect key="frame" x="274" y="350" width="90" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="nhA-jc-iLZ"/>
+                                    <constraint firstAttribute="width" constant="90" id="oTq-ZO-J2j"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Join Event">
+                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="createButtonPressed:" destination="ZNC-ES-8eU" eventType="touchUpInside" id="zZR-qg-QkE"/>
+                                    <action selector="joinEventButtonClicked:" destination="O6s-m2-AMY" eventType="touchUpInside" id="XEH-Te-0ww"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eTQ-iJ-ZUe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -649,36 +653,38 @@
                             <constraint firstItem="eTQ-iJ-ZUe" firstAttribute="trailing" secondItem="6Ul-SR-inv" secondAttribute="trailing" constant="56" id="5XD-dq-NS2"/>
                             <constraint firstItem="6Ul-SR-inv" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="288" id="5nr-qo-8fk"/>
                             <constraint firstItem="wFm-65-bcO" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="47" id="6Fr-pB-TVP"/>
-                            <constraint firstItem="eTQ-iJ-ZUe" firstAttribute="trailing" secondItem="Yye-Ya-UnS" secondAttribute="trailing" constant="56" id="6JP-ql-6NO"/>
                             <constraint firstItem="sXg-QN-b8q" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="110" id="7OT-4W-398"/>
                             <constraint firstItem="GpR-Yq-Cva" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="50" id="7Qt-PJ-Tgt"/>
-                            <constraint firstItem="c7y-se-oFh" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="50" id="BSO-GD-aP7"/>
+                            <constraint firstItem="eTQ-iJ-ZUe" firstAttribute="trailing" secondItem="Yye-Ya-UnS" secondAttribute="trailing" constant="50" id="APZ-ln-04v"/>
                             <constraint firstItem="tQA-1w-jiD" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="50" id="D0F-ef-t6X"/>
                             <constraint firstItem="LO0-6R-OxM" firstAttribute="centerY" secondItem="ZPp-dD-ze8" secondAttribute="centerY" id="FhB-7X-X9m"/>
-                            <constraint firstItem="VeE-U2-tu3" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="46" id="HIk-Q2-uYM"/>
-                            <constraint firstItem="kz7-og-hci" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="50" id="HQ3-br-Fok"/>
+                            <constraint firstItem="VeE-U2-tu3" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="50" id="HIk-Q2-uYM"/>
                             <constraint firstItem="cqR-kU-Wzb" firstAttribute="centerY" secondItem="LO0-6R-OxM" secondAttribute="centerY" id="IbO-AR-sRt"/>
                             <constraint firstItem="eTQ-iJ-ZUe" firstAttribute="trailing" secondItem="dGO-9h-ovC" secondAttribute="trailing" constant="68.5" id="ImQ-af-c7e"/>
                             <constraint firstItem="Yye-Ya-UnS" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="262" id="JGd-WZ-6iR"/>
                             <constraint firstItem="dGO-9h-ovC" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="109" id="Jo4-BX-MUL"/>
+                            <constraint firstItem="c7y-se-oFh" firstAttribute="trailing" secondItem="Yye-Ya-UnS" secondAttribute="trailing" id="Mfm-rE-B1h"/>
                             <constraint firstItem="Vov-FJ-hBG" firstAttribute="top" secondItem="GpR-Yq-Cva" secondAttribute="bottom" constant="45" id="N86-5F-sCP"/>
+                            <constraint firstItem="fuO-mk-HYi" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="47" id="NSu-vJ-b00"/>
                             <constraint firstItem="GpR-Yq-Cva" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="314" id="Ohk-T9-2uF"/>
                             <constraint firstItem="yZb-fB-uPt" firstAttribute="leading" secondItem="c7y-se-oFh" secondAttribute="leading" id="PW7-mo-Clh"/>
                             <constraint firstItem="tQA-1w-jiD" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="268" id="T3X-JY-VQY"/>
                             <constraint firstItem="sXg-QN-b8q" firstAttribute="centerX" secondItem="LO0-6R-OxM" secondAttribute="centerX" id="UYK-qn-c1w"/>
-                            <constraint firstItem="kz7-og-hci" firstAttribute="leading" secondItem="wFm-65-bcO" secondAttribute="trailing" constant="20" id="WzY-2a-sdf"/>
                             <constraint firstItem="c7y-se-oFh" firstAttribute="top" secondItem="yZb-fB-uPt" secondAttribute="bottom" constant="8" symbolic="YES" id="Y30-FH-thL"/>
                             <constraint firstItem="eTQ-iJ-ZUe" firstAttribute="trailing" secondItem="LO0-6R-OxM" secondAttribute="trailing" constant="156" id="a9X-tk-qk1"/>
                             <constraint firstItem="c7y-se-oFh" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="212" id="b8N-kn-8Re"/>
                             <constraint firstItem="ZPp-dD-ze8" firstAttribute="leading" secondItem="VeE-U2-tu3" secondAttribute="leading" id="g0C-6Q-TpB"/>
+                            <constraint firstItem="Yye-Ya-UnS" firstAttribute="trailing" secondItem="GpR-Yq-Cva" secondAttribute="trailing" id="ggb-Ks-95f"/>
                             <constraint firstItem="eTQ-iJ-ZUe" firstAttribute="trailing" secondItem="cqR-kU-Wzb" secondAttribute="trailing" constant="56" id="gxJ-Lo-a0f"/>
+                            <constraint firstItem="fuO-mk-HYi" firstAttribute="leading" secondItem="wFm-65-bcO" secondAttribute="trailing" constant="20" id="iCC-kU-HBQ"/>
                             <constraint firstItem="VeE-U2-tu3" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="110" id="iTa-kX-dh2"/>
                             <constraint firstItem="Vov-FJ-hBG" firstAttribute="centerX" secondItem="eTQ-iJ-ZUe" secondAttribute="centerX" id="ihq-Gr-C9e"/>
+                            <constraint firstItem="GpR-Yq-Cva" firstAttribute="centerX" secondItem="eTQ-iJ-ZUe" secondAttribute="centerX" id="kdj-dn-noK"/>
                             <constraint firstItem="wFm-65-bcO" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="50" id="mRP-KN-FzE"/>
                             <constraint firstItem="yZb-fB-uPt" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="50" id="n1F-ek-2pK"/>
                             <constraint firstItem="VeE-U2-tu3" firstAttribute="centerY" secondItem="sXg-QN-b8q" secondAttribute="centerY" id="nZo-iH-qyR"/>
                             <constraint firstItem="ZPp-dD-ze8" firstAttribute="top" secondItem="VeE-U2-tu3" secondAttribute="bottom" constant="2" id="tJ4-jF-5V4"/>
-                            <constraint firstItem="ZPp-dD-ze8" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="46" id="waB-KZ-qdo"/>
+                            <constraint firstItem="ZPp-dD-ze8" firstAttribute="leading" secondItem="eTQ-iJ-ZUe" secondAttribute="leading" constant="50" id="waB-KZ-qdo"/>
                             <constraint firstItem="6Ul-SR-inv" firstAttribute="top" secondItem="eTQ-iJ-ZUe" secondAttribute="top" constant="50" id="yhC-9g-vWM"/>
                         </constraints>
                     </view>
@@ -686,10 +692,12 @@
                     <connections>
                         <outlet property="attendeesTableView" destination="GpR-Yq-Cva" id="mT7-lT-ZIT"/>
                         <outlet property="dateTextField" destination="ZPp-dD-ze8" id="1vU-Kw-ciq"/>
+                        <outlet property="editButton" destination="6Ul-SR-inv" id="elm-6o-8tx"/>
                         <outlet property="endTimePicker" destination="cqR-kU-Wzb" id="l78-xh-cTX"/>
                         <outlet property="eventCreatorPicture" destination="wFm-65-bcO" id="rf6-Zt-HSR"/>
-                        <outlet property="eventNameLabel" destination="kz7-og-hci" id="6et-H7-mg6"/>
+                        <outlet property="eventNameTextField" destination="fuO-mk-HYi" id="aPM-4g-EUY"/>
                         <outlet property="locationTextField" destination="c7y-se-oFh" id="Pge-D3-NuV"/>
+                        <outlet property="saveButton" destination="Vov-FJ-hBG" id="6bp-gN-bfK"/>
                         <outlet property="startTimePicker" destination="LO0-6R-OxM" id="pha-el-J3F"/>
                     </connections>
                 </viewController>
@@ -1172,7 +1180,7 @@
                                     <constraint firstAttribute="width" constant="260" id="ZRL-td-z8g"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="CM9-HE-N8Q" imageView="Zfg-MF-9k6" style="IBUITableViewCellStyleDefault" id="PVj-ds-rjY">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="memberCell" textLabel="CM9-HE-N8Q" imageView="Zfg-MF-9k6" style="IBUITableViewCellStyleDefault" id="PVj-ds-rjY">
                                         <rect key="frame" x="0.0" y="44.5" width="258" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PVj-ds-rjY" id="6jR-rG-aXA">
@@ -1250,10 +1258,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Group Info" id="0np-d5-0AH"/>
                     <connections>
+                        <outlet property="addFriendsButton" destination="qfa-5I-kNf" id="Cni-O6-Ai9"/>
+                        <outlet property="cameraButton" destination="nvl-TL-QDU" id="HTN-wH-2Vq"/>
                         <outlet property="groupDescriptionTextField" destination="4X0-2G-8bt" id="60h-Tj-Tx1"/>
                         <outlet property="groupMembersTableView" destination="JUs-uu-h65" id="Fk7-eE-buU"/>
                         <outlet property="groupNameTextField" destination="rfl-ZT-1KO" id="GGB-bd-ASx"/>
                         <outlet property="groupPicture" destination="vaa-We-UNK" id="DOM-OE-RyT"/>
+                        <outlet property="saveButton" destination="736-UW-ccs" id="YbB-P6-vpP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ae8-hW-uOT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2472,7 +2483,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SEN-5B-iHA"/>
-        <segue reference="wSe-l3-ryt"/>
+        <segue reference="GOP-4q-Ftn"/>
         <segue reference="PFC-jh-Rw0"/>
         <segue reference="jrk-Lf-LFT"/>
     </inferredMetricsTieBreakers>
@@ -2491,6 +2502,9 @@
         <image name="small_rec_top" width="1054" height="264"/>
         <image name="square" catalog="system" width="128" height="114"/>
         <image name="top_rectangles" width="582" height="400"/>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

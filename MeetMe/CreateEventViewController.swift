@@ -213,6 +213,19 @@ class CreateEventViewController: UIViewController {
             present(controller,
                     animated: true,
                     completion: nil)
+            
+        case startTimePicker.date == endTimePicker.date:
+            let controller = UIAlertController(
+                title: "Incorrect End Time",
+                message: "The event end time can't be the same as the start time",
+                preferredStyle: .alert)
+            controller.addAction(UIAlertAction(
+                                    title: "OK",
+                                    style: .default,
+                                    handler: nil))
+            present(controller,
+                    animated: true,
+                    completion: nil)
         
         default:
             let otherVC = delegate as! AddNewEvent

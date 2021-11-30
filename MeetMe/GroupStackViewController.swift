@@ -12,8 +12,12 @@ protocol AddNewEvent {
     func addNewEvent(newEvent: Event)
 }
 
+protocol UpdateGroup {
+    func updateGroup(group: Group)
+}
+
 class GroupStackViewController: UIViewController, UITableViewDataSource,
-                                    UITableViewDelegate, AddNewEvent, MyStackCellDelegate {
+                                    UITableViewDelegate, AddNewEvent, UpdateGroup, MyStackCellDelegate {
     public var eventList:[Event] = []
     var delegate: UITableView!
     var currGroup: Group!
@@ -55,25 +59,11 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "hh a" // "a" prints "pm" or "am"
-//        var hourString:String = formatter.string(from: Date()) // "12 AM"
-////        hourString.insert(contentsOf: [":","0","0"], at: hourString.index(hourString.startIndex, offsetBy: 2))
-//        hourString = "3:00 AM"
-//
-//        var currentRow = 0
-//
-//        for index in 0...halfHours.count {
-//            if halfHours[index] == hourString {
-//                currentRow = index
-//                break
-//            }
-//        }
-//
-////        let indexPath = IndexPath(item: currentRow, section: 0)
-////        self.eventStack.scrollToRow(at: indexPath, at: .top, animated: false)
-//    }
+    // Reload stack to show any event edits
+    override func viewWillAppear(_ animated: Bool) {
+        eventStack.reloadData()
+        
+    }
     
     // Initialize the halfHours array
     func initTime(){
@@ -283,6 +273,12 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              }
          }
          
+         // Check if we are navigating to the group settings
+         if segue.identifier == "GroupSettingsSegue",
+            let destination = segue.destination as? GroupSettingsViewController {
+             destination.delegate = self
+             destination.group = currGroup
+         }
          
          // Check if we are navigating to the event 1 details
          if segue.identifier == "eventOneSegue" && currCell != nil,
@@ -365,6 +361,11 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     func addNewEvent(newEvent: Event) {
         eventList.append(newEvent)
         eventStack.reloadData()
+    }
+    
+    func updateGroup(group: Group) {
+        currGroup = group
+        self.groupNameLabel.setTitle(self.currGroup.groupName, for: .normal)
     }
          
 }
