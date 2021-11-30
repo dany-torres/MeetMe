@@ -43,11 +43,13 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         // Case 2: Admin Run AND group creator is trying to edit
         // Case 3: Check if uneditable, but user is event creator
         if (!currGroup.adminRun && event!.editEvents) ||
+            (!event!.editEvents && event?.eventCreator == Auth.auth().currentUser!.uid) ||
             (currGroup.adminRun && currGroup.groupCreator == Auth.auth().currentUser!.uid) {
             editButton.isHidden = false
             saveButton.isHidden = false
         }
         
+        // Check if it's the event creator
         if (event?.eventCreator == Auth.auth().currentUser!.uid){
             deleteButton.isHidden = false
         }
