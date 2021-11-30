@@ -249,6 +249,7 @@ class CreateEventViewController: UIViewController {
                                 "groupName": self.currGroup.groupName,
                                 "location": self.locationTextField.text!,
                                 "attendees": [uid],
+                                "groupHash": self.currGroup.groupHASH
                             ]
                             // Adds new event to Events db
                             self.db.collection("Events").document(hash).setData(eventDb)

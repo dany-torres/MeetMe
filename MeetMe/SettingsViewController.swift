@@ -23,6 +23,36 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextFields()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setLanguage()
+    }
+    
+    func setLanguage(){
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if data["language"] as? Bool ?? false == false {
+                            // english
+                            self.language.selectedSegmentIndex = 0
+                        } else {
+                            // spanish
+                            self.language.selectedSegmentIndex = 1
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func setTextFields(){
@@ -95,7 +125,27 @@ class SettingsViewController: UIViewController {
                                         (paramAction:UIAlertAction!) in
                                         Bundle.setLanguage("en")
                                         UserDefaults.standard.set("en", forKey: "selectedLanguage")
-                                        exit(0)
+                                        if Auth.auth().currentUser != nil {
+                                            let user = Auth.auth().currentUser
+                                            if let user = user {
+                                                let uid = user.uid
+                                                let userDb : [String: Any] = [
+                                                    "language": false
+                                                ]
+                                                self.db.collection("Users").document(uid).updateData(userDb) { err in
+                                                    if let err = err {
+                                                        print("Error writing document: \(err)")
+                                                    } else {
+                                                        print("Document successfully written!")
+                                                    }
+                                                }
+                                            }
+                                            
+                                            
+                                        } else {
+                                          // No user is signed in.
+                                          // ...
+                                        }
                                     }
             ))
             present(controller,
@@ -105,7 +155,7 @@ class SettingsViewController: UIViewController {
             // Spanish
             let controller = UIAlertController(
                 title: "Changing language to Spanish",
-                message: "You have to restart the app to make the changes.",
+                message: "You have to close and open the app to make the changes.",
                 preferredStyle: .alert)
             controller.addAction(UIAlertAction(
                                     title: "Cancel",
@@ -121,7 +171,27 @@ class SettingsViewController: UIViewController {
                                         (paramAction:UIAlertAction!) in
                                         UserDefaults.standard.set("es", forKey: "selectedLanguage")
                                         Bundle.setLanguage("es")
-                                        exit(0)
+                                        if Auth.auth().currentUser != nil {
+                                            let user = Auth.auth().currentUser
+                                            if let user = user {
+                                                let uid = user.uid
+                                                let userDb : [String: Any] = [
+                                                    "language": true
+                                                ]
+                                                self.db.collection("Users").document(uid).updateData(userDb){ err in
+                                                    if let err = err {
+                                                        print("Error writing document: \(err)")
+                                                    } else {
+                                                        print("Document successfully written!")
+                                                    }
+                                                }
+                                            }
+                                            
+                                            
+                                        } else {
+                                          // No user is signed in.
+                                          // ...
+                                        }
                                     }
             ))
             present(controller,
