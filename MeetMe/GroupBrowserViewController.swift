@@ -31,6 +31,52 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
         rePopulateGroupsTable()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if data["mode"] as? Bool ?? false == false {
+                            // light
+                            UIApplication.shared.windows.forEach { window in
+                                window.overrideUserInterfaceStyle = .light
+                            }
+                            self.navigationController?.navigationBar.backgroundColor = UIColor.white
+                            self.navigationController?.navigationBar.tintColor = UIColor.black
+                        } else {
+                            // dark
+                            UIApplication.shared.windows.forEach { window in
+                                window.overrideUserInterfaceStyle = .dark
+                            }
+                            self.navigationController?.navigationBar.backgroundColor = UIColor.black
+                            self.navigationController?.navigationBar.tintColor = UIColor.white
+                        }
+                    }
+                }
+            }
+        }
+//            if false {
+//                UIApplication.shared.windows.forEach { window in
+//                    window.overrideUserInterfaceStyle = .light
+//                }
+//                self.navigationController?.navigationBar.backgroundColor = UIColor.white
+//                self.navigationController?.navigationBar.tintColor = UIColor.black
+//            } else {
+//                UIApplication.shared.windows.forEach { window in
+//                    window.overrideUserInterfaceStyle = .dark
+//                }
+//                self.navigationController?.navigationBar.backgroundColor = UIColor.black
+//                self.navigationController?.navigationBar.tintColor = UIColor.white
+//            }
+    }
+    
     @IBAction func newGroupButtonPressed(_ sender: Any) {
     }
     

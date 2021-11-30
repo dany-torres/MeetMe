@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setLanguage()
+        setDarkMode()
     }
     
     func setLanguage(){
@@ -56,7 +57,28 @@ class SettingsViewController: UIViewController {
     }
     
     func setDarkMode(){
-        
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if data["mode"] as? Bool ?? false == false {
+                            // light
+                            self.mode.selectedSegmentIndex = 0
+                        } else {
+                            // dark
+                            self.mode.selectedSegmentIndex = 1
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func setTextFields(){
@@ -242,8 +264,6 @@ class SettingsViewController: UIViewController {
                                                         UIApplication.shared.windows.forEach { window in
                                                             window.overrideUserInterfaceStyle = .light
                                                         }
-                                                        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-                                                        self.navigationController?.navigationBar.tintColor = UIColor.black
                                                     }
                                                 }
                                             }
@@ -291,8 +311,6 @@ class SettingsViewController: UIViewController {
                                                         UIApplication.shared.windows.forEach { window in
                                                             window.overrideUserInterfaceStyle = .dark
                                                         }
-                                                        self.navigationController?.navigationBar.backgroundColor = UIColor.black
-                                                        self.navigationController?.navigationBar.tintColor = UIColor.white
                                                     }
                                                 }
                                             }
