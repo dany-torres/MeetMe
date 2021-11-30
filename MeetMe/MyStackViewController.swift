@@ -18,6 +18,7 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
     
     var halfHours:[String] = []
     var eventList:[Event] = []
+    var fetchedEvents:[Event] = []
     
     let db = Firestore.firestore()
     
@@ -31,6 +32,28 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
         setDayLabel()
         setUserInfo()
         initTime()
+        
+        // set array of accepted events
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        print("data", data)
+                        self.fetchedEvents = data["events"] as? Array ?? []
+                    }
+                }
+            }
+        }
+        
+//        print(fetchedEvents)
+        self.eventList = fetchedEvents
     }
     
     // Sets the name, location and picture fields TODO: set picture
@@ -195,16 +218,5 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
         
         return eventsAtTime
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

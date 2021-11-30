@@ -20,8 +20,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                                     UITableViewDelegate, AddNewEvent, UpdateGroup, MyStackCellDelegate {
     public var eventList:[Event] = []
     var delegate: UITableView!
-//    var currGroupHASH : String!
-//    var currGroupName : String!
     var currGroup: Group!
     var loaded: Bool = false
     
@@ -45,7 +43,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         eventStack.delegate = self
         eventStack.dataSource = self
         
-//        groupNameLabel.setTitle(currGroupName, for: .normal)
         setDayLabel()
         initTime()
         

@@ -116,6 +116,8 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
           // ...
         }
         
+        attendeesTableView.reloadData()
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
