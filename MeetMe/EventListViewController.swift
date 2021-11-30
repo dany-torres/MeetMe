@@ -10,6 +10,8 @@ import UIKit
 class EventListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var events:[Event] = []
+    var currGroup: Group!
+    
     var delegate: UIViewController!
     
     @IBOutlet weak var eventTableView: UITableView!
@@ -25,11 +27,11 @@ class EventListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
         let row = indexPath.row
         cell.textLabel?.text = events[row].eventName
-        // set image to creator's profile picture
+        // TODO: set image to creator's profile picture
+//        cell.imageView?.setValue(<#T##Any?#>, forKey: <#T##String#>)
         return cell
     }
     
@@ -39,6 +41,7 @@ class EventListViewController: UIViewController, UITableViewDelegate, UITableVie
            let destination = segue.destination as? EventDetailsViewController,
            let eventIndex = eventTableView.indexPathForSelectedRow?.row {
             destination.event = events[eventIndex]
+            destination.currGroup = currGroup
         }
     }
 

@@ -19,7 +19,7 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
     let db = Firestore.firestore()
 
     let groupCellIdentifier = "Cell"
-    let groupSegue = "GoupSegue"
+    let groupSegue = "GroupSegue"
     let newGroupSegue = "NewGroupSegue"
     
     @IBOutlet weak var groupTableView: UITableView!
@@ -110,15 +110,12 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
            let destination = segue.destination as? GroupCreationViewController {
             destination.delegate = self
         }
-        if segue.identifier == groupSegue{
-           let destination = segue.destination as? GroupStackViewController
-            let groupIndex = groupTableView.indexPathForSelectedRow?.row
-            let currGroup = groups[groupIndex!]
-            destination!.currGroupHASH = currGroup.groupHASH
-            destination!.currGroupName = currGroup.groupName
-//          destination!.currGroupName = currGroup.groupName
-//            destination.timerRow = timerIndex
+        if segue.identifier == groupSegue,
+           let destination = segue.destination as? GroupStackViewController {
+           let groupIndex = groupTableView.indexPathForSelectedRow?.row
+           let currGroup = groups[groupIndex!]
+           destination.loaded = true
+           destination.currGroup = currGroup
         }
     }
-
 }

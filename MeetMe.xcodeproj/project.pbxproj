@@ -107,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				B6F2550F2713DF400089FF17 /* MeetMe */,
-				B6F2550E2713DF400089FF17 /* Products */,
 				AB8866C59FB17816D7B18044 /* Pods */,
 				90DF9EA02441C66F58DB71AC /* Frameworks */,
 			);
@@ -119,6 +118,7 @@
 				B6F2550D2713DF400089FF17 /* MeetMe.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B6F2550F2713DF400089FF17 /* MeetMe */ = {
@@ -132,6 +132,7 @@
 				B6F255272714B1220089FF17 /* SignUpViewController.swift */,
 				B6F255162713DF400089FF17 /* Main.storyboard */,
 				B6F2553F2720E5E30089FF17 /* EventDetailsViewController.swift */,
+				B67AA47627509187009FEEAE /* EventListViewController.swift */,
 				B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */,
 				B6F25535271BE43A0089FF17 /* SettingsViewController.swift */,
 				B6F25537271BE4530089FF17 /* SearchViewController.swift */,
@@ -152,7 +153,7 @@
 				B6F2551E2713DF420089FF17 /* LaunchScreen.storyboard */,
 				B6F255212713DF420089FF17 /* Info.plist */,
 				B6F255192713DF400089FF17 /* MeetMe.xcdatamodeld */,
-				B67AA47627509187009FEEAE /* EventListViewController.swift */,
+				B6F2550E2713DF400089FF17 /* Products */,
 			);
 			path = MeetMe;
 			sourceTree = "<group>";

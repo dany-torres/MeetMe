@@ -12,15 +12,15 @@ protocol AddNewEvent {
     func addNewEvent(newEvent: Event)
 }
 
-class GroupStackViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddNewEvent {
+class GroupStackViewController: UIViewController, UITableViewDataSource,
+                                    UITableViewDelegate, AddNewEvent, MyStackCellDelegate {
     public var eventList:[Event] = []
     var delegate: UITableView!
-    var currGroupHASH : String!
-    var currGroupName : String!
+    var currGroup: Group!
+    var loaded: Bool = false
     
     var halfHours:[String] = []
-    var tappedEvent:Event!
-    var tappedMoreEvents:[Event] = []
+    var currCell:StackTableViewCell!
     
     let db = Firestore.firestore()
     
@@ -40,18 +40,40 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         eventStack.delegate = self
         eventStack.dataSource = self
         
-        groupNameLabel.setTitle(currGroupName, for: .normal)
         setDayLabel()
         initTime()
         
         let queue = DispatchQueue(label: "curr")
         queue.async {
-            while (self.currGroupHASH == nil){
+            while (!self.loaded){
                 sleep(1)
+            }
+            DispatchQueue.main.async {
+                self.groupNameLabel.setTitle(self.currGroup.groupName, for: .normal)
             }
             self.rePopulateEventStack()
         }
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "hh a" // "a" prints "pm" or "am"
+//        var hourString:String = formatter.string(from: Date()) // "12 AM"
+////        hourString.insert(contentsOf: [":","0","0"], at: hourString.index(hourString.startIndex, offsetBy: 2))
+//        hourString = "3:00 AM"
+//
+//        var currentRow = 0
+//
+//        for index in 0...halfHours.count {
+//            if halfHours[index] == hourString {
+//                currentRow = index
+//                break
+//            }
+//        }
+//
+////        let indexPath = IndexPath(item: currentRow, section: 0)
+////        self.eventStack.scrollToRow(at: indexPath, at: .top, animated: false)
+//    }
     
     // Initialize the halfHours array
     func initTime(){
@@ -105,29 +127,50 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         let row = indexPath.row
         let time = halfHours[row]
         cell.time.text = time
+        cell.delegate = self
         let events = getEventsAtCellTime(startTime: time)
         setEvents(cell:cell, events:events)
         return cell
     }
     
-    // function to make something unselectable
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
+    // Check if the first event button was clicked
+    func didTapCellButton1(cell:StackTableViewCell) {
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.eventStack.indexPath(for: cell)
+        let cell = eventStack.cellForRow(at: indexPath!) as! StackTableViewCell
+        currCell = cell
+//        print("******GOT HERE \(currCell.time.text)")
     }
     
-    // Tap recognizers, maybe delete this?
-//    @IBAction func event1TapRecognizer(_ sender: Any) {
-//
-//    }
-//
-//    @IBAction func event2TapRecognizer(_ sender: Any) {
-//
-//    }
-//
-//    @IBAction func event3TapRecognizer(_ sender: Any) {
-//
-//    }
+    // Check if the second event button was clicked
+    func didTapCellButton2(cell:StackTableViewCell) {
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.eventStack.indexPath(for: cell)
+        let cell = eventStack.cellForRow(at: indexPath!) as! StackTableViewCell
+        currCell = cell
+//        print("******GOT HERE \(currCell.time.text)")
+    }
     
+    // Check if the third event button was clicked
+    func didTapCellButton3(cell:StackTableViewCell) {
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.eventStack.indexPath(for: cell)
+        let cell = eventStack.cellForRow(at: indexPath!) as! StackTableViewCell
+        currCell = cell
+//        print("******GOT HERE \(currCell.time.text)")
+    }
+    
+    // Get hour to the nearest half hour
+    func getCurrentTime() -> String{
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "h:mm a"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+
+        let dateString = formatter.string(from: Date())
+        return dateString
+    }
     
     // Set the events block in the cells accordingly
     func setEvents(cell:StackTableViewCell, events:[Event]) {
@@ -146,7 +189,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
             if events.count > 3 {
                 setFirstEventBlock(cell:cell, event:events[0])
                 setSecondEventBlock(cell:cell, event:events[1])
-                setMoreThanThreeEvents(cell:cell, extraEvents:Array(events[2...events.count]))
+                setMoreThanThreeEvents(cell:cell, extraEvents:Array(events[2...events.count-1]))
             }
             break
         }
@@ -160,7 +203,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
             cell.event1.text = event.eventName
         }
         cell.eventOne = event
-        tappedEvent = event
     }
     
     // Set the second event block
@@ -170,7 +212,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
             cell.event2.text = event.eventName
         }
         cell.eventTwo = event
-        tappedEvent = event
     }
     
     // Set the third event block
@@ -180,7 +221,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
             cell.event3.text = event.eventName
         }
         cell.eventThree = [event]
-        tappedEvent = event
     }
     
     // Set the third event block when there are more events
@@ -188,7 +228,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
         cell.event3.isHidden = false
         cell.event3.text = String(extraEvents.count) + " More Events"
         cell.eventThree = extraEvents
-        tappedMoreEvents = extraEvents
     }
     
     
@@ -200,8 +239,12 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    // Get all events that start at a given time
+    // Get all events that happen at a given time
     func getEventsAtCellTime(startTime:String) -> [Event]{
+        // sort from longest duration, to shortest
+        eventList.sort {
+            $0.endTime > $1.endTime
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.short
         
@@ -218,13 +261,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
             
             if start! < startTimeDate! && end! > startTimeDate! {
                 eventsAtTime.append(event)
-                // TODO: fix so that it looks like one event box
             }
-        }
-        
-        // sort from longest duration, to shortest
-        eventsAtTime.sort {
-            $0.endTime < $1.endTime
         }
         
         return eventsAtTime
@@ -236,47 +273,65 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
          if segue.identifier == "CreateEventSegue",
             let nextVC = segue.destination as? CreateEventViewController {
              nextVC.delegate = self
-             // TODO: PASS THE HASH AND THE NAME OF THE GROUP SEGUE
+    
              let queue = DispatchQueue(label: "curr")
              queue.async {
-                 while (self.currGroupHASH == nil){
+                 while (self.currGroup == nil){
                      sleep(1)
                  }
-                 nextVC.hashGroup = self.currGroupHASH
-                 nextVC.nameGroup = self.currGroupName
+                 nextVC.currGroup = self.currGroup
              }
          }
          
-         // More events, need to segue into list of events
-         if segue.identifier == "eventListSegue" && tappedEvent == nil,
-            let destination = segue.destination as? EventListViewController {
-                 destination.delegate = self
-                 destination.events = tappedMoreEvents
-         }
          
-         // Check if we are navigating to the text change VC
-         if segue.identifier == "event1Identifier"
-            || segue.identifier == "event2Identifier"
-            || segue.identifier == "eventListSegue"
-            && tappedEvent != nil,
+         // Check if we are navigating to the event 1 details
+         if segue.identifier == "eventOneSegue" && currCell != nil,
             let destination = segue.destination as? EventDetailsViewController {
              destination.delegate = self
-             destination.event = tappedEvent
-             tappedEvent = nil
+             destination.event = currCell.eventOne
+             destination.currGroup = currGroup
+         }
+         
+         // Check if we are navigating to the event 2 details
+         if segue.identifier == "eventTwoSegue" && currCell != nil,
+            let destination = segue.destination as? EventDetailsViewController {
+             destination.delegate = self
+             destination.event = currCell.eventTwo
+             destination.currGroup = currGroup
+         }
+         
+         // Check if we are navigating to the event 3 details
+         if segue.identifier == "eventsListSegue" && currCell != nil && currCell.eventThree.count == 1,
+            let destination = segue.destination as? EventDetailsViewController {
+             destination.delegate = self
+             destination.event = currCell.eventThree[0]
+             destination.currGroup = currGroup
+         }
+         
+         // Check if we are navigating to the event 3 details
+         if segue.identifier == "eventsListSegue" && currCell != nil && currCell.eventThree.count > 1,
+            let destination = segue.destination as? EventListViewController {
+             destination.delegate = self
+             destination.events = currCell.eventThree
+             destination.currGroup = currGroup
          }
          
      }
     
-    func rePopulateEventStack(){
-        let groupRef = db.collection("Groups").document(currGroupHASH)
+    func rePopulateEventStack() {
+        //gets current group from db
+        let groupRef = db.collection("Groups").document(currGroup.groupHASH)
         groupRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let data = document.data()
-                let groupEvents = data!["events"] as! [String]
-                
-                for event in groupEvents {
-                    let eventRef = self.db.collection("Events").document(event)
                     
+                //gets events from "events" attribute in group
+                let groupEvents = data!["events"] as! [String]
+                    
+                for event in groupEvents {
+                    //matches event from Groups attributes with events from "Events" db
+                    let eventRef = self.db.collection("Events").document(event)
+                        
                     eventRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let eventData = document.data()
@@ -297,12 +352,12 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
                             )
                             self.addNewEvent(newEvent: newEvent)
                         } else {
-                            print("Document does not exist")
+                            print("Event does not exist")
                         }
                     }
                 }
             } else {
-                print("Document does not exist")
+                print("Group does not exist")
             }
         }
     }
