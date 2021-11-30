@@ -92,12 +92,12 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
                                         currGroup.events = groupsData!["events"] as! [String]
                                         self.addGroup(newGroup: currGroup)
                                     } else {
-                                        print("Document does not exist")
+                                        print("Group does not exist")
                                     }
                                 }
                             }
                         } else {
-                            print("Document does not exist")
+                            print("User does not exist")
                         }
                     }
                 }

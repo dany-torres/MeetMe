@@ -637,7 +637,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vG-Zj-qb3" userLabel="GroupNameTextField">
-                                <rect key="frame" x="54" y="289" width="290" height="34"/>
+                                <rect key="frame" x="54" y="289" width="289" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="IwZ-QI-OM5"/>
                                     <constraint firstAttribute="width" constant="290" id="STE-W2-INP"/>
@@ -655,7 +655,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G78-rR-WCI">
-                                <rect key="frame" x="54" y="193" width="149" height="29"/>
+                                <rect key="frame" x="54" y="193" width="148" height="29"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -670,7 +670,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5s-iS-7fp">
-                                <rect key="frame" x="55" y="425" width="57" height="20"/>
+                                <rect key="frame" x="55" y="425" width="56" height="20"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -717,7 +717,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4s-Rv-bme">
-                                <rect key="frame" x="273.5" y="349" width="76" height="20"/>
+                                <rect key="frame" x="273" y="349" width="76" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="76" id="h38-aB-PIC"/>
                                 </constraints>
@@ -1736,51 +1736,42 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="HZL-gk-bBd" detailTextLabel="vwF-mT-Tcs" imageView="Luc-ob-eKH" style="IBUITableViewCellStyleSubtitle" id="HzU-3A-Zdo">
-                                        <rect key="frame" x="0.0" y="88.5" width="414" height="62.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserCell" rowHeight="70" id="HzU-3A-Zdo" customClass="UserRequestTableViewCell" customModule="MeetMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="88.5" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HzU-3A-Zdo" id="mdC-6G-e36">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="62.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HZL-gk-bBd">
-                                                    <rect key="frame" x="57.75" y="9" width="48" height="22.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dl-Kb-gg1">
+                                                    <rect key="frame" x="36" y="11" width="330" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vwF-mT-Tcs">
-                                                    <rect key="frame" x="57.75" y="34.5" width="60" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0z-s2-seo">
+                                                    <rect key="frame" x="36" y="42" width="330" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Luc-ob-eKH">
-                                                    <rect key="frame" x="17.75" y="19" width="25" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
-                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="h0z-s2-seo" firstAttribute="top" secondItem="6dl-Kb-gg1" secondAttribute="bottom" constant="2" id="3qk-9h-bWS"/>
+                                                <constraint firstItem="6dl-Kb-gg1" firstAttribute="top" secondItem="mdC-6G-e36" secondAttribute="top" constant="11" id="CEx-0H-JMt"/>
+                                                <constraint firstItem="h0z-s2-seo" firstAttribute="top" secondItem="6dl-Kb-gg1" secondAttribute="bottom" constant="2" id="CQy-kl-fD8"/>
+                                                <constraint firstItem="h0z-s2-seo" firstAttribute="leading" secondItem="mdC-6G-e36" secondAttribute="leading" constant="36" id="T7w-mI-V6b"/>
+                                                <constraint firstItem="6dl-Kb-gg1" firstAttribute="leading" secondItem="mdC-6G-e36" secondAttribute="leading" constant="36" id="fTh-EO-teJ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="6dl-Kb-gg1" id="pSR-rI-8S5"/>
+                                            <outlet property="usernameLabel" destination="h0z-s2-seo" id="7iQ-yh-gLG"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3LP-EH-UaW">
-                                <rect key="frame" x="340" y="165" width="54" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Add">
-                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="addButtonPressed:" destination="up3-7R-BA0" eventType="touchUpInside" id="qYM-dk-nrW"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5A2-Ga-dFa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1795,7 +1786,6 @@
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="cellButton" destination="3LP-EH-UaW" id="vDj-c5-7Ut"/>
                         <outlet property="resultsTableView" destination="IJs-kt-TNy" id="GPU-Su-CQw"/>
                         <outlet property="searchBar" destination="yCh-GE-6eJ" id="tTc-jB-zlB"/>
                     </connections>
@@ -2273,7 +2263,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="SEN-5B-iHA"/>
         <segue reference="wSe-l3-ryt"/>
-        <segue reference="jrk-Lf-LFT"/>
+        <segue reference="1iG-eE-u3p"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

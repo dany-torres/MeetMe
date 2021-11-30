@@ -141,6 +141,86 @@ class SettingsViewController: UIViewController {
             let user = Auth.auth().currentUser
             if let user = user {
                 let uid = user.uid
+                
+                let nameRef = db.collection("Users").document(uid)
+                nameRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        let data = document.data()
+                        let userGroups = data!["groupsAll"] as! [String]
+                        let userEvents = data!["events"] as! [String]
+                        
+                        for event in userEvents {
+                            let eventRef = self.db.collection("Events").document(event)
+                            
+                            eventRef.getDocument { (document, error) in
+                                if let document = document, document.exists {
+                                    let eventData = document.data()
+                                    let newEvent = Event(eventName: eventData!["name"] as! String,
+                                                         eventDate: eventData!["eventDate"] as! String,
+                                                         startTime: eventData!["startTime"] as! String,
+                                                         endTime: eventData!["endTime"] as! String,
+                                                         location: eventData!["location"] as! String,
+                                                         notifications: eventData!["notifications"] as! Bool,
+                                                         reminderChoice: eventData!["reminderChoice"] as! String,
+                                                         polls: eventData!["polls"] as! Bool,
+                                                         messages: eventData!["messages"] as! Bool,
+                                                         editEvents: eventData!["editable"] as! Bool,
+                                                         eventCreator: eventData!["creator"] as! String,
+                                                         nameOfGroup: eventData!["groupName"] as! String,
+                                                         listOfAttendees: eventData!["attendees"] as! [String],
+                                                         eventHash: eventData!["uid"] as! String
+                                    )
+                                    //delete event from all user accepted
+                                    self.deleteEventFromUsers(newEvent: newEvent)
+                                    //delete event from groups
+                                    //TODO
+                                    self.deleteEventFromGroups(newEvent: newEvent)
+                                    //delete event from events
+                                    self.db.collection("Events").document(event).delete()
+                                } else {
+                                    print("Group does not exist")
+                                }
+                            }
+                        }
+                        
+                        for group in userGroups {
+                            let groupRef = self.db.collection("Groups").document(group)
+                            
+                            groupRef.getDocument { (document, error) in
+                                if let document = document, document.exists {
+                                    let groupsData = document.data()
+                                    let currGroup = Group()
+                                    currGroup.groupHASH = groupsData!["uid"] as! String
+                                    currGroup.groupName = groupsData!["name"] as! String
+                                    currGroup.groupDescr = groupsData!["description"] as! String
+                                    currGroup.adminRun = groupsData!["admin"] as! Bool
+                                    currGroup.groupCreator = groupsData!["creator"] as! String
+                                    currGroup.members = groupsData!["peopleInGroup"] as! [String]
+                                    currGroup.events = groupsData!["events"] as! [String]
+                                    
+                                    
+                                    //delete group if User is admin
+                                    if currGroup.adminRun {
+                                        self.deleteAdminGroupFromUsers(newGroup: currGroup)
+                                        self.db.collection("Groups").document(group).delete()
+                                    } else {
+                                        //delete user from group members
+                                        self.deleteUserFromGroup(newGroup: currGroup, uid: uid)
+                                    }
+                                } else {
+                                    print("Group does not exist")
+                                }
+                            }
+                        }
+                    } else {
+                        print("User does not exist")
+                    }
+                }
+                
+                
+                //delete user from friends TODO
+                // delete User from AUTH TODO
+                
                 db.collection("Users").document(uid).delete() { err in
                     if let err = err {
                         print("Error removing document: \(err)")
@@ -173,16 +253,54 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func deleteAdminGroupFromUsers(newGroup: Group){
+        for member in newGroup.members{
+            let nameRef = db.collection("Users").document(member)
+            nameRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let data = document.data()
+                    let groups = data!["groupsAll"] as! [String]
+                    let newGroups = groups.filter {$0 != newGroup.groupHASH}
+                    self.db.collection("Users").document(member).updateData(["groupsAll": newGroups])
+                }
+            }
+        }
     }
-    */
-
+    
+    func deleteUserFromGroup(newGroup: Group, uid: String){
+        let nameRef = db.collection("Groups").document(newGroup.groupHASH)
+        nameRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let members = data!["peopleInGroup"] as! [String]
+                let newMembers = members.filter {$0 != uid}
+                if newMembers.isEmpty{
+                    self.db.collection("Groups").document(newGroup.groupHASH).delete()
+                } else{
+                    self.db.collection("Groups").document(newGroup.groupHASH).updateData(["peopleInGroup": newMembers])
+                }
+            }
+        }
+    }
+    
+    func deleteEventFromUsers(newEvent: Event){
+        for attendees in newEvent.listOfAttendees{
+            let nameRef = db.collection("Users").document(attendees)
+            nameRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let data = document.data()
+                    let eventsAttending = data!["events"] as! [String]
+                    let newEvents = eventsAttending.filter {$0 != newEvent.eventHash}
+                    self.db.collection("Users").document(attendees).updateData(["events": newEvents])
+                }
+            }
+        }
+    }
+    
+    func deleteEventFromGroups(newEvent: Event){
+        
+    }
+    
 }
 
 //MARK: Localization configure bundle

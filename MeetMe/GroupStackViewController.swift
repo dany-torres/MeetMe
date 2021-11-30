@@ -245,7 +245,28 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
                                                  listOfAttendees: eventData!["attendees"] as! [String],
                                                  eventHash: eventData!["uid"] as! String
                             )
-                            self.addNewEvent(newEvent: newEvent)
+                            
+                            let today = Date()
+                            let weekday = Calendar.current.component(.weekday, from: today)
+                            let month = Calendar.current.component(.month, from: today)
+                            let date = Calendar.current.component(.day, from: today)
+
+                            let weekdayText = Calendar.current.shortWeekdaySymbols[weekday-1]
+                            let monthText = "\(Calendar.current.shortMonthSymbols[month-1]) \(date)"
+                            
+                            let todayCheck = "\(weekdayText) \(monthText)"
+                            if newEvent.eventDate == todayCheck {
+                                self.addNewEvent(newEvent: newEvent)
+                            } else {
+                                //delete event from all user accepted
+                                self.deleteEventFromUsers(newEvent: newEvent)
+                                //delete event from groups
+                                //TODO
+                                self.deleteEventFromGroups(newEvent: newEvent)
+                                //delete event from events
+                                self.db.collection("Events").document(newEvent.eventHash).delete()
+                            }
+                            
                         } else {
                             print("Event does not exist")
                         }
@@ -253,6 +274,32 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
                 }
             } else {
                 print("Group does not exist")
+            }
+        }
+    }
+    
+    func deleteEventFromUsers(newEvent: Event){
+        for attendees in newEvent.listOfAttendees{
+            let nameRef = db.collection("Users").document(attendees)
+            nameRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let data = document.data()
+                    let eventsAttending = data!["events"] as! [String]
+                    let newEvents = eventsAttending.filter {$0 != newEvent.eventHash}
+                    self.db.collection("Users").document(attendees).updateData(["events": newEvents])
+                }
+            }
+        }
+    }
+    
+    func deleteEventFromGroups(newEvent: Event){
+        let nameRef = db.collection("Groups").document(currGroup.groupHASH)
+        nameRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let events = data!["events"] as! [String]
+                let newEvents = events.filter {$0 != newEvent.eventHash}
+                self.db.collection("Groups").document(self.currGroup.groupHASH).updateData(["events": newEvents])
             }
         }
     }

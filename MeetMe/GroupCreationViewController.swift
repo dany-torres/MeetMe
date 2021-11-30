@@ -113,6 +113,7 @@ class GroupCreationViewController: UIViewController {
 //            destination.currGroupHASH = newGroup.groupHASH
 //            destination.currGroupName = newGroup.groupName
             destination.currGroup = newGroup
+            destination.loaded = true
         }
     }
     
