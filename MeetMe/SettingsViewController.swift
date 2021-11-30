@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setLanguage()
+        setDarkMode()
     }
     
     func setLanguage(){
@@ -48,6 +49,31 @@ class SettingsViewController: UIViewController {
                         } else {
                             // spanish
                             self.language.selectedSegmentIndex = 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func setDarkMode(){
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if data["mode"] as? Bool ?? false == false {
+                            // light
+                            self.mode.selectedSegmentIndex = 0
+                        } else {
+                            // dark
+                            self.mode.selectedSegmentIndex = 1
                         }
                     }
                 }
@@ -200,11 +226,123 @@ class SettingsViewController: UIViewController {
         default:
             print("Error")
         }
-//        exit(0)
     }
     
     @IBAction func modeSegCtrl(_ sender: Any) {
+        switch mode.selectedSegmentIndex {
+        case 0:
+            // Light
+            let controller = UIAlertController(
+                title: "Changing to light mode",
+                message: "You have to close and open the app to make the changes.",
+                preferredStyle: .alert)
+            controller.addAction(UIAlertAction(
+                                    title: "Cancel",
+                                    style: .cancel,
+                                    handler: {
+                                        (paramAction:UIAlertAction!) in
+                                        self.mode.selectedSegmentIndex = 1
+                                    }
+            ))
+            controller.addAction(UIAlertAction(
+                                    title: "OK",
+                                    style: .default,
+                                    handler: {
+                                        (paramAction:UIAlertAction!) in
+                                        if Auth.auth().currentUser != nil {
+                                            let user = Auth.auth().currentUser
+                                            if let user = user {
+                                                let uid = user.uid
+                                                let userDb : [String: Any] = [
+                                                    "mode": false
+                                                ]
+                                                self.db.collection("Users").document(uid).updateData(userDb) { err in
+                                                    if let err = err {
+                                                        print("Error writing document: \(err)")
+                                                    } else {
+                                                        print("Document successfully written!")
+                                                        UIApplication.shared.windows.forEach { window in
+                                                            window.overrideUserInterfaceStyle = .light
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                            
+                                        } else {
+                                          // No user is signed in.
+                                          // ...
+                                        }
+                                    }
+            ))
+            present(controller,
+                    animated: true,
+                    completion: nil)
+        case 1:
+            // Dark
+            let controller = UIAlertController(
+                title: "Changing to dark mode",
+                message: "You have to close and open the app to make the changes.",
+                preferredStyle: .alert)
+            controller.addAction(UIAlertAction(
+                                    title: "Cancel",
+                                    style: .cancel,
+                                    handler: {
+                                        (paramAction:UIAlertAction!) in
+                                        self.mode.selectedSegmentIndex = 0
+                                    }))
+            controller.addAction(UIAlertAction(
+                                    title: "OK",
+                                    style: .default,
+                                    handler: {
+                                        (paramAction:UIAlertAction!) in
+                                        if Auth.auth().currentUser != nil {
+                                            let user = Auth.auth().currentUser
+                                            if let user = user {
+                                                let uid = user.uid
+                                                let userDb : [String: Any] = [
+                                                    "mode": true
+                                                ]
+                                                self.db.collection("Users").document(uid).updateData(userDb){ err in
+                                                    if let err = err {
+                                                        print("Error writing document: \(err)")
+                                                    } else {
+                                                        print("Document successfully written!")
+                                                        UIApplication.shared.windows.forEach { window in
+                                                            window.overrideUserInterfaceStyle = .dark
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                            
+                                        } else {
+                                          // No user is signed in.
+                                          // ...
+                                        }
+                                    }
+            ))
+            present(controller,
+                    animated: true,
+                    completion: nil)
+        default:
+            print("Error")
+        }
     }
+    
+//    if false {
+//        UIApplication.shared.windows.forEach { window in
+//            window.overrideUserInterfaceStyle = .light
+//        }
+//        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+//        self.navigationController?.navigationBar.tintColor = UIColor.black
+//    } else {
+//        UIApplication.shared.windows.forEach { window in
+//            window.overrideUserInterfaceStyle = .dark
+//        }
+//        self.navigationController?.navigationBar.backgroundColor = UIColor.black
+//        self.navigationController?.navigationBar.tintColor = UIColor.white
+//    }
     
     @IBAction func deleteAccountButtonPressed(_ sender: Any) {
         if Auth.auth().currentUser != nil {
