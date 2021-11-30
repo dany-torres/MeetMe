@@ -20,6 +20,8 @@ class GroupCreationViewController: UIViewController {
     
     let db = Firestore.firestore()
     
+    let addFriendsSegue = "AddFriendsSegue"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,6 +114,11 @@ class GroupCreationViewController: UIViewController {
 //            destination.currGroupHASH = newGroup.groupHASH
 //            destination.currGroupName = newGroup.groupName
             destination.currGroup = newGroup
+            destination.loaded = true
+        }
+        if segue.identifier == addFriendsSegue,
+            let destination = segue.destination as? FriendListViewController {
+            destination.group = newGroup
             destination.loaded = true
         }
     }

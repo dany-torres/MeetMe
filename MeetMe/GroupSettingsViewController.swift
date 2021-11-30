@@ -11,6 +11,7 @@ import Firebase
 class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var group:Group!
+    let addFriendsSegue = "AddFriendsSegue"
     
     var delegate: UIViewController!
     
@@ -125,4 +126,13 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
         return true
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Check if we are navigating to the group settings
+        if segue.identifier == addFriendsSegue,
+           let destination = segue.destination as? FriendListViewController {
+            destination.group = group
+            destination.loaded = true
+        }
+    }
 }

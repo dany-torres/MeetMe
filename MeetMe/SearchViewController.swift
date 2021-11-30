@@ -52,6 +52,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let uid = user.uid
                 //Cambiar a FriendRequests para tener al interface
                 db.collection("Users").document(selectedUser.hash).updateData(["friends": FieldValue.arrayUnion([uid])])
+                db.collection("Users").document(uid).updateData(["friends": FieldValue.arrayUnion([selectedUser.hash])])
             }
         }
     }
