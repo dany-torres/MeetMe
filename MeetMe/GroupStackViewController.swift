@@ -213,20 +213,20 @@ class GroupStackViewController: UIViewController, UITableViewDataSource, UITable
          }
      }
     
-    func rePopulateEventStack(){
+    func rePopulateEventStack() {
         //gets current group from db
         let groupRef = db.collection("Groups").document(currGroup.groupHASH)
         groupRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let data = document.data()
-                
+                    
                 //gets events from "events" attribute in group
                 let groupEvents = data!["events"] as! [String]
-                
+                    
                 for event in groupEvents {
                     //matches event from Groups attributes with events from "Events" db
                     let eventRef = self.db.collection("Events").document(event)
-                    
+                        
                     eventRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let eventData = document.data()
