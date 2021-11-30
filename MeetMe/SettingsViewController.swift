@@ -234,7 +234,7 @@ class SettingsViewController: UIViewController {
             // Light
             let controller = UIAlertController(
                 title: "Changing to light mode",
-                message: "You have to close and open the app to make the changes.",
+                message: "You can revert the changes by pressing cancel.",
                 preferredStyle: .alert)
             controller.addAction(UIAlertAction(
                                     title: "Cancel",
@@ -282,7 +282,7 @@ class SettingsViewController: UIViewController {
             // Dark
             let controller = UIAlertController(
                 title: "Changing to dark mode",
-                message: "You have to close and open the app to make the changes.",
+                message: "You can revert the changes by pressing cancel.",
                 preferredStyle: .alert)
             controller.addAction(UIAlertAction(
                                     title: "Cancel",
