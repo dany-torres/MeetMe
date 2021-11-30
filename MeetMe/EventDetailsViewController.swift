@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class EventDetailsViewController: UIViewController {
+class EventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var eventCreatorPicture: UIImageView!
@@ -19,6 +19,7 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var attendeesTableView: UITableView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     
     var event:Event? = nil
@@ -32,8 +33,10 @@ class EventDetailsViewController: UIViewController {
         super.viewDidLoad()
         editButton.isHidden = true
         saveButton.isHidden = true
-        startTimePicker.setValue(UIColor.lightGray, forKeyPath: "textColor")
-        endTimePicker.setValue(UIColor.lightGray, forKeyPath: "textColor")
+        deleteButton.isHidden = true
+        
+        attendeesTableView.delegate = self
+        attendeesTableView.dataSource = self
         
         // Check if user can't edit event
         // Case 1: Community Run AND event is editable
@@ -42,6 +45,10 @@ class EventDetailsViewController: UIViewController {
             (currGroup.adminRun && currGroup.groupCreator == Auth.auth().currentUser!.uid) {
             editButton.isHidden = false
             saveButton.isHidden = false
+        }
+        
+        if (currGroup.groupCreator == Auth.auth().currentUser!.uid){
+            deleteButton.isHidden = false
         }
         
         setTextFieldsInfo()
@@ -107,6 +114,42 @@ class EventDetailsViewController: UIViewController {
         }
         
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return event!.listOfAttendees.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "attendeeCell", for: indexPath)
+        let row = indexPath.row
+        let uid = event!.listOfAttendees[row]
+        let docRef = db.collection("Users").document(uid)
+        docRef.getDocument { (document, error) in
+            guard error == nil else {
+                print("error", error ?? "")
+                return
+            }
+
+            if let document = document, document.exists {
+                let data = document.data()
+                if let data = data {
+                    cell.textLabel?.text = "@" + (data["username"] as? String ?? "")
+                    // TODO: set picture
+                }
+            }
+        }
+        return cell
+    }
+    
+    // Function to delete event
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        // Delete event from Events DB collection
+        
+        // Delete event from Group
+        
+        // Delete event from all attendees accepted events
+    }
+    
     
     // When the save button is pressed, the event info should be updated
     @IBAction func saveButtonPressed(_ sender: Any) {
