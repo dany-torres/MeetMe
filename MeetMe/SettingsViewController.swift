@@ -137,7 +137,6 @@ class SettingsViewController: UIViewController {
                                                         print("Error writing document: \(err)")
                                                     } else {
                                                         print("Document successfully written!")
-                                                        exit(0)
                                                     }
                                                 }
                                             }
@@ -156,7 +155,7 @@ class SettingsViewController: UIViewController {
             // Spanish
             let controller = UIAlertController(
                 title: "Changing language to Spanish",
-                message: "You have to restart the app to make the changes.",
+                message: "You have to close and open the app to make the changes.",
                 preferredStyle: .alert)
             controller.addAction(UIAlertAction(
                                     title: "Cancel",
@@ -184,7 +183,6 @@ class SettingsViewController: UIViewController {
                                                         print("Error writing document: \(err)")
                                                     } else {
                                                         print("Document successfully written!")
-                                                        exit(0)
                                                     }
                                                 }
                                             }
