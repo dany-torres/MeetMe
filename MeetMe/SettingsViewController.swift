@@ -23,6 +23,32 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextFields()
+        setLanguage()
+    }
+    
+    func setLanguage(){
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if data["language"] as? Bool ?? false == false {
+                            // english
+                            self.language.selectedSegmentIndex = 0
+                        } else {
+                            // spanish
+                            self.language.selectedSegmentIndex = 1
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func setTextFields(){
@@ -95,6 +121,21 @@ class SettingsViewController: UIViewController {
                                         (paramAction:UIAlertAction!) in
                                         Bundle.setLanguage("en")
                                         UserDefaults.standard.set("en", forKey: "selectedLanguage")
+                                        if Auth.auth().currentUser != nil {
+                                            let user = Auth.auth().currentUser
+                                            if let user = user {
+                                                let uid = user.uid
+                                                let userDb : [String: Any] = [
+                                                    "language": false
+                                                ]
+                                                self.db.collection("Users").document(uid).updateData(userDb)
+                                            }
+                                            
+                                            
+                                        } else {
+                                          // No user is signed in.
+                                          // ...
+                                        }
                                         exit(0)
                                     }
             ))
@@ -121,6 +162,22 @@ class SettingsViewController: UIViewController {
                                         (paramAction:UIAlertAction!) in
                                         UserDefaults.standard.set("es", forKey: "selectedLanguage")
                                         Bundle.setLanguage("es")
+                                        if Auth.auth().currentUser != nil {
+                                            let user = Auth.auth().currentUser
+                                            if let user = user {
+                                                let uid = user.uid
+                                                let userDb : [String: Any] = [
+                                                    "language": true
+                                                ]
+                                                self.db.collection("Users").document(uid).updateData(userDb)
+                                            }
+                                            
+                                            
+                                        } else {
+                                          // No user is signed in.
+                                          // ...
+                                        }
+                                        
                                         exit(0)
                                     }
             ))

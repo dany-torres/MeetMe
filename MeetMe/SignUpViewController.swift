@@ -101,6 +101,8 @@ class SignUpViewController: UIViewController {
                                             "groupsAll": [],
                                             "groupsNotif": [],
                                             "groupsMuted": [],
+                                            "friends": [],
+                                            "friendRequests": [],
                                             "events": []
                                         ]
                                         self.db.collection("Users").document(uid).setData(userDb)
