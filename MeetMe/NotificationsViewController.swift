@@ -31,10 +31,101 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         upcomingEventsTableView.dataSource = self
         
         
-        //populate evetn list and friend request list from database
+        //populate event list and friend request list from database
+        populateFriendRequestTable()
+        populateUpcomingEventsTable()
+        
+        //TODO: Add logic for when the accept and decline button are clicked
     }
     
+    func populateFriendRequestTable(){
+        
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                    let nameRef = db.collection("Users").document(uid)
+                
+                    nameRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let data = document.data()
+                            let friendRequests = data!["friendRequests"] as! [String]
+                            for friendReq in friendRequests{
+                                let friendRef = self.db.collection("Users").document(friendReq)
+                                
+                                friendRef.getDocument { (document, error) in
+                                    if let document = document, document.exists {
+                                        let friendReqData = document.data()
+                                        let name = friendReqData!["name"] as! String
+                                        let username = friendReqData!["username"] as! String
+                                        let hash = friendReqData!["uid"] as! String
+                                        let newFriendReq = User(name: name, username: username, hash: hash)
+                                        self.friendRequesList.append(newFriendReq)
+                                        self.friendRequestTableView.reloadData()
+                                        print(name)
+                                    } else {
+                                        print("Friend Request does not exist")
+                                    }
+                                }
+                            }
+                        }else {
+                            print("User does not exist")
+                        }
+                    }
+            }
+        }
+        
+    }
     
+    func populateUpcomingEventsTable(){
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                    let nameRef = db.collection("Users").document(uid)
+                
+                    nameRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let data = document.data()
+                            let upcomingEvents = data!["events"] as! [String]
+                            for event in upcomingEvents{
+                                let eventRef = self.db.collection("Users").document(event)
+                                
+                                eventRef.getDocument { (document, error) in
+                                    if let document = document, document.exists {
+                                        let eventData = document.data()
+                                        let name = eventData!["name"] as! String
+                                        let eventDate = eventData!["eventDate"] as! String
+                                        let startTime = eventData!["startTime"] as! String
+                                        let endTime = eventData!["endTime"] as! String
+                                        let location = eventData!["location"] as! String
+                                        let notifications = eventData!["notifications"] as! Bool
+                                        let reminderChoice = eventData!["reminderChoice"] as! String
+                                        let polls = eventData!["polls"] as! Bool
+                                        let messages = eventData!["messages"] as! Bool
+                                        let editEvents = eventData!["editable"] as! Bool
+                                        let eventCreator = eventData!["creator"] as! String
+                                        let nameOfGroup = eventData!["groupName"] as! String
+                                        let listOfAttendees = eventData!["attendees"] as! [String]
+                                        let eventHash = eventData!["uid"] as! String
+                                        
+                                        let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, notifications: notifications, reminderChoice: reminderChoice, polls: polls, messages: messages, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash)
+                                        self.eventList.append(newEvent)
+                                        self.upcomingEventsTableView.reloadData()
+                                        print(name)
+                                    } else {
+                                        print("Friend Request does not exist")
+                                    }
+                                }
+                            }
+                        }else {
+                            print("User does not exist")
+                        }
+                    }
+            }
+        }
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
