@@ -10,6 +10,8 @@
 		0D097B3D435C357ED7EB890B /* Pods_MeetMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F62E88697E24C77D8BB9A6 /* Pods_MeetMe.framework */; };
 		5BE927B42722005A005254BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BE927B32722005A005254BF /* GoogleService-Info.plist */; };
 		8D22CE24271CE300001BE602 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D22CE23271CE300001BE602 /* Event.swift */; };
+		8D3F7F9B2757386F0047D465 /* UpcomingEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F7F9A2757386F0047D465 /* UpcomingEventTableViewCell.swift */; };
+		8D3F7F9D27573B970047D465 /* FriendRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F7F9C27573B970047D465 /* FriendRequestTableViewCell.swift */; };
 		A10ACFC72755CB9E00FEA7AA /* UserRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10ACFC62755CB9E00FEA7AA /* UserRequestTableViewCell.swift */; };
 		A10ACFC92756687200FEA7AA /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10ACFC82756687200FEA7AA /* AddFriendTableViewCell.swift */; };
 		A11FC8FC271E25C3005C37B1 /* GroupsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */; };
@@ -48,6 +50,8 @@
 		5BE927B32722005A005254BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		72988190ACDF0A01EC9E0CE9 /* Pods-MeetMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetMe.release.xcconfig"; path = "Target Support Files/Pods-MeetMe/Pods-MeetMe.release.xcconfig"; sourceTree = "<group>"; };
 		8D22CE23271CE300001BE602 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		8D3F7F9A2757386F0047D465 /* UpcomingEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEventTableViewCell.swift; sourceTree = "<group>"; };
+		8D3F7F9C27573B970047D465 /* FriendRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTableViewCell.swift; sourceTree = "<group>"; };
 		A10ACFC62755CB9E00FEA7AA /* UserRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestTableViewCell.swift; sourceTree = "<group>"; };
 		A10ACFC82756687200FEA7AA /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsClass.swift; sourceTree = "<group>"; };
@@ -142,8 +146,8 @@
 				B6F2553F2720E5E30089FF17 /* EventDetailsViewController.swift */,
 				B67AA47627509187009FEEAE /* EventListViewController.swift */,
 				B6F2553D271BFA260089FF17 /* MeetMeTabBarController.swift */,
-				B6F25535271BE43A0089FF17 /* SettingsViewController.swift */,
 				B6F25537271BE4530089FF17 /* SearchViewController.swift */,
+				B6F25535271BE43A0089FF17 /* SettingsViewController.swift */,
 				B6F25539271BE4690089FF17 /* NotificationsViewController.swift */,
 				B6F2553B271BE4800089FF17 /* MyStackViewController.swift */,
 				B6F255312715F6DE0089FF17 /* GroupSettingsViewController.swift */,
@@ -157,7 +161,9 @@
 				A153D6302733611C00DE247E /* GroupsTableViewCell.swift */,
 				B6F255332716916B0089FF17 /* CreateEventViewController.swift */,
 				B698C9C7274EB0C000B608D6 /* StackTableViewCell.swift */,
+				8D3F7F9A2757386F0047D465 /* UpcomingEventTableViewCell.swift */,
 				A10ACFC62755CB9E00FEA7AA /* UserRequestTableViewCell.swift */,
+				8D3F7F9C27573B970047D465 /* FriendRequestTableViewCell.swift */,
 				5BE927B32722005A005254BF /* GoogleService-Info.plist */,
 				B6F2551C2713DF420089FF17 /* Assets.xcassets */,
 				B6F2551E2713DF420089FF17 /* LaunchScreen.storyboard */,
@@ -296,11 +302,13 @@
 				B6F2553C271BE4800089FF17 /* MyStackViewController.swift in Sources */,
 				B6F255402720E5E40089FF17 /* EventDetailsViewController.swift in Sources */,
 				A10ACFC72755CB9E00FEA7AA /* UserRequestTableViewCell.swift in Sources */,
+				8D3F7F9D27573B970047D465 /* FriendRequestTableViewCell.swift in Sources */,
 				8D22CE24271CE300001BE602 /* Event.swift in Sources */,
 				B6F255152713DF400089FF17 /* ViewController.swift in Sources */,
 				A10ACFC92756687200FEA7AA /* AddFriendTableViewCell.swift in Sources */,
 				A153D6312733611D00DE247E /* GroupsTableViewCell.swift in Sources */,
 				B6F2553A271BE4690089FF17 /* NotificationsViewController.swift in Sources */,
+				8D3F7F9B2757386F0047D465 /* UpcomingEventTableViewCell.swift in Sources */,
 				B67AA47727509187009FEEAE /* EventListViewController.swift in Sources */,
 				B6F2552E2715395A0089FF17 /* FriendListViewController.swift in Sources */,
 				B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */,

@@ -2043,7 +2043,7 @@
                                     <constraint firstAttribute="height" constant="118" id="mpc-iP-U9c"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendRequestCell" textLabel="CI6-Hf-DZ6" detailTextLabel="M42-Uh-DI1" imageView="WGQ-zt-xjK" style="IBUITableViewCellStyleSubtitle" id="DCP-hc-3uO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendRequestCell" textLabel="CI6-Hf-DZ6" detailTextLabel="M42-Uh-DI1" imageView="WGQ-zt-xjK" style="IBUITableViewCellStyleSubtitle" id="DCP-hc-3uO" customClass="FriendRequestTableViewCell" customModule="MeetMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="331" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DCP-hc-3uO" id="36J-aA-Gzr">
@@ -2071,6 +2071,10 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="CI6-Hf-DZ6" id="d4K-ST-bPh"/>
+                                            <outlet property="username" destination="M42-Uh-DI1" id="VWr-tb-dJP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -2097,7 +2101,7 @@
                                     <constraint firstAttribute="height" constant="381" id="uzw-Vg-BGW"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationCell" textLabel="CLy-C0-3uz" imageView="WRA-4E-4BW" style="IBUITableViewCellStyleDefault" id="LTD-ne-rkR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationCell" textLabel="CLy-C0-3uz" imageView="WRA-4E-4BW" style="IBUITableViewCellStyleDefault" id="LTD-ne-rkR" customClass="UpcomingEventTableViewCell" customModule="MeetMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="331" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LTD-ne-rkR" id="TQ9-4n-BUQ">
@@ -2118,6 +2122,9 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="upcomingEventLabel" destination="CLy-C0-3uz" id="Gdc-t3-Oyc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
