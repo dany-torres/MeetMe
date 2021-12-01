@@ -192,6 +192,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             cell.event1.text = event.eventName
         }
         cell.eventOne = event
+        cell.event1.backgroundColor = getEventColor(event: event)
     }
     
     // Set the second event block
@@ -201,6 +202,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             cell.event2.text = event.eventName
         }
         cell.eventTwo = event
+        cell.event2.backgroundColor = getEventColor(event: event)
     }
     
     // Set the third event block
@@ -210,6 +212,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             cell.event3.text = event.eventName
         }
         cell.eventThree = [event]
+        cell.event3.backgroundColor = getEventColor(event: event)
     }
     
     // Set the third event block when there are more events
@@ -254,6 +257,42 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         }
         
         return eventsAtTime
+    }
+    
+    func getEventColor(event:Event)->UIColor {
+        var red:CGFloat? = 0
+        var blue:CGFloat? = 0
+        var green:CGFloat? = 0
+        let uid = event.eventCreator
+        let docRef = db.collection("Users").document(uid)
+        docRef.getDocument { (document, error) in
+            guard error == nil else {
+                print("error", error ?? "")
+                return
+            }
+
+            if let document = document, document.exists {
+                let data = document.data()
+                if let data = data {
+                    let rConv = data["red"]
+                    if let rV = Double(rConv as! Substring) {
+                        red = CGFloat(rV)
+                    }
+                    let gConv = data["green"]
+                    if let gV = Double(gConv as! Substring) {
+                        green = CGFloat(gV)
+                    }
+                    let bConv = data["blue"]
+                    if let bV = Double(bConv as! Substring) {
+                        blue = CGFloat(bV)
+                    }
+                }
+            }
+        }
+        print("red: \(red)")
+        print("green: \(green)")
+        print("blue: \(blue)")
+        return UIColor(red: red!, green: green!, blue: blue!, alpha: 1)
     }
 
     // MARK: - Navigation
