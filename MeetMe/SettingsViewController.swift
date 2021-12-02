@@ -633,6 +633,11 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
                     return
                 }
                 let urlString = url.absoluteString
+                
+                DispatchQueue.main.async {
+                    self.displayPicture.image = selectedImage
+                }
+                
                 print("URL String: \(urlString)")
                 UserDefaults.standard.set(urlString, forKey: "url")
             })
