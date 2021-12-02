@@ -52,7 +52,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                 sleep(1)
             }
             DispatchQueue.main.async {
-                self.groupNameLabel.setTitle(self.currGroup.groupName, for: .normal)
+                let myNormalAttributedTitle = NSAttributedString(string: self.currGroup.groupName,
+                    attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 17)!])
+                self.groupNameLabel.setAttributedTitle(myNormalAttributedTitle, for: .normal)
             }
             self.rePopulateEventStack()
         }
@@ -423,7 +425,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     
     func updateGroup(group: Group) {
         currGroup = group
-        self.groupNameLabel.setTitle(self.currGroup.groupName, for: .normal)
+        let myNormalAttributedTitle = NSAttributedString(string: self.currGroup.groupName,
+            attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 17)!])
+        self.groupNameLabel.setAttributedTitle(myNormalAttributedTitle, for: .normal)
     }
          
 }

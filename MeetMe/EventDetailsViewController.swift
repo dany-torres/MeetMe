@@ -20,6 +20,7 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var joinButton: UIButton!
     
     
     var event:Event? = nil
@@ -52,6 +53,15 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         // Check if it's the event creator
         if (event?.eventCreator == Auth.auth().currentUser!.uid){
             deleteButton.isHidden = false
+            joinButton.isHidden = true
+        }
+        
+        // Check if current user is already part of the event
+        if (event!.listOfAttendees.contains(Auth.auth().currentUser!.uid)){
+            let myNormalAttributedTitle = NSAttributedString(string: "Unjoin",
+                attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 13)!])
+            joinButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+            
         }
         
         setTextFieldsInfo()
@@ -94,28 +104,43 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     // Add user to event's attendees and to user's accepted events
     @IBAction func joinEventButtonClicked(_ sender: Any) {
-        // Add current user to event attendees
-        event!.listOfAttendees.append(Auth.auth().currentUser!.uid)
-    
+        var myNormalAttributedTitle = NSAttributedString()
+        // Check if user is already part of the event, if so, unjoin event
+        if (event!.listOfAttendees.contains(Auth.auth().currentUser!.uid)){
+            // Remove locally
+            if let index = event!.listOfAttendees.firstIndex(of: Auth.auth().currentUser!.uid) {
+                event!.listOfAttendees.remove(at: index)
+            }
+            
+            // Remove from users accepted events
+            self.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+                "events": FieldValue.arrayRemove([event!.eventHash])
+            ])
+            
+            // New Button Text
+            myNormalAttributedTitle = NSAttributedString(string: "Join Event",
+                attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 13)!])
+            
+        } else {
+            // Add current user to event attendees
+            event!.listOfAttendees.append(Auth.auth().currentUser!.uid)
+            
+            // Add event to user accepted events array
+            self.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData(["events": FieldValue.arrayUnion([event!.eventHash])])
+            
+            // New Button Text
+            myNormalAttributedTitle = NSAttributedString(string: "Unjoin",
+                attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 13)!])
+        }
+        
         // Update event in database
         let eventDB : [String: Any] = [
-            "listOfAttendees": event!.listOfAttendees,
+            "attendees": event!.listOfAttendees,
         ]
         self.db.collection("Events").document(event!.eventHash).updateData(eventDB)
         
-        // TODO: checar que esto funciona
-        // Add event to user accepted events array
-        if Auth.auth().currentUser != nil {
-            let user = Auth.auth().currentUser
-            if let user = user {
-                let uid = user.uid
-                self.db.collection("Users").document(uid).updateData(["events": FieldValue.arrayUnion([event!.eventHash])])
-            }
-        } else {
-          // No user is signed in.
-          // ...
-        }
-        
+        // Change Button Text
+        joinButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
         attendeesTableView.reloadData()
 
     }
