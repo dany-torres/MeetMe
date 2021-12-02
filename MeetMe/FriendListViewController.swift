@@ -9,13 +9,16 @@ import UIKit
 import Firebase
 
 class FriendListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var usersList: [User] = []
+    var usersList: [String] = []
     
     let db = Firestore.firestore()
 
     let UserCellIdentifier = "Cell"
+    var delegate: UIViewController!
     var group: Group!
     var loaded: Bool = false
+    var fromSettings = true
+    var currentMembers: [String] = []
     
     @IBOutlet weak var friendSearchBar: UISearchBar!
     @IBOutlet var friendsTableView: UITableView!
@@ -37,8 +40,15 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedUser = usersList[indexPath.row]
-        db.collection("Groups").document(group.groupHASH).updateData(["peopleInGroup": FieldValue.arrayUnion([selectedUser.hash])])
-        db.collection("Users").document(selectedUser.hash).updateData(["groupsAll": FieldValue.arrayUnion([group.groupHASH])])
+        if fromSettings {
+            db.collection("Groups").document(group.groupHASH).updateData(["peopleInGroup": FieldValue.arrayUnion([selectedUser])])
+            db.collection("Users").document(selectedUser).updateData(["groupsAll": FieldValue.arrayUnion([group.groupHASH])])
+        }
+        currentMembers.append(selectedUser)
+        usersList = usersList.filter {$0 != selectedUser}
+        let otherVC = delegate as! addFriends
+        otherVC.addFriends(newUser: selectedUser)
+        friendsTableView.reloadData()
     }
 
     func populateFriendTable() {
@@ -51,20 +61,17 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
                     nameRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let data = document.data()
-                            let friends = data!["friends"] as! [String]
+                            var friends = data!["friends"] as! [String]
+                            friends = Array(Set(friends).subtracting(self.currentMembers))
                             for friend in friends{
                                 let friendRef = self.db.collection("Users").document(friend)
                                 
                                 friendRef.getDocument { (document, error) in
                                     if let document = document, document.exists {
                                         let firnedsData = document.data()
-                                        let name = firnedsData!["name"] as! String
-                                        let username = firnedsData!["username"] as! String
                                         let hash = firnedsData!["uid"] as! String
-                                        let newUser = User(name: name, username: username, hash: hash)
-                                        self.usersList.append(newUser)
+                                        self.usersList.append(hash)
                                         self.friendsTableView.reloadData()
-                                        print(name)
                                     } else {
                                         print("Friend does not exist")
                                     }
@@ -86,8 +93,17 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: UserCellIdentifier, for: indexPath) as! AddFriendTableViewCell
         let row = indexPath.row
         let user = usersList[row]
-        cell.nameLabel.text = user.name
-        cell.usernameLabel.text = user.username
+        let friendRef = self.db.collection("Users").document(user)
+        friendRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let firnedsData = document.data()
+                cell.nameLabel.text = firnedsData!["name"] as? String
+                cell.usernameLabel.text = firnedsData!["username"] as? String
+            } else {
+                print("Friend does not exist")
+            }
+        }
+        
         return cell
     }
 }

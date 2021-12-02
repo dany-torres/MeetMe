@@ -384,7 +384,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                                                  eventCreator: eventData!["creator"] as! String,
                                                  nameOfGroup: eventData!["groupName"] as! String,
                                                  listOfAttendees: eventData!["attendees"] as! [String],
-                                                 eventHash: eventData!["uid"] as! String
+                                                 eventHash: eventData!["uid"] as! String,
+                                                 groupHash: eventData!["groupHash"] as! String
                             )
                             
                             let today = Date()

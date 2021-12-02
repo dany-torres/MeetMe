@@ -356,6 +356,7 @@ class SettingsViewController: UIViewController {
                         let data = document.data()
                         let userGroups = data!["groupsAll"] as! [String]
                         let userEvents = data!["events"] as! [String]
+                        let userFriends = data!["friends"] as! [String]
                         
                         for event in userEvents {
                             let eventRef = self.db.collection("Events").document(event)
@@ -376,12 +377,12 @@ class SettingsViewController: UIViewController {
                                                          eventCreator: eventData!["creator"] as! String,
                                                          nameOfGroup: eventData!["groupName"] as! String,
                                                          listOfAttendees: eventData!["attendees"] as! [String],
-                                                         eventHash: eventData!["uid"] as! String
+                                                         eventHash: eventData!["uid"] as! String,
+                                                         groupHash: eventData!["groupHash"] as! String
                                     )
                                     //delete event from all user accepted
                                     self.deleteEventFromUsers(newEvent: newEvent)
                                     //delete event from groups
-                                    //TODO
                                     self.deleteEventFromGroups(newEvent: newEvent)
                                     //delete event from events
                                     self.db.collection("Events").document(event).delete()
@@ -420,14 +421,27 @@ class SettingsViewController: UIViewController {
                                 }
                             }
                         }
+                        
+                        for friend in userFriends {
+                            let friendRef = self.db.collection("Users").document(friend)
+                            
+                            friendRef.getDocument { (document, error) in
+                                if let document = document, document.exists {
+                                    let friendsData = document.data()
+                                    
+                                    let friendsList = friendsData!["friends"] as! [String]
+                                    let newFriendsList = friendsList.filter {$0 != uid}
+                                    self.db.collection("Users").document(friend).updateData(["friends": newFriendsList])
+                                } else {
+                                    print("Friend does not exist")
+                                }
+                            }
+                        }
+                        
                     } else {
                         print("User does not exist")
                     }
                 }
-                
-                
-                //delete user from friends TODO
-                // delete User from AUTH TODO
                 
                 db.collection("Users").document(uid).delete() { err in
                     if let err = err {
@@ -444,6 +458,14 @@ class SettingsViewController: UIViewController {
                 }
             }
             
+            // delete User from AUTH
+            user?.delete {error in
+                if let error = error {
+                    print("User wasnt deleted from AUTH \(error)")
+                } else {
+                    print("User deleted from Auth")
+                }
+            }
             
         } else {
           // No user is signed in.
@@ -506,7 +528,15 @@ class SettingsViewController: UIViewController {
     }
     
     func deleteEventFromGroups(newEvent: Event){
-        
+        let nameRef = db.collection("Groups").document(newEvent.groupHash)
+        nameRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let events = data!["events"] as! [String]
+                let newEvents = events.filter {$0 != newEvent.eventHash}
+                self.db.collection("Groups").document(newEvent.groupHash).updateData(["events": newEvents])
+            }
+        }
     }
     
 }

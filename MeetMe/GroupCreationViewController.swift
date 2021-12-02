@@ -7,8 +7,8 @@
 import UIKit
 import Firebase
 
-class GroupCreationViewController: UIViewController {
-
+class GroupCreationViewController: UIViewController, addFriends {
+    
     @IBOutlet weak var groupPhoto: UIImageView!
     @IBOutlet weak var groupTypeSegCtrl: UISegmentedControl!
     @IBOutlet weak var groupNameTextField: UITextField!
@@ -17,6 +17,8 @@ class GroupCreationViewController: UIViewController {
     var delegate: UIViewController!
     var newGroup: Group!
     var adminRun: Bool = true
+    
+    var members: [String] = []
     
     let db = Firestore.firestore()
     
@@ -65,6 +67,7 @@ class GroupCreationViewController: UIViewController {
                     hasher.combine(newGroup.groupDescr)
                     let hash = String(hasher.finalize())
                     // Create the instance object
+                    members.append(uid)
                     let groupDb : [String: Any] = [
                         "uid": hash,
                         "name": currentName,
@@ -72,14 +75,14 @@ class GroupCreationViewController: UIViewController {
                         "creator": uid,
                         "description": groupDescriptionTextField.text!,
                         "inviteLink": "",
-                        "peopleInGroup": [uid],
+                        "peopleInGroup": members,
                         "events": []
                     ]
                     newGroup.groupName = currentName
                     newGroup.groupDescr = groupDescriptionTextField.text!
                     newGroup.groupHASH = hash
                     newGroup.groupCreator = uid
-                    newGroup.members = [uid]
+                    newGroup.members = members
                     newGroup.events = []
                     // Add it to the groups instance
                     self.db.collection("Groups").document(hash).setData(groupDb)
@@ -108,6 +111,10 @@ class GroupCreationViewController: UIViewController {
         }
     }
     
+    func addFriends(newUser: String) {
+        members.append(newUser)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CreateGroupSegue",
            let destination = segue.destination as? GroupStackViewController {
@@ -119,7 +126,9 @@ class GroupCreationViewController: UIViewController {
         if segue.identifier == addFriendsSegue,
             let destination = segue.destination as? FriendListViewController {
             destination.group = newGroup
+            destination.delegate = self
             destination.loaded = true
+            destination.fromSettings = false
         }
     }
 }

@@ -108,8 +108,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         let nameOfGroup = eventData!["groupName"] as! String
                                         let listOfAttendees = eventData!["attendees"] as! [String]
                                         let eventHash = eventData!["uid"] as! String
+                                        let groupHash = eventData!["groupHash"] as! String
                                         
-                                        let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, notifications: notifications, reminderChoice: reminderChoice, polls: polls, messages: messages, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash)
+                                        let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, notifications: notifications, reminderChoice: reminderChoice, polls: polls, messages: messages, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash, groupHash: groupHash)
                                         self.eventList.append(newEvent)
                                         self.upcomingEventsTableView.reloadData()
                                         print(name)

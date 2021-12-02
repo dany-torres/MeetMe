@@ -35,8 +35,26 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let username = data["username"] as! String
                     let hash = data["uid"] as! String
                     let newUser = User(name: name, username: username, hash: hash)
-                    self.usersList.append(newUser)
-                    self.resultsTableView.reloadData()
+//                    self.usersList.append(newUser)
+//                    self.resultsTableView.reloadData()
+                    if Auth.auth().currentUser != nil {
+                        let user = Auth.auth().currentUser
+                        if let user = user {
+                            let uid = user.uid
+                            let nameRef = self.db.collection("Users").document(uid)
+                            nameRef.getDocument { (document, error) in
+                                if let document = document, document.exists {
+                                    let data = document.data()
+                                    var friends = data!["friends"] as! [String]
+                                    friends.append(uid)
+                                    if !friends.contains(newUser.hash){
+                                        self.usersList.append(newUser)
+                                        self.resultsTableView.reloadData()
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

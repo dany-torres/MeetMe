@@ -23,8 +23,9 @@ class Event{
     var nameOfGroup: String
     var listOfAttendees:[String] = []
     var eventHash: String
+    var groupHash: String
     
-    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String){
+    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String, groupHash: String){
         
         self.eventName = eventName
         self.eventDate = eventDate
@@ -40,6 +41,7 @@ class Event{
         self.nameOfGroup = nameOfGroup
         self.listOfAttendees = listOfAttendees
         self.eventHash = eventHash
+        self.groupHash = groupHash
     }
     
     func printEventDetails()-> String{

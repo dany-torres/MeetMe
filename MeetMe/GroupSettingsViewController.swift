@@ -8,8 +8,12 @@
 import UIKit
 import Firebase
 
-class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol addFriends {
+    func addFriends(newUser: String)
+}
 
+class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, addFriends {
+    
     var group:Group!
     let addFriendsSegue = "AddFriendsSegue"
     
@@ -126,13 +130,19 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
         return true
     }
     
+    func addFriends(newUser: String) {
+        group.members.append(newUser)
+        groupMembersTableView.reloadData()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Check if we are navigating to the group settings
         if segue.identifier == addFriendsSegue,
            let destination = segue.destination as? FriendListViewController {
+            destination.delegate = self
             destination.group = group
             destination.loaded = true
+            destination.currentMembers = group.members
         }
     }
 }

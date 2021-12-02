@@ -271,7 +271,8 @@ class CreateEventViewController: UIViewController {
                              eventCreator: uid,
                              nameOfGroup: self.currGroup.groupName,
                              listOfAttendees: [uid],
-                             eventHash: hash)
+                             eventHash: hash,
+                            groupHash: self.currGroup.groupHASH)
                             // Adds new event object locally
                            otherVC.addNewEvent(newEvent: newEvent)
                        }
