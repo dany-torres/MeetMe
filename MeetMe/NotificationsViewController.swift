@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FriendRequestCellDelegate {
 
     @IBOutlet weak var friendRequestTableView: UITableView!
     @IBOutlet weak var upcomingEventsTableView: UITableView!
@@ -17,6 +17,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     var user:User? = nil
     var eventList: [Event] = []
     var friendRequesList: [User] = []
+    var currCell: FriendRequestTableViewCell!
     
     let db = Firestore.firestore()
     
@@ -32,10 +33,10 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         //populate event list and friend request list from database
+        //TODO: add this in a thread & in search view controller, add a button for send request and add logic for adding person to friend request array
         populateFriendRequestTable()
         populateUpcomingEventsTable()
-        
-        //TODO: Add logic for when the accept and decline button are clicked
+
     }
     
     func populateFriendRequestTable(){
@@ -163,7 +164,17 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as! UpcomingEventTableViewCell
                 let row = indexPath.row
                 let event = eventList[row]
-                cell.upcomingEventLabel.text = event.eventName
+                
+            
+                let eventDateIntFormat: Int? = Int(event.startTime)
+                let now = Date()
+                let formatter = DateFormatter()
+                formatter.timeStyle = .short
+
+                let modifiedDate = Calendar.current.date(byAdding: .hour, value: -eventDateIntFormat!, to: now)!
+                
+                let dateString = formatter.string(from: modifiedDate)
+                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(dateString)"
                 return cell
             
             default:
@@ -175,10 +186,68 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     
-    //make method for when accept friend button is clicked
+    //method for accepting friend request
+    func didTapAcceptButton(cell: FriendRequestTableViewCell) {
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.friendRequestTableView.indexPath(for: cell)
+        let cell = friendRequestTableView.cellForRow(at: indexPath!) as! FriendRequestTableViewCell
+        currCell = cell
+        
+        let row = (indexPath?.row)!
+        
+        //remove locally
+        let newFriend = friendRequesList.remove(at: row)
+        let newFriendHash = newFriend.hash
+        
+        //add new friend to current users friends array in DB
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                
+                // Search for the user and append it to existing array
+                self.db.collection("Users").document(uid).updateData(["friends": FieldValue.arrayUnion([newFriendHash])])
+                
+                //remove from friend request list in DB
+                self.db.collection("Users").document(uid).updateData(["friendRequests": FieldValue.arrayRemove([newFriendHash])
+                                                                     ])
+            }
+            
+        } else {
+          // No user is signed in.
+          // ...
+        }
+    }
     
-    
-    //make method for when decline friend button is clicked
+    //method for declining friend request
+    func didTapDeclineButton(cell: FriendRequestTableViewCell) {
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.friendRequestTableView.indexPath(for: cell)
+        let cell = friendRequestTableView.cellForRow(at: indexPath!) as! FriendRequestTableViewCell
+        currCell = cell
+        
+        let row = (indexPath?.row)!
+        
+        //remove locally
+        let personToRemove = friendRequesList.remove(at: row)
+        let personToRemoveHash = personToRemove.hash
+        
+        
+        //remove from database
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                
+                self.db.collection("Users").document(uid).updateData(["friendRequests": FieldValue.arrayRemove([personToRemoveHash])
+                                                                     ])
+            }
+            
+        } else {
+          // No user is signed in.
+          // ...
+        }
+    }
     
     /*
     // MARK: - Navigation
@@ -191,3 +260,4 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     */
 
 }
+
