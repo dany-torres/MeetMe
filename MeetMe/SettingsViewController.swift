@@ -19,6 +19,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var mode: UISegmentedControl!
     
     let db = Firestore.firestore()
+    let storage = Storage.storage().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -603,6 +604,16 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
+        
+        guard let imageData = selectedImage.pngData() else {
+            return
+        }
+        storage.putData(imageData, metadata: nil, completion: { _, error in
+            guard error == nil else {
+                print("failed to upload")
+                return
+            }
+        })
         self.displayPicture.image = selectedImage
         self.displayPicture.layer.masksToBounds = true
         self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
