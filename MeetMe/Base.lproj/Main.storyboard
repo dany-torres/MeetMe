@@ -181,13 +181,13 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GroupName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4D-k4-62Z">
                                                     <rect key="frame" x="109" y="11" width="217" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fz0-7h-Osl">
                                                     <rect key="frame" x="109" y="38" width="217" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -717,6 +717,7 @@
                         <outlet property="endTimePicker" destination="cqR-kU-Wzb" id="l78-xh-cTX"/>
                         <outlet property="eventCreatorPicture" destination="wFm-65-bcO" id="rf6-Zt-HSR"/>
                         <outlet property="eventNameTextField" destination="fuO-mk-HYi" id="aPM-4g-EUY"/>
+                        <outlet property="joinButton" destination="Yye-Ya-UnS" id="1ai-UL-bLt"/>
                         <outlet property="locationTextField" destination="c7y-se-oFh" id="Pge-D3-NuV"/>
                         <outlet property="saveButton" destination="Vov-FJ-hBG" id="6bp-gN-bfK"/>
                         <outlet property="startTimePicker" destination="LO0-6R-OxM" id="pha-el-J3F"/>
@@ -1950,13 +1951,13 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yd1-xv-wwy">
                                                     <rect key="frame" x="36" y="11" width="330" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BP-XI-9tm">
                                                     <rect key="frame" x="36" y="42" width="330" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -2476,7 +2477,7 @@
         <segue reference="SEN-5B-iHA"/>
         <segue reference="GOP-4q-Ftn"/>
         <segue reference="WvW-sU-lMF"/>
-        <segue reference="jrk-Lf-LFT"/>
+        <segue reference="1iG-eE-u3p"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
