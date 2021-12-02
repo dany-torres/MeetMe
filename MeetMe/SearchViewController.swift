@@ -8,7 +8,9 @@
 import UIKit
 import Firebase
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UserRequestTableViewCellDelegate {
+    
+    
     var usersList: [User] = []
     
     let db = Firestore.firestore()
@@ -17,6 +19,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultsTableView: UITableView!
+    
+    var currCell: UserRequestTableViewCell!
     
     
     override func viewDidLoad() {
@@ -88,4 +92,36 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.usernameLabel.text = user.username
         return cell
     }
+    
+    //when button is clicked, add the uid of curr user to clicked users friend request list
+    func didTapButton(cell: UserRequestTableViewCell) {
+        
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.resultsTableView.indexPath(for: cell)
+        let cell = resultsTableView.cellForRow(at: indexPath!) as! UserRequestTableViewCell
+        
+        //change button status
+        cell.requestButton.setTitle("Request Sent", for: .normal)
+        
+        currCell = cell
+                
+        let row = (indexPath?.row)!
+        
+        let newFriendRequest = usersList[row]
+        let newFriendRequestHash = newFriendRequest.hash
+        
+        if Auth.auth().currentUser != nil {
+            
+            //get current user
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                
+                // Search for the curr user and add the uid of curr user to friend request list of clicked user
+                self.db.collection("Users").document(newFriendRequestHash).updateData(["friendRequests": FieldValue.arrayUnion([uid])])
+                
+                
+            }
+    }
+}
 }

@@ -6,11 +6,21 @@
 //
 
 import UIKit
+import Firebase
+
+protocol UserRequestTableViewCellDelegate: AnyObject {
+    func didTapButton(cell: UserRequestTableViewCell)
+}
 
 class UserRequestTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var requestButton: UIButton!
+    
+    
+    weak var delegate : UserRequestTableViewCellDelegate?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,5 +32,10 @@ class UserRequestTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    
+    @IBAction func didTapButton(_ sender: Any) {
+        delegate?.didTapButton(cell: self)
+    }
+    
 }

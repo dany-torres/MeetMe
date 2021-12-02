@@ -18,6 +18,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     var eventList: [Event] = []
     var friendRequesList: [User] = []
     var currCell: FriendRequestTableViewCell!
+    var loaded: Bool = false
     
     let db = Firestore.firestore()
     
@@ -33,9 +34,18 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         //populate event list and friend request list from database
-        //TODO: add this in a thread & in search view controller, add a button for send request and add logic for adding person to friend request array
-        populateFriendRequestTable()
-        populateUpcomingEventsTable()
+        //TODO: add this in a thread & in search view controller (not sure ab this)
+        
+        let queue = DispatchQueue(label: "curr")
+        queue.async {
+            while (!self.loaded){
+                sleep(1)
+            }
+            DispatchQueue.main.async {
+                self.populateFriendRequestTable()
+                self.populateUpcomingEventsTable()
+            }
+        }
 
     }
     
