@@ -17,8 +17,6 @@ class Event{
     var location: String
     var notifications: Bool
     var reminderTime: String
-    var polls: Bool
-    var messages: Bool
     var editEvents: Bool
     var eventCreator: String
     var nameOfGroup: String
@@ -27,7 +25,7 @@ class Event{
     var groupHash: String
     var eventColor: [Int] = []
     
-    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String, groupHash: String, eventColor:[Int]){
+    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String, groupHash: String, eventColor:[Int]){
         
         self.eventName = eventName
         self.eventDate = eventDate
@@ -36,8 +34,6 @@ class Event{
         self.location = location
         self.notifications = notifications
         self.reminderTime = reminderChoice
-        self.polls = polls
-        self.messages = messages
         self.editEvents = editEvents
         self.eventCreator = eventCreator
         self.nameOfGroup = nameOfGroup

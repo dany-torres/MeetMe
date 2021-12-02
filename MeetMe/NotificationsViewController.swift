@@ -101,8 +101,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         let location = eventData!["location"] as! String
                                         let notifications = eventData!["notifications"] as! Bool
                                         let reminderChoice = eventData!["reminderChoice"] as! String
-                                        let polls = eventData!["polls"] as! Bool
-                                        let messages = eventData!["messages"] as! Bool
                                         let editEvents = eventData!["editable"] as! Bool
                                         let eventCreator = eventData!["creator"] as! String
                                         let nameOfGroup = eventData!["groupName"] as! String
@@ -110,7 +108,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         let eventHash = eventData!["uid"] as! String
                                         let groupHash = eventData!["groupHash"] as! String
                                         
-                                        let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, notifications: notifications, reminderChoice: reminderChoice, polls: polls, messages: messages, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash, groupHash: groupHash, eventColor:[216, 180, 252])
+                                        let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, notifications: notifications, reminderChoice: reminderChoice, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash, groupHash: groupHash, eventColor:[216, 180, 252])
                                         self.eventList.append(newEvent)
                                         self.upcomingEventsTableView.reloadData()
                                         print(name)

@@ -371,8 +371,6 @@ class SettingsViewController: UIViewController {
                                                          location: eventData!["location"] as! String,
                                                          notifications: eventData!["notifications"] as! Bool,
                                                          reminderChoice: eventData!["reminderChoice"] as! String,
-                                                         polls: eventData!["polls"] as! Bool,
-                                                         messages: eventData!["messages"] as! Bool,
                                                          editEvents: eventData!["editable"] as! Bool,
                                                          eventCreator: eventData!["creator"] as! String,
                                                          nameOfGroup: eventData!["groupName"] as! String,
