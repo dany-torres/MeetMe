@@ -68,7 +68,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     // Reload stack to show any event edits
     override func viewWillAppear(_ animated: Bool) {
         eventStack.reloadData()
-        
     }
     
     // Initialize the halfHours array
@@ -200,13 +199,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         cell.event1.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
-    func getColor(rgbArray:[Int]) -> UIColor {
-        let red:CGFloat = CGFloat(rgbArray[0])/CGFloat(255)
-        let green:CGFloat = CGFloat(rgbArray[1])/CGFloat(255)
-        let blue:CGFloat = CGFloat(rgbArray[2])/CGFloat(255)
-        return UIColor(red: red, green: green, blue: blue, alpha: 1)
-    }
-    
     // Set the second event block
     func setSecondEventBlock(cell:StackTableViewCell, event:Event){
         cell.event2.isHidden = false
@@ -234,6 +226,13 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         cell.eventThree = extraEvents
     }
     
+    // Func to get the color of the event block based on User color
+    func getColor(rgbArray:[Int]) -> UIColor {
+        let red:CGFloat = CGFloat(rgbArray[0])/CGFloat(255)
+        let green:CGFloat = CGFloat(rgbArray[1])/CGFloat(255)
+        let blue:CGFloat = CGFloat(rgbArray[2])/CGFloat(255)
+        return UIColor(red: red, green: green, blue: blue, alpha: 1)
+    }
     
     // Hide any event blocks that are not being used
     func hideUnusedEvents(cell:StackTableViewCell) {
@@ -241,7 +240,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         cell.event2.isHidden = true
         cell.event3.isHidden = true
     }
-    
     
     // Get all events that happen at a given time
     func getEventsAtCellTime(startTime:String) -> [Event]{
@@ -283,8 +281,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                  while (self.currGroup == nil){
                      sleep(1)
                  }
-//                 nextVC.hashGroup = self.currGroupHASH
-//                 nextVC.nameGroup = self.currGroupName
                  nextVC.currGroup = self.currGroup
              }
          }
@@ -330,6 +326,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
          
      }
     
+    // Function that retrieves events from DB to repopulate eventList for the stack
     func rePopulateEventStack() {
         //gets current group from db
         let groupRef = db.collection("Groups").document(currGroup.groupHASH)
@@ -397,35 +394,29 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         }
     }
     
+    // Function that deletes event from all attendees accepted events
     func deleteEventFromUsers(newEvent: Event){
-        for attendees in newEvent.listOfAttendees{
-            let nameRef = db.collection("Users").document(attendees)
-            nameRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let data = document.data()
-                    let eventsAttending = data!["events"] as! [String]
-                    let newEvents = eventsAttending.filter {$0 != newEvent.eventHash}
-                    self.db.collection("Users").document(attendees).updateData(["events": newEvents])
-                }
-            }
+        for attendee in newEvent.listOfAttendees {
+            db.collection("Users").document(attendee).updateData([
+                "events": FieldValue.arrayRemove([newEvent.eventHash])
+            ])
         }
     }
     
+    // Function that deletes event from group
     func deleteEventFromGroups(newEvent: Event){
-        let nameRef = db.collection("Groups").document(currGroup.groupHASH)
-        nameRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let data = document.data()
-                let events = data!["events"] as! [String]
-                let newEvents = events.filter {$0 != newEvent.eventHash}
-                self.db.collection("Groups").document(self.currGroup.groupHASH).updateData(["events": newEvents])
-            }
-        }
+        self.db.collection("Groups").document(newEvent.groupHash).updateData([
+            "events": FieldValue.arrayRemove([newEvent.eventHash])
+        ])
     }
     
     // Adds event to local list
     func addNewEvent(newEvent: Event) {
         eventList.append(newEvent)
+        // sort from longest duration, to shortest
+        eventList.sort {
+            $0.endTime > $1.endTime
+        }
         eventStack.reloadData()
     }
     
@@ -433,6 +424,10 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     func deleteEvent(event: Event) {
         if let index = eventList.firstIndex(of:event) {
             eventList.remove(at: index)
+        }
+        // sort from longest duration, to shortest
+        eventList.sort {
+            $0.endTime > $1.endTime
         }
         eventStack.reloadData()
     }
