@@ -34,6 +34,20 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setLanguage()
         setDarkMode()
+        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                self.displayPicture.image = image
+            }
+        })
+        task.resume()
     }
     
     func setLanguage(){
@@ -608,18 +622,27 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
         guard let imageData = selectedImage.pngData() else {
             return
         }
-        storage.putData(imageData, metadata: nil, completion: { _, error in
+        
+        storage.child("images/file.png").putData(imageData, metadata: nil, completion: { _, error in
             guard error == nil else {
                 print("failed to upload")
                 return
             }
+            self.storage.child("images/file.png").downloadURL(completion: {url, error in
+                guard let url = url, error == nil else {
+                    return
+                }
+                let urlString = url.absoluteString
+                print("URL String: \(urlString)")
+                UserDefaults.standard.set(urlString, forKey: "url")
+            })
         })
         self.displayPicture.image = selectedImage
-        self.displayPicture.layer.masksToBounds = true
-        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
-        self.displayPicture.clipsToBounds = true
-        self.displayPicture.layer.borderWidth = 2.0
-        self.displayPicture.layer.borderColor = UIColor.purple.cgColor
+//        self.displayPicture.layer.masksToBounds = true
+//        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
+//        self.displayPicture.clipsToBounds = true
+//        self.displayPicture.layer.borderWidth = 2.0
+//        self.displayPicture.layer.borderColor = UIColor.purple.cgColor
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
