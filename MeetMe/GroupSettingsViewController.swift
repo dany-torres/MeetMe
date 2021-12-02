@@ -99,6 +99,14 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
             group.groupName = groupNameTextField.text!
             group.groupDescr = groupDescriptionTextField.text!
     
+            // Update group name in group Events DB
+            for event in group.events {
+                let eventDB : [String: Any] = [
+                    "groupName": groupNameTextField.text!
+                ]
+                self.db.collection("Events").document(event).updateData(eventDB)
+            }
+            
             // Update group in database
             let groupDB : [String: Any] = [
                 "name": groupNameTextField.text!,
