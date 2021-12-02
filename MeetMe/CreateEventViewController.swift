@@ -211,7 +211,7 @@ class CreateEventViewController: UIViewController {
                     completion: nil)
         
         default:
-        
+            
             let otherVC = delegate as! AddNewEvent
         
             if Auth.auth().currentUser != nil {
@@ -224,12 +224,14 @@ class CreateEventViewController: UIViewController {
                     hasher.combine(locationTextField.text)
                     let hash = String(hasher.finalize())
                     
+                    self.setRGBArray(uid:uid)
+                    
                     let queue = DispatchQueue(label: "curr")
                     queue.async {
-                        while (self.currGroup == nil){
+                        while (self.currGroup == nil || self.rgbArray == []){
                             sleep(1)
                         }
-                            
+                        
                         // Create the instance object
                         DispatchQueue.main.async {
                             let eventDb : [String: Any] = [
@@ -275,7 +277,7 @@ class CreateEventViewController: UIViewController {
                              nameOfGroup: self.currGroup.groupName,
                              listOfAttendees: [uid],
                              eventHash: hash,
-                            groupHash: self.currGroup.groupHASH,
+                             groupHash: self.currGroup.groupHASH,
                              eventColor: self.rgbArray)
                             // Adds new event object locally
                            otherVC.addNewEvent(newEvent: newEvent)
@@ -287,14 +289,8 @@ class CreateEventViewController: UIViewController {
        }
    }
     
-    // Function that returns user's color
-    func getEventColor(uid:String)->[Int] {
-        setRGBArray(uid: uid)
-        print("********SET********** \(self.rgbArray)")
-        print("*******RETURN*********** \(self.rgbArray)")
-        return self.rgbArray
-    }
-    
+
+    // Function that sets RGB array to store in event db
     func setRGBArray(uid:String){
         let docRef = db.collection("Users").document(uid)
         docRef.getDocument { (document, error) in
@@ -306,9 +302,7 @@ class CreateEventViewController: UIViewController {
             if let document = document, document.exists {
                 let data = document.data()
                 if let data = data {
-//                    print("data", data)
                     self.rgbArray = data["rgb"] as! [Int]
-                    print("********SET********** \(self.rgbArray)")
                 }
             }
         }

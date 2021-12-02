@@ -44,7 +44,9 @@ class Event{
         self.listOfAttendees = listOfAttendees
         self.eventHash = eventHash
         self.groupHash = groupHash
-        self.eventColor = [216, 180, 252]
+        self.eventColor = eventColor
+    }
+    
     func printEventDetails()-> String{
         let cellEventDetails = " \(startTime) : \(eventName) @ \(location)"
         return cellEventDetails

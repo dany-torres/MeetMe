@@ -128,7 +128,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         let indexPath = self.eventStack.indexPath(for: cell)
         let cell = eventStack.cellForRow(at: indexPath!) as! StackTableViewCell
         currCell = cell
-//        print("******GOT HERE \(currCell.time.text)")
     }
     
     // Check if the second event button was clicked
@@ -137,7 +136,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         let indexPath = self.eventStack.indexPath(for: cell)
         let cell = eventStack.cellForRow(at: indexPath!) as! StackTableViewCell
         currCell = cell
-//        print("******GOT HERE \(currCell.time.text)")
     }
     
     // Check if the third event button was clicked
@@ -146,7 +144,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         let indexPath = self.eventStack.indexPath(for: cell)
         let cell = eventStack.cellForRow(at: indexPath!) as! StackTableViewCell
         currCell = cell
-//        print("******GOT HERE \(currCell.time.text)")
     }
     
     // Get hour to the nearest half hour
@@ -197,9 +194,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     }
     
     func getColor(rgbArray:[Int]) -> UIColor {
-        let red:CGFloat = CGFloat(rgbArray[0]/255)
-        let green:CGFloat = CGFloat(rgbArray[1]/255)
-        let blue:CGFloat = CGFloat(rgbArray[2]/255)
+        let red:CGFloat = CGFloat(rgbArray[0])/CGFloat(255)
+        let green:CGFloat = CGFloat(rgbArray[1])/CGFloat(255)
+        let blue:CGFloat = CGFloat(rgbArray[2])/CGFloat(255)
         return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
@@ -266,30 +263,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         
         return eventsAtTime
     }
-    
-//    func getEventColor(event:Event)->UIColor {
-//        var rgbArray:[Int] = []
-//        let uid = event.eventCreator
-//        let docRef = db.collection("Users").document(uid)
-//        docRef.getDocument { (document, error) in
-//            guard error == nil else {
-//                print("error", error ?? "")
-//                return
-//            }
-//
-//            if let document = document, document.exists {
-//                let data = document.data()
-//                if let data = data {
-//                    print("data", data)
-//                    rgbArray = data["rgb"] as! [Int]
-//                }
-//            }
-//        }
-//        let red:CGFloat = CGFloat(rgbArray[0]/255)
-//        let green:CGFloat = CGFloat(rgbArray[1]/255)
-//        let blue:CGFloat = CGFloat(rgbArray[2]/255)
-//        return UIColor(red: red, green: green, blue: blue, alpha: 1)
-//    }
 
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -382,8 +355,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                                                  listOfAttendees: eventData!["attendees"] as! [String],
                                                  eventHash: eventData!["uid"] as! String,
                                                  groupHash: eventData!["groupHash"] as! String,
-                                                 eventColor: eventData!["rgb"] as! [Int]
-                            )
+                                                 eventColor: eventData!["eventColor"] as! [Int]
+                                            )
                             
                             let today = Date()
                             let weekday = Calendar.current.component(.weekday, from: today)
