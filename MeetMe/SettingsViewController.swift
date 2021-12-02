@@ -23,7 +23,11 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextFields()
-        
+        self.displayPicture.layer.masksToBounds = true
+        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
+        self.displayPicture.clipsToBounds = true
+        self.displayPicture.layer.borderWidth = 2.0
+        self.displayPicture.layer.borderColor = UIColor.purple.cgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -600,6 +604,11 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
             return
         }
         self.displayPicture.image = selectedImage
+        self.displayPicture.layer.masksToBounds = true
+        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
+        self.displayPicture.clipsToBounds = true
+        self.displayPicture.layer.borderWidth = 2.0
+        self.displayPicture.layer.borderColor = UIColor.purple.cgColor
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
