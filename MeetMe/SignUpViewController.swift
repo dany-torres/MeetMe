@@ -110,7 +110,8 @@ class SignUpViewController: UIViewController {
                                             "groupsMuted": [],
                                             "friends": [],
                                             "friendRequests": [],
-                                            "events": []
+                                            "events": [],
+                                            "rgb": self.getRandomColor()
                                         ]
                                         self.db.collection("Users").document(uid).setData(userDb)
                                     }
@@ -132,6 +133,13 @@ class SignUpViewController: UIViewController {
         }
         
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func getRandomColor() -> [Int] {
+        let colors:[[Int]] = [[232,31,99], [194,24,91], [156,39,177],
+                              [86,39,176],[38,42,175], [38,107,175],
+                              [87,173,222], [88,220,189], [97,197,139]]
+        return colors.randomElement()!
     }
     
     /*

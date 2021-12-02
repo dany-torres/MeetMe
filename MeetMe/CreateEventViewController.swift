@@ -33,6 +33,7 @@ class CreateEventViewController: UIViewController {
 //    var hashGroup: String!
 //    var nameGroup: String!
     var currGroup: Group!
+    var rgbArray:[Int] = []
     
     var delegate: UIViewController!
     
@@ -246,11 +247,13 @@ class CreateEventViewController: UIViewController {
                                 "groupName": self.currGroup.groupName,
                                 "location": self.locationTextField.text!,
                                 "attendees": [uid],
-                                "groupHash": self.currGroup.groupHASH
+                                "groupHash": self.currGroup.groupHASH,
+                                "eventColor": self.rgbArray
                             ]
                             // Adds new event to Events db
                             self.db.collection("Events").document(hash).setData(eventDb)
                         }
+                        
                         // Adds new event to list of events in current group
                         self.db.collection("Groups").document(self.currGroup.groupHASH).updateData(["events": FieldValue.arrayUnion([hash])])
                         // Adds new event to list of events in current user
@@ -272,7 +275,8 @@ class CreateEventViewController: UIViewController {
                              nameOfGroup: self.currGroup.groupName,
                              listOfAttendees: [uid],
                              eventHash: hash,
-                            groupHash: self.currGroup.groupHASH)
+                            groupHash: self.currGroup.groupHASH,
+                             eventColor: self.rgbArray)
                             // Adds new event object locally
                            otherVC.addNewEvent(newEvent: newEvent)
                        }
@@ -282,6 +286,33 @@ class CreateEventViewController: UIViewController {
             }
        }
    }
+    
+    // Function that returns user's color
+    func getEventColor(uid:String)->[Int] {
+        setRGBArray(uid: uid)
+        print("********SET********** \(self.rgbArray)")
+        print("*******RETURN*********** \(self.rgbArray)")
+        return self.rgbArray
+    }
+    
+    func setRGBArray(uid:String){
+        let docRef = db.collection("Users").document(uid)
+        docRef.getDocument { (document, error) in
+            guard error == nil else {
+                print("error", error ?? "")
+                return
+            }
+
+            if let document = document, document.exists {
+                let data = document.data()
+                if let data = data {
+//                    print("data", data)
+                    self.rgbArray = data["rgb"] as! [Int]
+                    print("********SET********** \(self.rgbArray)")
+                }
+            }
+        }
+    }
                                
     
     @IBAction func startTimeChosen(_ sender: Any) {

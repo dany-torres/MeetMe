@@ -192,7 +192,15 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             cell.event1.text = event.eventName
         }
         cell.eventOne = event
-        cell.event1.backgroundColor = getEventColor(event: event)
+        
+        cell.event1.backgroundColor = getColor(rgbArray: event.eventColor)
+    }
+    
+    func getColor(rgbArray:[Int]) -> UIColor {
+        let red:CGFloat = CGFloat(rgbArray[0]/255)
+        let green:CGFloat = CGFloat(rgbArray[1]/255)
+        let blue:CGFloat = CGFloat(rgbArray[2]/255)
+        return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
     // Set the second event block
@@ -202,7 +210,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             cell.event2.text = event.eventName
         }
         cell.eventTwo = event
-        cell.event2.backgroundColor = getEventColor(event: event)
+        cell.event2.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
     // Set the third event block
@@ -212,7 +220,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             cell.event3.text = event.eventName
         }
         cell.eventThree = [event]
-        cell.event3.backgroundColor = getEventColor(event: event)
+        cell.event3.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
     // Set the third event block when there are more events
@@ -259,41 +267,29 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         return eventsAtTime
     }
     
-    func getEventColor(event:Event)->UIColor {
-        var red:CGFloat? = 0
-        var blue:CGFloat? = 0
-        var green:CGFloat? = 0
-        let uid = event.eventCreator
-        let docRef = db.collection("Users").document(uid)
-        docRef.getDocument { (document, error) in
-            guard error == nil else {
-                print("error", error ?? "")
-                return
-            }
-
-            if let document = document, document.exists {
-                let data = document.data()
-                if let data = data {
-                    let rConv = data["red"]
-                    if let rV = Double(rConv as! Substring) {
-                        red = CGFloat(rV)
-                    }
-                    let gConv = data["green"]
-                    if let gV = Double(gConv as! Substring) {
-                        green = CGFloat(gV)
-                    }
-                    let bConv = data["blue"]
-                    if let bV = Double(bConv as! Substring) {
-                        blue = CGFloat(bV)
-                    }
-                }
-            }
-        }
-        print("red: \(red)")
-        print("green: \(green)")
-        print("blue: \(blue)")
-        return UIColor(red: red!, green: green!, blue: blue!, alpha: 1)
-    }
+//    func getEventColor(event:Event)->UIColor {
+//        var rgbArray:[Int] = []
+//        let uid = event.eventCreator
+//        let docRef = db.collection("Users").document(uid)
+//        docRef.getDocument { (document, error) in
+//            guard error == nil else {
+//                print("error", error ?? "")
+//                return
+//            }
+//
+//            if let document = document, document.exists {
+//                let data = document.data()
+//                if let data = data {
+//                    print("data", data)
+//                    rgbArray = data["rgb"] as! [Int]
+//                }
+//            }
+//        }
+//        let red:CGFloat = CGFloat(rgbArray[0]/255)
+//        let green:CGFloat = CGFloat(rgbArray[1]/255)
+//        let blue:CGFloat = CGFloat(rgbArray[2]/255)
+//        return UIColor(red: red, green: green, blue: blue, alpha: 1)
+//    }
 
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -385,7 +381,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                                                  nameOfGroup: eventData!["groupName"] as! String,
                                                  listOfAttendees: eventData!["attendees"] as! [String],
                                                  eventHash: eventData!["uid"] as! String,
-                                                 groupHash: eventData!["groupHash"] as! String
+                                                 groupHash: eventData!["groupHash"] as! String,
+                                                 eventColor: eventData!["rgb"] as! [Int]
                             )
                             
                             let today = Date()
@@ -449,9 +446,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     func addNewEvent(newEvent: Event) {
         eventList.append(newEvent)
         eventStack.reloadData()
-//        for event in eventList{
-//            print(event.eventName)
-//        }
     }
     
     func updateGroup(group: Group) {

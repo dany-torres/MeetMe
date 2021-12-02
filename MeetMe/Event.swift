@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Event{
     
@@ -24,8 +25,9 @@ class Event{
     var listOfAttendees:[String] = []
     var eventHash: String
     var groupHash: String
+    var eventColor: [Int] = []
     
-    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String, groupHash: String){
+    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, polls: Bool, messages: Bool, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String, groupHash: String, eventColor:[Int]){
         
         self.eventName = eventName
         self.eventDate = eventDate
@@ -42,8 +44,7 @@ class Event{
         self.listOfAttendees = listOfAttendees
         self.eventHash = eventHash
         self.groupHash = groupHash
-    }
-    
+        self.eventColor = [216, 180, 252]
     func printEventDetails()-> String{
         let cellEventDetails = " \(startTime) : \(eventName) @ \(location)"
         return cellEventDetails

@@ -378,7 +378,8 @@ class SettingsViewController: UIViewController {
                                                          nameOfGroup: eventData!["groupName"] as! String,
                                                          listOfAttendees: eventData!["attendees"] as! [String],
                                                          eventHash: eventData!["uid"] as! String,
-                                                         groupHash: eventData!["groupHash"] as! String
+                                                         groupHash: eventData!["groupHash"] as! String,
+                                                         eventColor: eventData!["eventColor"] as! [Int]
                                     )
                                     //delete event from all user accepted
                                     self.deleteEventFromUsers(newEvent: newEvent)
