@@ -49,9 +49,6 @@ class GroupCreationViewController: UIViewController, addFriends {
         
     }
     
-    @IBAction func inviteLinkButtonPressed(_ sender: Any) {
-        
-    }
     
     @IBAction func createButtonPressed(_ sender: Any) {
         let currentName:String = groupNameTextField.text!
@@ -74,7 +71,6 @@ class GroupCreationViewController: UIViewController, addFriends {
                         "admin": adminRun,
                         "creator": uid,
                         "description": groupDescriptionTextField.text!,
-                        "inviteLink": "",
                         "peopleInGroup": members,
                         "events": []
                     ]

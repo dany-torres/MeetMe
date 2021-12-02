@@ -126,7 +126,9 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             event!.listOfAttendees.append(Auth.auth().currentUser!.uid)
             
             // Add event to user accepted events array
-            self.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData(["events": FieldValue.arrayUnion([event!.eventHash])])
+            self.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+                "events": FieldValue.arrayUnion([event!.eventHash])
+            ])
             
             // New Button Text
             myNormalAttributedTitle = NSAttributedString(string: "Unjoin",
@@ -174,11 +176,21 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     // Function to delete event
     @IBAction func deleteButtonPressed(_ sender: Any) {
         // Delete event from all attendees accepted events
+        for attendee in event!.listOfAttendees {
+            self.db.collection("Users").document(attendee).updateData([
+                "events": FieldValue.arrayRemove([event!.eventHash])
+            ])
+        }
         
         // Delete event from Group
+        self.db.collection("Groups").document(event!.groupHash).updateData([
+            "events": FieldValue.arrayRemove([event!.eventHash])
+        ])
         
         // Delete event from Events DB collection
+        self.db.collection("Events").document(event!.eventHash).delete()
         
+        // TODO: hacer que se regrese al group stack y que se reloadee
         
     }
     

@@ -17,7 +17,6 @@ class Group{
     
     var members: [String] = [] //add creator to list
     var events: [String] = []
-    var inviteLink: String = String()
     var groupPicture: String = ""
     
     init(){
@@ -34,13 +33,8 @@ class Group{
             groupName = newName
         }
     }
-     //INVITE LINK
-    func createInviteLink()->String{
-        inviteLink = "Test_invite_link"
-        return inviteLink
-    }
     
-    //PICTURE
+    //TODO: PICTURE
     func changeGroupPicture(){
         
     }

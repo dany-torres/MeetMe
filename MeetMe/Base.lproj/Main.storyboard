@@ -1258,39 +1258,6 @@
                                     <action selector="adminRunSegCtrl:" destination="Lxf-oT-TQw" eventType="valueChanged" id="GUQ-3s-X3T"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsB-Uy-lHD">
-                                <rect key="frame" x="83" y="593" width="110" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="Qwr-4x-v7L"/>
-                                    <constraint firstAttribute="width" constant="110" id="hYW-4P-LUV"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Add Friends">
-                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="addFriendsButtonPressed:" destination="Lxf-oT-TQw" eventType="touchUpInside" id="6uT-l8-RR5"/>
-                                    <segue destination="3AQ-8R-Tax" kind="show" identifier="AddFriendsSegue" id="wSe-l3-ryt"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3D-6M-Tc3">
-                                <rect key="frame" x="221" y="593" width="110" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="iKz-8B-T98"/>
-                                    <constraint firstAttribute="width" constant="110" id="mNf-QY-GCo"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Invite Link">
-                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="inviteLinkButtonPressed:" destination="Lxf-oT-TQw" eventType="touchUpInside" id="tCw-Qd-NKt"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZ0-d3-Cng" userLabel="Camera">
                                 <rect key="frame" x="249.5" y="280" width="32" height="35"/>
                                 <constraints>
@@ -1357,6 +1324,23 @@
                                     <segue destination="fup-V8-17t" kind="show" identifier="CreateGroupSegue" id="jrk-Lf-LFT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsB-Uy-lHD">
+                                <rect key="frame" x="152" y="593" width="110" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Qwr-4x-v7L"/>
+                                    <constraint firstAttribute="width" constant="110" id="hYW-4P-LUV"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Add Friends">
+                                    <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" red="0.64074325560000001" green="0.43403863910000001" blue="0.96475583310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addFriendsButtonPressed:" destination="Lxf-oT-TQw" eventType="touchUpInside" id="6uT-l8-RR5"/>
+                                    <segue destination="3AQ-8R-Tax" kind="show" identifier="AddFriendsSegue" id="wSe-l3-ryt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TNe-jM-hPq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1364,11 +1348,11 @@
                             <constraint firstItem="iBu-V4-U10" firstAttribute="centerX" secondItem="TNe-jM-hPq" secondAttribute="centerX" id="3k1-no-58u"/>
                             <constraint firstItem="luX-Ce-a8F" firstAttribute="top" secondItem="a29-fZ-Shx" secondAttribute="bottom" constant="28" id="5jI-z7-j2v"/>
                             <constraint firstItem="MZ0-d3-Cng" firstAttribute="leading" secondItem="TNe-jM-hPq" secondAttribute="leading" constant="249.5" id="6e8-Dc-04f"/>
+                            <constraint firstItem="AsB-Uy-lHD" firstAttribute="centerX" secondItem="TNe-jM-hPq" secondAttribute="centerX" id="9rc-9C-sTE"/>
                             <constraint firstItem="a29-fZ-Shx" firstAttribute="centerX" secondItem="TNe-jM-hPq" secondAttribute="centerX" id="ABl-Nf-oUl"/>
                             <constraint firstItem="wsI-lN-Sn9" firstAttribute="top" secondItem="12y-E9-A6A" secondAttribute="bottom" constant="52" id="DKa-Q8-bsn"/>
                             <constraint firstItem="a29-fZ-Shx" firstAttribute="top" secondItem="TNe-jM-hPq" secondAttribute="top" constant="96" id="EQt-nk-xWu"/>
                             <constraint firstItem="iBu-V4-U10" firstAttribute="top" secondItem="TNe-jM-hPq" secondAttribute="top" constant="578" id="Eeq-nc-Vec"/>
-                            <constraint firstItem="TNe-jM-hPq" firstAttribute="trailing" secondItem="J3D-6M-Tc3" secondAttribute="trailing" constant="83" id="Hu6-FM-tSF"/>
                             <constraint firstItem="SYq-ZI-zYU" firstAttribute="top" secondItem="luX-Ce-a8F" secondAttribute="bottom" constant="41" id="MfH-rX-Gto"/>
                             <constraint firstItem="SYq-ZI-zYU" firstAttribute="leading" secondItem="12y-E9-A6A" secondAttribute="leading" id="NNO-Fe-kVQ"/>
                             <constraint firstItem="SYq-ZI-zYU" firstAttribute="leading" secondItem="TNe-jM-hPq" secondAttribute="leading" constant="78" id="P84-b3-Vte"/>
@@ -1377,7 +1361,6 @@
                             <constraint firstItem="TNe-jM-hPq" firstAttribute="trailing" secondItem="12y-E9-A6A" secondAttribute="trailing" constant="78" id="Z77-lq-AbA"/>
                             <constraint firstItem="AsB-Uy-lHD" firstAttribute="top" secondItem="wsI-lN-Sn9" secondAttribute="bottom" constant="40" id="aZF-PE-6R7"/>
                             <constraint firstItem="TNe-jM-hPq" firstAttribute="trailing" secondItem="Lt0-Ta-jpq" secondAttribute="trailing" constant="259" id="bSx-rS-JR3"/>
-                            <constraint firstItem="J3D-6M-Tc3" firstAttribute="top" secondItem="wsI-lN-Sn9" secondAttribute="bottom" constant="40" id="eI9-J7-NNv"/>
                             <constraint firstItem="Lt0-Ta-jpq" firstAttribute="top" secondItem="12y-E9-A6A" secondAttribute="bottom" constant="24" id="ecb-ri-4AB"/>
                             <constraint firstItem="TNe-jM-hPq" firstAttribute="trailing" secondItem="SYq-ZI-zYU" secondAttribute="trailing" constant="245" id="hVP-56-n9e"/>
                             <constraint firstItem="12y-E9-A6A" firstAttribute="leading" secondItem="TNe-jM-hPq" secondAttribute="leading" constant="78" id="jut-jj-Vrx"/>
@@ -1386,7 +1369,6 @@
                             <constraint firstItem="Lt0-Ta-jpq" firstAttribute="leading" secondItem="wsI-lN-Sn9" secondAttribute="leading" id="sRu-oY-535"/>
                             <constraint firstItem="TNe-jM-hPq" firstAttribute="trailing" secondItem="MZ0-d3-Cng" secondAttribute="trailing" constant="132.5" id="suH-Ca-ySI"/>
                             <constraint firstItem="12y-E9-A6A" firstAttribute="top" secondItem="SYq-ZI-zYU" secondAttribute="bottom" constant="8" symbolic="YES" id="uWK-vM-AZE"/>
-                            <constraint firstItem="AsB-Uy-lHD" firstAttribute="leading" secondItem="TNe-jM-hPq" secondAttribute="leading" constant="83" id="upz-6L-l9d"/>
                             <constraint firstItem="12y-E9-A6A" firstAttribute="top" secondItem="luX-Ce-a8F" secondAttribute="bottom" constant="69" id="wuO-aF-od4"/>
                             <constraint firstItem="MZ0-d3-Cng" firstAttribute="top" secondItem="TNe-jM-hPq" secondAttribute="top" constant="192" id="zLt-ZR-PVq"/>
                             <constraint firstItem="SYq-ZI-zYU" firstAttribute="top" secondItem="TNe-jM-hPq" secondAttribute="top" constant="317" id="zbr-sI-Jj3"/>
@@ -2478,9 +2460,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="SEN-5B-iHA"/>
-        <segue reference="GOP-4q-Ftn"/>
+        <segue reference="wSe-l3-ryt"/>
         <segue reference="WvW-sU-lMF"/>
-        <segue reference="1iG-eE-u3p"/>
+        <segue reference="jrk-Lf-LFT"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
