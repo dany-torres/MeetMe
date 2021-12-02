@@ -12,12 +12,17 @@ protocol AddNewEvent {
     func addNewEvent(newEvent: Event)
 }
 
+protocol DeleteEvent {
+    func deleteEvent(event: Event)
+}
+
 protocol UpdateGroup {
     func updateGroup(group: Group)
 }
 
 class GroupStackViewController: UIViewController, UITableViewDataSource,
-                                    UITableViewDelegate, AddNewEvent, UpdateGroup, MyStackCellDelegate {
+                                    UITableViewDelegate, AddNewEvent, DeleteEvent,
+                                    UpdateGroup, MyStackCellDelegate {
     public var eventList:[Event] = []
     var delegate: UITableView!
     var currGroup: Group!
@@ -418,11 +423,21 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         }
     }
     
+    // Adds event to local list
     func addNewEvent(newEvent: Event) {
         eventList.append(newEvent)
         eventStack.reloadData()
     }
     
+    // Deletes event from local list
+    func deleteEvent(event: Event) {
+        if let index = eventList.firstIndex(of:event) {
+            eventList.remove(at: index)
+        }
+        eventStack.reloadData()
+    }
+    
+    // Updates currGroup to get the new edits set
     func updateGroup(group: Group) {
         currGroup = group
         let myNormalAttributedTitle = NSAttributedString(string: self.currGroup.groupName,

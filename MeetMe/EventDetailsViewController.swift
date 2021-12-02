@@ -190,7 +190,12 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         // Delete event from Events DB collection
         self.db.collection("Events").document(event!.eventHash).delete()
         
-        // TODO: hacer que se regrese al group stack y que se reloadee
+        // Delete event locally with protocol
+        let otherVC = delegate as! DeleteEvent
+        otherVC.deleteEvent(event: self.event!)
+        
+        // Automatically go back to group stack
+        _ = navigationController?.popViewController(animated: true)
         
     }
     

@@ -187,24 +187,10 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fz0-7h-Osl">
                                                     <rect key="frame" x="109" y="38" width="217" height="21"/>
-                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JO4-Tc-eSF">
-                                                    <rect key="frame" x="18" y="9" width="51" height="51"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="51" id="ldQ-bg-8gs"/>
-                                                        <constraint firstAttribute="height" constant="51" id="pea-1T-E8Z"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PngItem_5067891" translatesAutoresizingMaskIntoConstraints="NO" id="GAq-r3-zIC">
-                                                    <rect key="frame" x="76" y="22" width="25" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="25" id="IOd-mZ-Gd2"/>
-                                                        <constraint firstAttribute="height" constant="25" id="kVb-GR-lLA"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="35426" translatesAutoresizingMaskIntoConstraints="NO" id="CYp-GD-LVV">
                                                     <rect key="frame" x="346" y="21" width="30" height="27"/>
                                                     <constraints>
@@ -212,17 +198,22 @@
                                                         <constraint firstAttribute="width" constant="30" id="hIu-3Y-RkZ"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PngItem_5067891" translatesAutoresizingMaskIntoConstraints="NO" id="JO4-Tc-eSF">
+                                                    <rect key="frame" x="37" y="9" width="51" height="51"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="51" id="ldQ-bg-8gs"/>
+                                                        <constraint firstAttribute="height" constant="51" id="pea-1T-E8Z"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="E4D-k4-62Z" firstAttribute="leading" secondItem="JO4-Tc-eSF" secondAttribute="trailing" constant="21" id="3TH-h0-QUB"/>
+                                                <constraint firstItem="JO4-Tc-eSF" firstAttribute="leading" secondItem="IJf-xT-jh6" secondAttribute="leading" constant="37" id="6zl-bE-aho"/>
                                                 <constraint firstItem="E4D-k4-62Z" firstAttribute="top" secondItem="IJf-xT-jh6" secondAttribute="top" constant="9" id="9Y7-Bx-g76"/>
                                                 <constraint firstItem="JO4-Tc-eSF" firstAttribute="top" secondItem="IJf-xT-jh6" secondAttribute="top" constant="9" id="CvK-Jf-Nwt"/>
-                                                <constraint firstItem="JO4-Tc-eSF" firstAttribute="leading" secondItem="IJf-xT-jh6" secondAttribute="leading" constant="18" id="FM5-ir-rbh"/>
-                                                <constraint firstItem="GAq-r3-zIC" firstAttribute="leading" secondItem="JO4-Tc-eSF" secondAttribute="trailing" constant="7" id="J4X-Qp-9Tx"/>
-                                                <constraint firstItem="E4D-k4-62Z" firstAttribute="leading" secondItem="GAq-r3-zIC" secondAttribute="trailing" constant="8" symbolic="YES" id="N38-TE-bLp"/>
                                                 <constraint firstItem="CYp-GD-LVV" firstAttribute="top" secondItem="IJf-xT-jh6" secondAttribute="top" constant="21" id="Q7A-Lp-ze8"/>
-                                                <constraint firstItem="fz0-7h-Osl" firstAttribute="leading" secondItem="GAq-r3-zIC" secondAttribute="trailing" constant="8" symbolic="YES" id="rLV-Xw-3y2"/>
-                                                <constraint firstItem="GAq-r3-zIC" firstAttribute="top" secondItem="IJf-xT-jh6" secondAttribute="top" constant="22" id="s6x-Ce-FQ7"/>
-                                                <constraint firstItem="fz0-7h-Osl" firstAttribute="top" secondItem="E4D-k4-62Z" secondAttribute="bottom" constant="8" symbolic="YES" id="uJ0-3G-p6z"/>
+                                                <constraint firstItem="fz0-7h-Osl" firstAttribute="top" secondItem="E4D-k4-62Z" secondAttribute="bottom" constant="6" id="ihP-NL-fnj"/>
+                                                <constraint firstItem="fz0-7h-Osl" firstAttribute="leading" secondItem="JO4-Tc-eSF" secondAttribute="trailing" constant="21" id="rjP-OU-g1j"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration">
@@ -236,7 +227,6 @@
                                             <outlet property="groupImage" destination="JO4-Tc-eSF" id="nC9-aY-PCt"/>
                                             <outlet property="groupName" destination="E4D-k4-62Z" id="zzE-cx-KBQ"/>
                                             <outlet property="muteLabel" destination="CYp-GD-LVV" id="Gxw-kV-JWB"/>
-                                            <outlet property="notificationLabel" destination="GAq-r3-zIC" id="hnr-QY-0IY"/>
                                             <segue destination="fup-V8-17t" kind="show" identifier="GroupSegue" id="1iG-eE-u3p"/>
                                         </connections>
                                     </tableViewCell>
@@ -2462,7 +2452,7 @@
         <segue reference="SEN-5B-iHA"/>
         <segue reference="wSe-l3-ryt"/>
         <segue reference="WvW-sU-lMF"/>
-        <segue reference="jrk-Lf-LFT"/>
+        <segue reference="1iG-eE-u3p"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

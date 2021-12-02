@@ -51,6 +51,11 @@ class Event{
         let cellEventDetails = " \(startTime) : \(eventName) @ \(location)"
         return cellEventDetails
     }
-    
-    
+}
+
+extension Event: Equatable {
+    static func == (lhs: Event, rhs: Event) -> Bool {
+        return
+            lhs.eventHash == rhs.eventHash
+    }
 }
