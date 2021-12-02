@@ -19,16 +19,42 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var mode: UISegmentedControl!
     
     let db = Firestore.firestore()
+    let storage = Storage.storage().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextFields()
-        
+        self.displayPicture.layer.masksToBounds = true
+        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
+        self.displayPicture.clipsToBounds = true
+        self.displayPicture.layer.borderWidth = 2.0
+        self.displayPicture.layer.borderColor = UIColor.purple.cgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setLanguage()
         setDarkMode()
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+                      let url = URL(string: urlString) else {
+                          return
+                      }
+                let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: data)
+                        self.displayPicture.image = image
+                    }
+                })
+                task.resume()
+            }
+        }
+        
     }
     
     func setLanguage(){
@@ -105,6 +131,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func cameraButtonPressed(_ sender: Any) {
+        presentPhotoActionSheet()
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
@@ -561,5 +588,83 @@ class PrivateBundle: Bundle {
     override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
         let bundle: Bundle? = objc_getAssociatedObject(self, &associatedLanguageBundle) as? Bundle
         return (bundle != nil) ? (bundle!.localizedString(forKey: key, value: value, table: tableName)) : (super.localizedString(forKey: key, value: value, table: tableName))
+    }
+}
+
+extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func presentPhotoActionSheet() {
+        let actionSheet = UIAlertController(title: "Profile Picture", message: "How would you like to select a picture?", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Take photo", style: .default, handler: { [weak self] _ in
+            self?.presentCamera()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Choose photo", style: .default, handler: { [weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+        present(actionSheet, animated: true)
+    }
+    
+    func presentCamera() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func presentPhotoPicker() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        
+        guard let imageData = selectedImage.pngData() else {
+            return
+        }
+        
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                storage.child("images/\(uid).png").putData(imageData, metadata: nil, completion: { _, error in
+                    guard error == nil else {
+                        print("failed to upload")
+                        return
+                    }
+                    self.storage.child("images/\(uid).png").downloadURL(completion: {url, error in
+                        guard let url = url, error == nil else {
+                            return
+                        }
+                        let urlString = url.absoluteString
+                        
+                        DispatchQueue.main.async {
+                            self.displayPicture.image = selectedImage
+                        }
+                        
+                        print("URL String: \(urlString)")
+                        UserDefaults.standard.set(urlString, forKey: uid)
+                    })
+                })
+                self.displayPicture.image = selectedImage
+            }
+        }
+        
+        
+//        self.displayPicture.layer.masksToBounds = true
+//        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
+//        self.displayPicture.clipsToBounds = true
+//        self.displayPicture.layer.borderWidth = 2.0
+//        self.displayPicture.layer.borderColor = UIColor.purple.cgColor
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
