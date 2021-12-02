@@ -34,20 +34,27 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setLanguage()
         setDarkMode()
-        guard let urlString = UserDefaults.standard.value(forKey: "url") as? String,
-              let url = URL(string: urlString) else {
-                  return
-              }
-        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
-            guard let data = data, error == nil else {
-                return
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+                      let url = URL(string: urlString) else {
+                          return
+                      }
+                let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: data)
+                        self.displayPicture.image = image
+                    }
+                })
+                task.resume()
             }
-            DispatchQueue.main.async {
-                let image = UIImage(data: data)
-                self.displayPicture.image = image
-            }
-        })
-        task.resume()
+        }
+        
     }
     
     func setLanguage(){
@@ -623,26 +630,34 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
             return
         }
         
-        storage.child("images/file.png").putData(imageData, metadata: nil, completion: { _, error in
-            guard error == nil else {
-                print("failed to upload")
-                return
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                storage.child("images/\(uid).png").putData(imageData, metadata: nil, completion: { _, error in
+                    guard error == nil else {
+                        print("failed to upload")
+                        return
+                    }
+                    self.storage.child("images/\(uid).png").downloadURL(completion: {url, error in
+                        guard let url = url, error == nil else {
+                            return
+                        }
+                        let urlString = url.absoluteString
+                        
+                        DispatchQueue.main.async {
+                            self.displayPicture.image = selectedImage
+                        }
+                        
+                        print("URL String: \(urlString)")
+                        UserDefaults.standard.set(urlString, forKey: uid)
+                    })
+                })
+                self.displayPicture.image = selectedImage
             }
-            self.storage.child("images/file.png").downloadURL(completion: {url, error in
-                guard let url = url, error == nil else {
-                    return
-                }
-                let urlString = url.absoluteString
-                
-                DispatchQueue.main.async {
-                    self.displayPicture.image = selectedImage
-                }
-                
-                print("URL String: \(urlString)")
-                UserDefaults.standard.set(urlString, forKey: "url")
-            })
-        })
-        self.displayPicture.image = selectedImage
+        }
+        
+        
 //        self.displayPicture.layer.masksToBounds = true
 //        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
 //        self.displayPicture.clipsToBounds = true
