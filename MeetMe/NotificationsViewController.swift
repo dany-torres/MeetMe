@@ -77,7 +77,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         let name = friendReqData!["name"] as! String
                                         let username = friendReqData!["username"] as! String
                                         let hash = friendReqData!["uid"] as! String
-                                        let newFriendReq = User(name: name, username: username, hash: hash)
+                                        let location = friendReqData!["location"] as! String
+                                        let image = friendReqData!["img"] as! String
+                                        let newFriendReq = User(name: name, username: username, hash: hash, location: location, image: image)
                                         self.friendRequesList.append(newFriendReq)
                                         self.friendRequestTableView.reloadData()
                                         print(name)

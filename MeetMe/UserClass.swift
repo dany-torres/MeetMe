@@ -12,11 +12,15 @@ class User{
     let name: String
     let username: String
     let hash: String
+    let location: String
+    let image: String
     
-    init(name: String, username: String, hash: String){
+    init(name: String, username: String, hash: String, location: String, image: String){
         self.name = name
         self.username = username
         self.hash = hash
+        self.location = location
+        self.image = image
     }
 //    String Username
 //    String Location

@@ -38,7 +38,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let name = data["name"] as! String
                     let username = data["username"] as! String
                     let hash = data["uid"] as! String
-                    let newUser = User(name: name, username: username, hash: hash)
+                    let location = data["location"] as! String
+                    let image = data["img"] as? String ?? ""
+                    let newUser = User(name: name, username: username, hash: hash, location: location, image: image)
 //                    self.usersList.append(newUser)
 //                    self.resultsTableView.reloadData()
                     if Auth.auth().currentUser != nil {
@@ -89,7 +91,33 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let row = indexPath.row
         let searchedUser = usersList[row]
         cell.nameLabel.text = searchedUser.name
-        cell.usernameLabel.text = searchedUser.username
+        cell.usernameLabel.text = "@" + searchedUser.username
+        cell.locationLabel.text = searchedUser.location
+        
+        // Make image a circle
+        cell.userImage.layer.borderWidth = 1
+        cell.userImage.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        cell.userImage.layer.cornerRadius = cell.userImage.frame.height/2
+        cell.userImage.clipsToBounds = true
+        
+        // Set Picture
+        let uid = searchedUser.hash
+        let urlString = UserDefaults.standard.value(forKey: uid) as? String
+        if urlString != nil {
+            let url = URL(string: urlString!)
+            let task = URLSession.shared.dataTask(with: url!, completionHandler: { data, _, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data)
+                    cell.userImage.image = image
+                }
+            })
+            task.resume()
+        }
+        
+        
         
         //check cases and update button label
         //case 1: searched user is in friendreq list && not in friends list -> button label: requested
@@ -135,6 +163,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
+
     
     //when button is clicked, add the uid of curr user to clicked users friend request list
     //when loading the table view, we want to set the title of the button based on wether the searched user is in
