@@ -24,11 +24,12 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextFields()
-        self.displayPicture.layer.masksToBounds = true
-        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
-        self.displayPicture.clipsToBounds = true
-        self.displayPicture.layer.borderWidth = 2.0
-        self.displayPicture.layer.borderColor = UIColor.purple.cgColor
+        
+        // Make image a circle
+        displayPicture.layer.borderWidth = 1
+        displayPicture.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        displayPicture.layer.cornerRadius = displayPicture.frame.height/2
+        displayPicture.clipsToBounds = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -398,8 +399,6 @@ class SettingsViewController: UIViewController {
                                                          location: eventData!["location"] as! String,
                                                          notifications: eventData!["notifications"] as! Bool,
                                                          reminderChoice: eventData!["reminderChoice"] as! String,
-                                                         polls: eventData!["polls"] as! Bool,
-                                                         messages: eventData!["messages"] as! Bool,
                                                          editEvents: eventData!["editable"] as! Bool,
                                                          eventCreator: eventData!["creator"] as! String,
                                                          nameOfGroup: eventData!["groupName"] as! String,

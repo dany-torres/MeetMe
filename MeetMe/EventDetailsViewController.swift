@@ -32,13 +32,38 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        editButton.isHidden = true
-        saveButton.isHidden = true
-        deleteButton.isHidden = true
         
         attendeesTableView.delegate = self
         attendeesTableView.dataSource = self
         
+        // Set default settings
+        editButton.isHidden = true
+        saveButton.isHidden = true
+        deleteButton.isHidden = true
+        
+        // Make image a circle
+        eventCreatorPicture.layer.borderWidth = 1
+        eventCreatorPicture.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        eventCreatorPicture.layer.cornerRadius = eventCreatorPicture.frame.height/2
+        eventCreatorPicture.clipsToBounds = true
+        
+        // Set Picture
+        let uid = event?.eventCreator
+        guard let urlString = UserDefaults.standard.value(forKey: uid!) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                self.eventCreatorPicture.image = image
+            }
+        })
+        task.resume()
+
         // Check if user can't edit event
         // Case 1: Community Run AND event is editable
         // Case 2: Admin Run AND group creator is trying to edit
@@ -190,7 +215,12 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         // Delete event from Events DB collection
         self.db.collection("Events").document(event!.eventHash).delete()
         
-        // TODO: hacer que se regrese al group stack y que se reloadee
+        // Delete event locally with protocol
+        let otherVC = delegate as! DeleteEvent
+        otherVC.deleteEvent(event: self.event!)
+        
+        // Automatically go back to group stack
+        _ = navigationController?.popViewController(animated: true)
         
     }
     

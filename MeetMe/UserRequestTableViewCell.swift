@@ -17,6 +17,8 @@ class UserRequestTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var requestButton: UIButton!
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var locationLabel: UILabel!
     
     
     weak var delegate : UserRequestTableViewCellDelegate?

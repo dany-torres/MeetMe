@@ -30,8 +30,30 @@ class EventListViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
         let row = indexPath.row
         cell.textLabel?.text = events[row].eventName
-        // TODO: set image to creator's profile picture
-//        cell.imageView?.setValue(<#T##Any?#>, forKey: <#T##String#>)
+
+        // Make image a circle
+        cell.imageView?.layer.borderWidth = 1
+        cell.imageView?.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.height)!/2
+        cell.imageView?.clipsToBounds = true
+        
+        // Set Picture
+        let uid = events[row].eventCreator
+        let urlString = UserDefaults.standard.value(forKey: uid) as? String
+        if urlString != nil {
+            let url = URL(string: urlString!)
+            let task = URLSession.shared.dataTask(with: url!, completionHandler: { data, _, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data)
+                    cell.imageView?.image = image
+                }
+            })
+            task.resume()
+        }
+        
         return cell
     }
     
