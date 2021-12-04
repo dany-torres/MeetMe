@@ -95,7 +95,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         }
     }
     
-    // Sets the dat label to the current day
+    // Sets the date label to the current day
     func setDayLabel(){
         let today = Date()
         let weekday = Calendar.current.component(.weekday, from: today)
@@ -150,6 +150,12 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         let indexPath = self.eventStack.indexPath(for: cell)
         let cell = eventStack.cellForRow(at: indexPath!) as! StackTableViewCell
         currCell = cell
+        
+        if (currCell != nil && currCell.eventThree.count == 1) {
+            self.performSegue(withIdentifier: "singleEvent3", sender: nil)
+        } else {
+            self.performSegue(withIdentifier: "eventsListSegue", sender: nil)
+        }
     }
     
     // Get hour to the nearest half hour
@@ -168,6 +174,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     func setEvents(cell:StackTableViewCell, events:[Event]) {
         hideUnusedEvents(cell:cell)
         switch events.count {
+        case 0:
+            break
         case 1:
             setFirstEventBlock(cell:cell, event:events[0])
         case 2:
@@ -257,13 +265,20 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             let end = dateFormatter.date(from: event.endTime)
             let startTimeDate = dateFormatter.date(from: startTime)
             
+            // Checks if current cell block applies
             if event.startTime == startTime {
                 eventsAtTime.append(event)
             }
             
+            // Check if this cells occurs between start time and end time
             if start! < startTimeDate! && end! > startTimeDate! {
                 eventsAtTime.append(event)
             }
+        }
+        
+        // Sort from longest duration, to shortest
+        eventsAtTime.sort {
+            $0.endTime > $1.endTime
         }
         
         return eventsAtTime
@@ -309,7 +324,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
          }
          
          // Check if we are navigating to the event 3 details
-         if segue.identifier == "eventsListSegue" && currCell != nil && currCell.eventThree.count == 1,
+         if segue.identifier == "singleEvent3" && currCell != nil && currCell.eventThree.count == 1,
             let destination = segue.destination as? EventDetailsViewController {
              destination.delegate = self
              destination.event = currCell.eventThree[0]

@@ -357,7 +357,6 @@
                                                             <buttonConfiguration key="configuration" style="plain" title=""/>
                                                             <connections>
                                                                 <action selector="didTapCellButton3:" destination="d1b-gz-9aG" eventType="touchUpInside" id="KvE-hd-SrP"/>
-                                                                <segue destination="tsb-qf-L9L" kind="show" identifier="eventsListSegue" id="fYY-36-Uc8"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -454,6 +453,8 @@
                         <outlet property="dateLabel" destination="y66-GZ-MCP" id="OZP-OW-nUW"/>
                         <outlet property="eventStack" destination="9xw-yO-I9z" id="fF8-ne-NFO"/>
                         <outlet property="groupNameLabel" destination="xyq-6E-nTW" id="tR8-CG-dV3"/>
+                        <segue destination="O6s-m2-AMY" kind="show" identifier="singleEvent3" id="XJw-23-qYy"/>
+                        <segue destination="tsb-qf-L9L" kind="show" identifier="eventsListSegue" id="wcY-Ws-PbB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMU-Zw-SXD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -932,7 +933,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldh-Cf-ddD" userLabel="EditButton">
-                                <rect key="frame" x="62" y="613" width="21" height="43.5"/>
+                                <rect key="frame" x="62" y="613" width="21" height="39"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="square" catalog="system" title="">
@@ -943,7 +944,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0b-Oe-29O">
-                                <rect key="frame" x="98" y="623" width="66" height="19.5"/>
+                                <rect key="frame" x="98" y="623" width="66" height="15"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2498,7 +2499,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="OhN-LV-acH"/>
         <segue reference="wSe-l3-ryt"/>
-        <segue reference="PFC-jh-Rw0"/>
+        <segue reference="XJw-23-qYy"/>
         <segue reference="1iG-eE-u3p"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
