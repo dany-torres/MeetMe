@@ -44,8 +44,15 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             DispatchQueue.main.async {
                 self.populateFriendRequestTable()
                 self.populateUpcomingEventsTable()
+                print("IN THREAD")
+                print(self.eventList.count)
             }
         }
+        
+        //self.populateFriendRequestTable()
+        //self.populateUpcomingEventsTable()
+        
+        upcomingEventsTableView.reloadData()
 
     }
     
@@ -89,18 +96,19 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func populateUpcomingEventsTable(){
+        
         if Auth.auth().currentUser != nil {
             let user = Auth.auth().currentUser
             if let user = user {
                 let uid = user.uid
                     let nameRef = db.collection("Users").document(uid)
-                
+                    
                     nameRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let data = document.data()
                             let upcomingEvents = data!["events"] as! [String]
                             for event in upcomingEvents{
-                                let eventRef = self.db.collection("Users").document(event)
+                                let eventRef = self.db.collection("Events").document(event)
                                 
                                 eventRef.getDocument { (document, error) in
                                     if let document = document, document.exists {
@@ -123,10 +131,12 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         
                                         let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, notifications: notifications, reminderChoice: reminderChoice, polls: polls, messages: messages, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash, groupHash: groupHash, eventColor:[216, 180, 252])
                                         self.eventList.append(newEvent)
+                                        
                                         self.upcomingEventsTableView.reloadData()
+                                        print(self.eventList.count)
                                         print(name)
                                     } else {
-                                        print("Friend Request does not exist")
+                                        print("Upcoming event does not exist")
                                     }
                                 }
                             }
@@ -136,6 +146,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                     }
             }
         }
+        
+        print(self.eventList.count)
         
     }
     
@@ -150,8 +162,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 return eventList.count
             
             default:
-            
-            return 0
+            return eventList.count
             
             }
         
@@ -189,7 +200,21 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             
             default:
             
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as! UpcomingEventTableViewCell
+            let row = indexPath.row
+            let event = eventList[row]
+            
+        
+            let eventDateIntFormat: Int? = Int(event.startTime)
+            let now = Date()
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+
+            let modifiedDate = Calendar.current.date(byAdding: .hour, value: -eventDateIntFormat!, to: now)!
+            
+            let dateString = formatter.string(from: modifiedDate)
+            cell.upcomingEventLabel.text = "\(event.eventName) starts in \(dateString)"
+            return cell
             
             }
     }

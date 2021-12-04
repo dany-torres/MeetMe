@@ -66,18 +66,18 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Do any additional setup after loading the view.
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedUser = usersList[indexPath.row]
-        if Auth.auth().currentUser != nil {
-            let user = Auth.auth().currentUser
-            if let user = user {
-                let uid = user.uid
-                //Cambiar a FriendRequests para tener al interface
-                db.collection("Users").document(selectedUser.hash).updateData(["friends": FieldValue.arrayUnion([uid])])
-                db.collection("Users").document(uid).updateData(["friends": FieldValue.arrayUnion([selectedUser.hash])])
-            }
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedUser = usersList[indexPath.row]
+//        if Auth.auth().currentUser != nil {
+//            let user = Auth.auth().currentUser
+//            if let user = user {
+//                let uid = user.uid
+//                //Cambiar a FriendRequests para tener al interface
+//                db.collection("Users").document(selectedUser.hash).updateData(["friends": FieldValue.arrayUnion([uid])])
+//                db.collection("Users").document(uid).updateData(["friends": FieldValue.arrayUnion([selectedUser.hash])])
+//            }
+//        }
+//    }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -151,9 +151,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         //check status of button
         let buttonStatus = cell.requestButton.titleLabel?.text
-        
+        print("INSIDE DELEGATE METHOD")
         if(buttonStatus == "Add"){
             
+            print("INSIDE IF ADD STATEMENT")
             //change button status
             cell.requestButton.setTitle("Requested", for: .normal)
                 
