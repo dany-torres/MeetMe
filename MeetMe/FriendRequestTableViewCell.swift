@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import Firebase
+
+protocol FriendRequestCellDelegate: AnyObject {
+    func didTapAcceptButton(cell: FriendRequestTableViewCell)
+    func didTapDeclineButton(cell: FriendRequestTableViewCell)
+}
 
 class FriendRequestTableViewCell: UITableViewCell {
     
-    //TODO: add outlets
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
+    
+    weak var delegate : FriendRequestCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,5 +30,13 @@ class FriendRequestTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    @IBAction func didTapAcceptButton(_ sender: Any) {
+        delegate?.didTapAcceptButton(cell: self)
+    }
+    
+    @IBAction func didTapDeclineButton(_ sender: Any) {
+        delegate?.didTapDeclineButton(cell: self)
+    }
+    
 }
