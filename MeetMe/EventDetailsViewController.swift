@@ -260,6 +260,9 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         startTimePicker.setValue(UIColor.lightGray, forKeyPath: "textColor")
         endTimePicker.setValue(UIColor.lightGray, forKeyPath: "textColor")
         
+        // Update event locally with protocol
+        let otherVC = delegate as! UpdateEvent
+        otherVC.updateEvent(event: self.event!)
     }
     
     // Function to check if new information is allowed

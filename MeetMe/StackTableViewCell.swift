@@ -35,10 +35,10 @@ class StackTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        // Add action to perform when the button is tapped
-//        self.button1.addTarget(self, action: #selector(didTapCellButton1(_:)), for: .touchUpInside)
-
+        
+        button1.isHidden = true
+        button2.isHidden = true
+        button3.isHidden = true
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
