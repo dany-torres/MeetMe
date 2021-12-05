@@ -88,6 +88,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UserCellIdentifier, for: indexPath) as! UserRequestTableViewCell
+        
+        cell.delegate = self
+        
         let row = indexPath.row
         let searchedUser = usersList[row]
         cell.nameLabel.text = searchedUser.name
@@ -116,8 +119,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             })
             task.resume()
         }
-        
-        
         
         //check cases and update button label
         //case 1: searched user is in friendreq list && not in friends list -> button label: requested
@@ -173,7 +174,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //case 3: searched user is not in friendreq list and in friends list -> button label: friends
     
     func didTapButton(cell: UserRequestTableViewCell) {
-        
+        print("*****AT BEGINNING OF DID TAP METHOD")
         //Get the indexpath of cell where button was tapped
         let indexPath = self.resultsTableView.indexPath(for: cell)
         let cell = resultsTableView.cellForRow(at: indexPath!) as! UserRequestTableViewCell
@@ -206,7 +207,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.db.collection("Users").document(newFriendRequestHash).updateData(["friendRequests": FieldValue.arrayUnion([uid])])
                     
                     //also remove it from user list or ??
-                    
                     
                 }
             }

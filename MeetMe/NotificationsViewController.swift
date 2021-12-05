@@ -31,26 +31,21 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         upcomingEventsTableView.delegate = self
         upcomingEventsTableView.dataSource = self
-        
-        
+
         //populate event list and friend request list from database
-        //TODO: add this in a thread & in search view controller (not sure ab this)
         
         let queue = DispatchQueue(label: "curr")
         queue.async {
-            while (!self.loaded){
-                sleep(1)
-            }
+//            while (self.eventList == []){
+//                sleep(1)
+//
+//            }
             DispatchQueue.main.async {
                 self.populateFriendRequestTable()
                 self.populateUpcomingEventsTable()
-                print("IN THREAD")
-                print(self.eventList.count)
             }
         }
-        
-        //self.populateFriendRequestTable()
-        //self.populateUpcomingEventsTable()
+
         
         upcomingEventsTableView.reloadData()
 
@@ -78,7 +73,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         let username = friendReqData!["username"] as! String
                                         let hash = friendReqData!["uid"] as! String
                                         let location = friendReqData!["location"] as! String
-                                        let image = friendReqData!["img"] as! String
+                                        let image = friendReqData!["img"] as? String ?? ""
                                         let newFriendReq = User(name: name, username: username, hash: hash, location: location, image: image)
                                         self.friendRequesList.append(newFriendReq)
                                         self.friendRequestTableView.reloadData()
@@ -98,13 +93,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func populateUpcomingEventsTable(){
-        
         if Auth.auth().currentUser != nil {
             let user = Auth.auth().currentUser
             if let user = user {
                 let uid = user.uid
                     let nameRef = db.collection("Users").document(uid)
-                    
                     nameRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let data = document.data()
@@ -133,7 +126,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         self.eventList.append(newEvent)
                                         
                                         self.upcomingEventsTableView.reloadData()
-                                        print(self.eventList.count)
                                         print(name)
                                     } else {
                                         print("Upcoming event does not exist")
@@ -175,10 +167,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             
             case friendRequestTableView:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "FriendRequestCell", for: indexPath) as! FriendRequestTableViewCell
+                cell.delegate = self
                 let row = indexPath.row
                 let friend = friendRequesList[row]
                 cell.name.text = friend.name
-                cell.username.text = friend.username
+                cell.username.text = "@ \(friend.username)"
                 return cell
                 
             case upcomingEventsTableView:
@@ -186,16 +179,23 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 let row = indexPath.row
                 let event = eventList[row]
                 
-            
-                let eventDateIntFormat: Int? = Int(event.startTime)
                 let now = Date()
+                var calendar = Calendar.current
                 let formatter = DateFormatter()
                 formatter.timeStyle = .short
-
-                let modifiedDate = Calendar.current.date(byAdding: .hour, value: -eventDateIntFormat!, to: now)!
+            
+                let start = formatter.date(from: event.startTime)
+            
+                let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: now, to: start!)
                 
-                let dateString = formatter.string(from: modifiedDate)
-                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(dateString)"
+                //if == 0 print happening now
+                //compare start dates
+                let finalDate = Calendar.current.date(from:diffComponents)!
+                let hour = calendar.component(.hour, from: finalDate)
+                let min = calendar.component(.minute, from: finalDate)
+
+            
+                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(hour) hours and \(min) minutes"
                 return cell
             
             default:
@@ -232,7 +232,15 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         //remove locally
         let newFriend = friendRequesList.remove(at: row)
+        
+        //remove cell
+        friendRequestTableView.beginUpdates()
+        friendRequestTableView.deleteRows(at: [IndexPath(row: row, section: 0)], with: .fade)
+        friendRequestTableView.endUpdates()
+        
+        //get hash of user object
         let newFriendHash = newFriend.hash
+        
         
         //add new friend to current users friends array in DB
         if Auth.auth().currentUser != nil {
@@ -246,6 +254,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 //remove from friend request list in DB
                 self.db.collection("Users").document(uid).updateData(["friendRequests": FieldValue.arrayRemove([newFriendHash])
                                                                      ])
+                self.friendRequestTableView.reloadData()
             }
             
         } else {
