@@ -16,13 +16,17 @@ protocol DeleteEvent {
     func deleteEvent(event: Event)
 }
 
+protocol UpdateEvent {
+    func updateEvent(event: Event)
+}
+
 protocol UpdateGroup {
     func updateGroup(group: Group)
 }
 
 class GroupStackViewController: UIViewController, UITableViewDataSource,
                                     UITableViewDelegate, AddNewEvent, DeleteEvent,
-                                    UpdateGroup, MyStackCellDelegate {
+                                    UpdateEvent, UpdateGroup, MyStackCellDelegate {
     public var eventList:[Event] = []
     var delegate: UITableView!
     var currGroup: Group!
@@ -66,9 +70,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     }
     
     // Reload stack to show any event edits
-    override func viewWillAppear(_ animated: Bool) {
-        eventStack.reloadData()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        eventStack.reloadData()
+//    }
     
     // Initialize the halfHours array
     func initTime(){
@@ -173,19 +177,30 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     // Set the events block in the cells accordingly
     func setEvents(cell:StackTableViewCell, events:[Event]) {
         hideUnusedEvents(cell:cell)
+        print(">> GOT IN SET EVENTS, eventsCount: \(events.count)")
+        
         switch events.count {
         case 0:
             break
         case 1:
+            cell.button1.isHidden = false
             setFirstEventBlock(cell:cell, event:events[0])
         case 2:
+            cell.button1.isHidden = false
+            cell.button2.isHidden = false
             setFirstEventBlock(cell:cell, event:events[0])
             setSecondEventBlock(cell:cell, event:events[1])
         case 3:
+            cell.button1.isHidden = false
+            cell.button2.isHidden = false
+            cell.button3.isHidden = false
             setFirstEventBlock(cell:cell, event:events[0])
             setSecondEventBlock(cell:cell, event:events[1])
             setThirdEventBlock(cell:cell, event:events[2])
         default:
+            cell.button1.isHidden = false
+            cell.button2.isHidden = false
+            cell.button3.isHidden = false
             if events.count > 3 {
                 setFirstEventBlock(cell:cell, event:events[0])
                 setSecondEventBlock(cell:cell, event:events[1])
@@ -251,10 +266,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     
     // Get all events that happen at a given time
     func getEventsAtCellTime(startTime:String) -> [Event]{
-        // sort from longest duration, to shortest
-        eventList.sort {
-            $0.endTime > $1.endTime
-        }
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.short
         
@@ -278,7 +289,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         
         // Sort from longest duration, to shortest
         eventsAtTime.sort {
-            $0.endTime > $1.endTime
+            dateFormatter.date(from:$0.endTime)! >= dateFormatter.date(from:$1.endTime)!
         }
         
         return eventsAtTime
@@ -426,10 +437,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     // Adds event to local list
     func addNewEvent(newEvent: Event) {
         eventList.append(newEvent)
-        // sort from longest duration, to shortest
-        eventList.sort {
-            $0.endTime > $1.endTime
-        }
         eventStack.reloadData()
     }
     
@@ -438,9 +445,16 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         if let index = eventList.firstIndex(of:event) {
             eventList.remove(at: index)
         }
-        // sort from longest duration, to shortest
-        eventList.sort {
-            $0.endTime > $1.endTime
+        eventStack.reloadData()
+    }
+    
+    // Updates event in local list
+    func updateEvent(event: Event) {
+        if let elem = eventList.first(where: {$0.eventHash == event.eventHash}) {
+            elem.eventName = event.eventName
+            elem.startTime = event.startTime
+            elem.endTime = event.endTime
+            elem.location = event.location
         }
         eventStack.reloadData()
     }
