@@ -11,6 +11,7 @@ class EventListViewController: UIViewController, UITableViewDelegate, UITableVie
 
     var events:[Event] = []
     var currGroup: Group!
+    var cell:StackTableViewCell!
     
     var delegate: UIViewController!
     
@@ -64,6 +65,9 @@ class EventListViewController: UIViewController, UITableViewDelegate, UITableVie
            let eventIndex = eventTableView.indexPathForSelectedRow?.row {
             destination.event = events[eventIndex]
             destination.currGroup = currGroup
+            destination.delegate = self
+            destination.cell = cell
+            destination.eventBlockNum = 4
         }
     }
 

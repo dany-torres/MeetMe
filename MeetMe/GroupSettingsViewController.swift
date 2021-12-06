@@ -34,6 +34,9 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
         
         groupMembersTableView.delegate = self
         groupMembersTableView.dataSource = self
+        groupMembersTableView.layer.borderWidth = 0.5
+        groupMembersTableView.layer.cornerRadius = 10
+        groupMembersTableView.layer.borderColor = UIColor(red: 208/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
         
         setTextFields()
         
@@ -75,12 +78,17 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
                 let data = document.data()
                 if let data = data {
                     cell.textLabel?.text = "@" + (data["username"] as? String ?? "")
+                    self.setMemberPicture(uid: data["uid"] as! String, cell: cell)
                 }
             }
         }
         
-        // TODO: set image to creator's profile picture
-        // cell.imageView?.setValue(<#T##Any?#>, forKey: <#T##String#>)
+        // Format cell, add corners
+        cell.contentView.layer.cornerRadius = 5.0
+        cell.contentView.layer.masksToBounds = true
+        cell.layer.cornerRadius = 5.0
+        cell.layer.masksToBounds = false
+        
         return cell
     }
     
@@ -136,6 +144,30 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
             return false
         }
         return true
+    }
+    
+    // Sets user picture within cell
+    func setMemberPicture(uid:String, cell:UITableViewCell){
+        // Make image a circle
+        cell.imageView?.layer.borderWidth = 1
+        cell.imageView?.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.height)!/2
+        cell.imageView?.clipsToBounds = true
+        
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                cell.imageView?.image = image
+            }
+        })
+        task.resume()
     }
     
     func addFriends(newUser: String) {

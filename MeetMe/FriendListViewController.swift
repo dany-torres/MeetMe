@@ -96,14 +96,39 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
         let friendRef = self.db.collection("Users").document(user)
         friendRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let firnedsData = document.data()
-                cell.nameLabel.text = firnedsData!["name"] as? String
-                cell.usernameLabel.text = firnedsData!["username"] as? String
+                let friendsData = document.data()
+                cell.nameLabel.text = friendsData!["name"] as? String
+                cell.usernameLabel.text = "@" + (friendsData!["username"] as? String ?? "")
+                self.setUserPicture(uid:friendsData!["uid"] as! String, cell:cell)
             } else {
                 print("Friend does not exist")
             }
         }
         
         return cell
+    }
+    
+    // Sets user picture within cell
+    func setUserPicture(uid:String, cell:UITableViewCell){
+        // Make image a circle
+        cell.imageView?.layer.borderWidth = 1
+        cell.imageView?.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.height)!/2
+        cell.imageView?.clipsToBounds = true
+        
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                cell.imageView?.image = image
+            }
+        })
+        task.resume()
     }
 }

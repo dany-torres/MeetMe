@@ -37,6 +37,9 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         
         attendeesTableView.delegate = self
         attendeesTableView.dataSource = self
+        attendeesTableView.layer.borderWidth = 0.5
+        attendeesTableView.layer.cornerRadius = 10
+        attendeesTableView.layer.borderColor = UIColor(red: 208/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
         
         // Set default settings
         editButton.isHidden = true
@@ -193,11 +196,40 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 let data = document.data()
                 if let data = data {
                     cell.textLabel?.text = "@" + (data["username"] as? String ?? "")
-                    // TODO: set picture
+                    self.setAttendeePicture(uid: data["uid"] as! String, cell: cell)
                 }
             }
         }
+        // Format cell, add corners
+        cell.contentView.layer.cornerRadius = 5.0
+        cell.contentView.layer.masksToBounds = true
+        cell.layer.cornerRadius = 5.0
+        cell.layer.masksToBounds = false
         return cell
+    }
+    
+    // Sets user picture within cell
+    func setAttendeePicture(uid:String, cell:UITableViewCell){
+        // Make image a circle
+        cell.imageView?.layer.borderWidth = 1
+        cell.imageView?.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.height)!/2
+        cell.imageView?.clipsToBounds = true
+        
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                cell.imageView?.image = image
+            }
+        })
+        task.resume()
     }
     
     // Function to delete event
@@ -217,15 +249,16 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         // Delete event from Events DB collection
         self.db.collection("Events").document(event!.eventHash).delete()
         
-        // Delete event locally with protocol
-        let otherVC = delegate as! DeleteEvent
-        otherVC.deleteEvent(event: self.event!)
+        if (eventBlockNum != 4){
+            // Delete event locally with protocol
+            let otherVC = delegate as! DeleteEvent
+            otherVC.deleteEvent(event: self.event!)
+        }
         
         // Automatically go back to group stack
         _ = navigationController?.popViewController(animated: true)
         
     }
-    
     
     // When the save button is pressed, the event info should be updated
     @IBAction func saveButtonPressed(_ sender: Any) {
@@ -262,9 +295,11 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         startTimePicker.setValue(UIColor.lightGray, forKeyPath: "textColor")
         endTimePicker.setValue(UIColor.lightGray, forKeyPath: "textColor")
         
-        // Update event locally with protocol
-        let otherVC = delegate as! UpdateEvent
-        otherVC.updateEvent(cell:cell, event:event!)
+        if (eventBlockNum != 4){
+            // Update event locally with protocol
+            let otherVC = delegate as! UpdateEvent
+            otherVC.updateEvent(cell:cell, event:event!)
+        }
         
         let myNormalAttributedTitle = NSAttributedString(string: self.event!.eventName,
             attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 14)!])

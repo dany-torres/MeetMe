@@ -17,6 +17,7 @@ class FriendRequestTableViewCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var userPicture: UIImageView!
     
     weak var delegate : FriendRequestCellDelegate?
     

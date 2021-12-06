@@ -356,6 +356,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.events = currCell.eventThree
              destination.currGroup = currGroup
+             destination.cell = currCell
          }
          
      }
@@ -466,7 +467,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             elem.endTime = event.endTime
             elem.location = event.location
         }
-//        eventStack.reloadData()
+        eventStack.reloadData()
     }
     
     // Updates currGroup to get the new edits set
