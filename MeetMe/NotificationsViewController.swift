@@ -209,7 +209,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
 
             
                 cell.upcomingEventLabel.text = "\(event.eventName) starts in \(hour) hours and \(min) minutes"
-                
+                // Make image a circle
+            cell.imageView!.layer.borderWidth = 1
+            cell.imageView!.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+            cell.imageView!.layer.cornerRadius = cell.imageView!.frame.height/2
+            cell.imageView!.clipsToBounds = true
                 // TODO: set group picture
                 let uid = event.groupHash
                 setPicture(uid:uid, cell:cell)
