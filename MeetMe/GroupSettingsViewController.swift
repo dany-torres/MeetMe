@@ -16,6 +16,7 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
     
     var group:Group!
     let addFriendsSegue = "AddFriendsSegue"
+    let storage = Storage.storage().reference()
     
     var delegate: UIViewController!
     
@@ -51,6 +52,31 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
             groupNameTextField.isUserInteractionEnabled = false
             groupDescriptionTextField.isUserInteractionEnabled = false
         }
+        
+        // Make image a circle
+        groupPicture.layer.borderWidth = 1
+        groupPicture.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        groupPicture.layer.cornerRadius = groupPicture.frame.height/2
+        groupPicture.clipsToBounds = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let uid = group.groupHASH
+                guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+                      let url = URL(string: urlString) else {
+                          return
+                      }
+                let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: data)
+                        self.groupPicture.image = image
+                    }
+                })
+                task.resume()
+        
     }
     
     func setTextFields(){
@@ -95,6 +121,7 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @IBAction func cameraButtonPressed(_ sender: Any) {
         // TODO: add this
+        presentPhotoActionSheet()
     }
     
     @IBAction func addFriendsButtonPressed(_ sender: Any) {
@@ -184,5 +211,78 @@ class GroupSettingsViewController: UIViewController, UITableViewDelegate, UITabl
             destination.loaded = true
             destination.currentMembers = group.members
         }
+    }
+}
+
+extension GroupSettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func presentPhotoActionSheet() {
+        let actionSheet = UIAlertController(title: "Group Picture", message: "How would you like to select a picture?", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Take photo", style: .default, handler: { [weak self] _ in
+            self?.presentCamera()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Choose photo", style: .default, handler: { [weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+        present(actionSheet, animated: true)
+    }
+    
+    func presentCamera() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func presentPhotoPicker() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        
+        guard let imageData = selectedImage.pngData() else {
+            return
+        }
+        
+                let uid = group.groupHASH
+                storage.child("groups/\(uid).png").putData(imageData, metadata: nil, completion: { _, error in
+                    guard error == nil else {
+                        print("failed to upload")
+                        return
+                    }
+                    self.storage.child("groups/\(uid).png").downloadURL(completion: {url, error in
+                        guard let url = url, error == nil else {
+                            return
+                        }
+                        let urlString = url.absoluteString
+                        
+                        DispatchQueue.main.async {
+                            self.groupPicture.image = selectedImage
+                        }
+                        
+                        print("URL String: \(urlString)")
+                        UserDefaults.standard.set(urlString, forKey: uid)
+                    })
+                })
+                self.groupPicture.image = selectedImage
+        
+        
+//        self.displayPicture.layer.masksToBounds = true
+//        self.displayPicture.layer.cornerRadius = self.displayPicture.frame.size.width / 2.0
+//        self.displayPicture.clipsToBounds = true
+//        self.displayPicture.layer.borderWidth = 2.0
+//        self.displayPicture.layer.borderColor = UIColor.purple.cgColor
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
