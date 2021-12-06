@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 class CreateEventViewController: UIViewController {
 
@@ -279,6 +280,39 @@ class CreateEventViewController: UIViewController {
                            otherVC.addNewEvent(newEvent: newEvent)
                        }
                    }
+                    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+                         if settings.authorizationStatus == UNAuthorizationStatus.authorized {
+                           //contents
+                             let content = UNMutableNotificationContent()
+                                 content.title = "MeetMe"
+                             
+                             content.body = "\(self.eventNameTextField.text!) starts in \(self.reminderChoice)"
+                                 content.sound = UNNotificationSound.default
+                             //trigger
+                             //calculate the date
+                             //make date picker out of reminderChoice
+                             //triggerTime = startTimePicker.date - reminderChoiceDate
+                             //triggerDate = make date picker out of trigger time
+                             //let dateInfo = Calendar.current.dateComponents([.hour,.minute], from: self.triggerDate.date)
+                             
+                             let dateInfo = Calendar.current.dateComponents([.hour,.minute], from: self.startTimePicker.date)
+                             let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+                           //request
+                             let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
+
+                             let notificationCenter = UNUserNotificationCenter.current()
+
+                             notificationCenter.add(request) { (error) in
+                                if error != nil{
+                                   print("error in notification! ")
+                                }
+                             }
+                         }
+                         else {
+                             print("user denied")
+                         }
+                     }
+                    
                     _ = navigationController?.popViewController(animated: true)
                 }
             }
