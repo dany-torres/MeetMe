@@ -94,7 +94,15 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
         cell.groupName.text = group.groupName
         cell.groupDescription.text = group.groupDescr
         //Choose pic from group
+        // Make image a circle
+        cell.groupImage.layer.borderWidth = 1
+        cell.groupImage.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        cell.groupImage.layer.cornerRadius = cell.groupImage.frame.height/2
+        cell.groupImage.clipsToBounds = true
         
+        // Set Picture
+        let uid = group.groupHASH
+        setPicture(uid:uid, cell:cell)
         //if (currentUser.muted.contains(group.groupHASH){
         //      cell.mutedLabel.isHidden = false
         //}
@@ -109,6 +117,24 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
     func addGroup(newGroup: Group) {
         groups.append(newGroup)
         groupTableView.reloadData()
+    }
+    
+    // Sets user picture within cell
+    func setPicture(uid:String, cell:GroupsTableViewCell){
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                cell.groupImage.image = image
+            }
+        })
+        task.resume()
     }
     
     func rePopulateGroupsTable(){
