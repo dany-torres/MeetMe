@@ -372,12 +372,12 @@ class SettingsViewController: UIViewController {
 //        self.navigationController?.navigationBar.tintColor = UIColor.white
 //    }
     
-    @IBAction func deleteAccountButtonPressed(_ sender: Any) {
+    func deleteUser() {
         if Auth.auth().currentUser != nil {
             let user = Auth.auth().currentUser
             if let user = user {
                 let uid = user.uid
-                
+
                 let nameRef = db.collection("Users").document(uid)
                 nameRef.getDocument { (document, error) in
                     if let document = document, document.exists {
@@ -385,10 +385,10 @@ class SettingsViewController: UIViewController {
                         let userGroups = data!["groupsAll"] as! [String]
                         let userEvents = data!["events"] as! [String]
                         let userFriends = data!["friends"] as! [String]
-                        
+
                         for event in userEvents {
                             let eventRef = self.db.collection("Events").document(event)
-                            
+
                             eventRef.getDocument { (document, error) in
                                 if let document = document, document.exists {
                                     let eventData = document.data()
@@ -418,10 +418,10 @@ class SettingsViewController: UIViewController {
                                 }
                             }
                         }
-                        
+
                         for group in userGroups {
                             let groupRef = self.db.collection("Groups").document(group)
-                            
+
                             groupRef.getDocument { (document, error) in
                                 if let document = document, document.exists {
                                     let groupsData = document.data()
@@ -433,8 +433,8 @@ class SettingsViewController: UIViewController {
                                     currGroup.groupCreator = groupsData!["creator"] as! String
                                     currGroup.members = groupsData!["peopleInGroup"] as! [String]
                                     currGroup.events = groupsData!["events"] as! [String]
-                                    
-                                    
+
+
                                     //delete group if User is admin
                                     if currGroup.adminRun {
                                         self.deleteAdminGroupFromUsers(newGroup: currGroup)
@@ -448,14 +448,14 @@ class SettingsViewController: UIViewController {
                                 }
                             }
                         }
-                        
+
                         for friend in userFriends {
                             let friendRef = self.db.collection("Users").document(friend)
-                            
+
                             friendRef.getDocument { (document, error) in
                                 if let document = document, document.exists {
                                     let friendsData = document.data()
-                                    
+
                                     let friendsList = friendsData!["friends"] as! [String]
                                     let newFriendsList = friendsList.filter {$0 != uid}
                                     self.db.collection("Users").document(friend).updateData(["friends": newFriendsList])
@@ -464,12 +464,12 @@ class SettingsViewController: UIViewController {
                                 }
                             }
                         }
-                        
+
                     } else {
                         print("User does not exist")
                     }
                 }
-                
+
                 db.collection("Users").document(uid).delete() { err in
                     if let err = err {
                         print("Error removing document: \(err)")
@@ -477,6 +477,14 @@ class SettingsViewController: UIViewController {
                         print("Document successfully removed!")
                         do {
                             try Auth.auth().signOut()
+                            // delete User from AUTH
+                            user.delete {error in
+                                if let error = error {
+                                    print("User wasnt deleted from AUTH \(error)")
+                                } else {
+                                    print("User deleted from Auth")
+                                }
+                            }
                             self.performSegue(withIdentifier: "BackToSignInSegue", sender: nil)
                         } catch let signOutError as NSError {
                           print("Error signing out: %@", signOutError)
@@ -484,21 +492,25 @@ class SettingsViewController: UIViewController {
                     }
                 }
             }
-            
-            // delete User from AUTH
-            user?.delete {error in
-                if let error = error {
-                    print("User wasnt deleted from AUTH \(error)")
-                } else {
-                    print("User deleted from Auth")
-                }
-            }
-            
+
         } else {
           // No user is signed in.
           // ...
         }
-        
+    }
+    
+    @IBAction func deleteAccountButtonPressed(_ sender: Any) {
+        let controller = UIAlertController(
+            title: "Delete Account",
+            message: "Are you sure you want to delete your account?",
+            preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "Cancel",
+                                           style: .cancel,
+                                           handler: nil))
+        controller.addAction(UIAlertAction(title: "Delete",
+                                           style: .default,
+                                           handler: { action in self.deleteUser()}))
+        present(controller, animated: true, completion: nil)
     }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {

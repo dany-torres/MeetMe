@@ -141,6 +141,11 @@ class GroupBrowserViewController: UIViewController, UITableViewDelegate, UITable
                                         self.addGroup(newGroup: currGroup)
                                     } else {
                                         print("Group does not exist")
+                                        // Delete group from db
+                                        self.db.collection("Users").document(uid).updateData([
+                                            "groupsAll": FieldValue.arrayRemove([group])
+                                        ])
+                                        self.db.collection("Groups").document(group).delete()
                                     }
                                 }
                             }

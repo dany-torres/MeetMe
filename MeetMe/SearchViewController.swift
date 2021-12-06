@@ -130,33 +130,29 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let friendRequests = data!["friendRequests"] as! [String]
                                     
                                     // Cases:
-                                    // You have the friend request
-                                    if (friendRequests.contains(searchedUser.hash) && !friends.contains(searchedUser.hash)) {
-                                        cell.requestButton.setTitle("Wants to be friends", for: .normal)
-                                    }
-                                    
-                                    // You request them
-                                    let ref = self.db.collection("Users").document(searchedUser.hash)
-                                    ref.getDocument { (document, error) in
-                                        if let document = document, document.exists {
-                                            let data = document.data()
-                                            let userFriendRequests = data!["friendRequests"] as! [String]
-                                            if (userFriendRequests.contains(uid) && !friends.contains(searchedUser.hash)) {
-                                                cell.requestButton.setTitle("Requested", for: .normal)
-                                                cell.requestButton.isEnabled = false
-                                            }
-                                        }
-                                    }
-                                    
-                                    // No friend request either side
-                                    if(!friendRequests.contains(searchedUser.hash) && !friends.contains(searchedUser.hash)){
-                                        cell.requestButton.setTitle("Add", for: .normal)
-                                    }
-                                    
                                     // You are already friends
-                                    if(!friendRequests.contains(searchedUser.hash) && friends.contains(searchedUser.hash)){
+                                    if(friends.contains(searchedUser.hash)){
                                         cell.requestButton.setTitle("Added", for: .normal)
                                         cell.requestButton.isEnabled = false
+                                    } else if (friendRequests.contains(searchedUser.hash) && !friends.contains(searchedUser.hash)) {
+                                        // You have the friend request
+                                        cell.requestButton.setTitle("Wants to be friends", for: .normal)
+                                    } else if(!friendRequests.contains(searchedUser.hash) && !friends.contains(searchedUser.hash)){
+                                        // No friend request either side
+                                        cell.requestButton.setTitle("Add", for: .normal)
+                                    } else {
+                                        // You requested them
+                                        let ref = self.db.collection("Users").document(searchedUser.hash)
+                                        ref.getDocument { (document, error) in
+                                            if let document = document, document.exists {
+                                                let data = document.data()
+                                                let userFriendRequests = data!["friendRequests"] as! [String]
+                                                if (userFriendRequests.contains(uid) && !friends.contains(searchedUser.hash)) {
+                                                    cell.requestButton.setTitle("Requested", for: .normal)
+                                                    cell.requestButton.isEnabled = false
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }

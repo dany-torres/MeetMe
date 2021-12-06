@@ -85,7 +85,10 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         self.friendRequestTableView.reloadData()
                                         print(name)
                                     } else {
-                                        print("Friend Request does not exist")
+                                        print("Friend's user does not exist")
+                                        self.db.collection("Users").document(uid).updateData([
+                                            "friendRequests": FieldValue.arrayRemove([friendReq])
+                                        ])
                                     }
                                 }
                             }
@@ -135,10 +138,15 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         print(name)
                                     } else {
                                         print("Upcoming event does not exist")
+                                        // Delete event from db
+                                        self.db.collection("Users").document(uid).updateData([
+                                            "events": FieldValue.arrayRemove([event])
+                                        ])
+                                        self.db.collection("Events").document(event).delete()
                                     }
                                 }
                             }
-                        }else {
+                        } else {
                             print("User does not exist")
                         }
                     }
