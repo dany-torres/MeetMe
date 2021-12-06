@@ -53,7 +53,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let data = document.data()
                                     var friends = data!["friends"] as! [String]
                                     friends.append(uid)
-                                    if !friends.contains(newUser.hash){
+                                    if newUser.hash != uid{
                                         self.usersList.append(newUser)
                                         self.resultsTableView.reloadData()
                                     }
@@ -128,18 +128,35 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let data = document.data()
                                     let friends = data!["friends"] as! [String]
                                     let friendRequests = data!["friendRequests"] as! [String]
-                                    //friends.append(uid)
+                                    
+                                    // Cases:
+                                    // You have the friend request
                                     if (friendRequests.contains(searchedUser.hash) && !friends.contains(searchedUser.hash)) {
-                                        cell.requestButton.setTitle("Requested", for: .normal)
-                                        self.resultsTableView.reloadData()
+                                        cell.requestButton.setTitle("Wants to be friends", for: .normal)
                                     }
+                                    
+                                    // You request them
+                                    let ref = self.db.collection("Users").document(searchedUser.hash)
+                                    ref.getDocument { (document, error) in
+                                        if let document = document, document.exists {
+                                            let data = document.data()
+                                            let userFriendRequests = data!["friendRequests"] as! [String]
+                                            if (userFriendRequests.contains(uid) && !friends.contains(searchedUser.hash)) {
+                                                cell.requestButton.setTitle("Requested", for: .normal)
+                                                cell.requestButton.isEnabled = false
+                                            }
+                                        }
+                                    }
+                                    
+                                    // No friend request either side
                                     if(!friendRequests.contains(searchedUser.hash) && !friends.contains(searchedUser.hash)){
                                         cell.requestButton.setTitle("Add", for: .normal)
-                                        self.resultsTableView.reloadData()
                                     }
+                                    
+                                    // You are already friends
                                     if(!friendRequests.contains(searchedUser.hash) && friends.contains(searchedUser.hash)){
                                         cell.requestButton.setTitle("Added", for: .normal)
-                                        self.resultsTableView.reloadData()
+                                        cell.requestButton.isEnabled = false
                                     }
                                 }
                             }
@@ -214,6 +231,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 }
             }
+        } else if (buttonStatus == "Wants to be friends"){
+            // go to notifications
+            performSegue(withIdentifier: "searchNotificationsSegue", sender: nil)
             
         }
         
