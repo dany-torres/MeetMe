@@ -24,6 +24,8 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
     
+    @IBOutlet weak var reminderChoicePicker: UIDatePicker!
+    
     let db = Firestore.firestore()
     
     var reminderChoice = ""
@@ -48,12 +50,10 @@ class CreateEventViewController: UIViewController {
         notificationsButton.setImage(square, for: .normal)
         
 
-        
         editEventButton.setImage(checkmark, for: .selected)
         editEventButton.setImage(square, for: .normal)
         
 
-        
         // Setting up the curr date for date label
         let today = Date()
         let weekday = Calendar.current.component(.weekday, from: today)
@@ -66,49 +66,6 @@ class CreateEventViewController: UIViewController {
         currentDateLabel.text = "\(weekdayText) \(monthText)"
     }
     
-    @IBAction func setReminderButtonPressed(_ sender: Any) {
-        
-        //this will prompt an action sheet where
-        //the user can pick how many hours/minutes before to send the people in the event reminders that the event is about to start
-        
-        let controller = UIAlertController(
-            title: "Remind your friends about your event",
-            message: "Choose a time:",
-            preferredStyle: .actionSheet)
-        
-        let atTimeAction = UIAlertAction(
-            title: "At time of event",
-            style: .default,
-            handler: {(action) in self.reminderChoice = "At time of event"})
-        controller.addAction(atTimeAction)
-        
-        let fifteenAction = UIAlertAction(
-            title: "15 minutes before",
-            style: .default,
-            handler: {(action) in self.reminderChoice = "15 minutes before"})
-        controller.addAction(fifteenAction)
-        
-        let thirtyAction = UIAlertAction(
-            title: "30 minutes before",
-            style: .default,
-            handler: {(action) in self.reminderChoice = "30 minutes before"})
-        controller.addAction(thirtyAction)
-        
-        let oneHourAction = UIAlertAction(
-            title: "1 hour before",
-            style: .default,
-            handler: {(action) in self.reminderChoice = "1 hour before"})
-        controller.addAction(oneHourAction)
-        
-        let twoHoursAction = UIAlertAction(
-            title: "No Reminder",
-            style: .destructive,
-            handler: {(action) in self.reminderChoice = "No Reminder"})
-        controller.addAction(twoHoursAction)
-        
-        present(controller, animated: true, completion: nil)
-        
-    }
     
     @IBAction func notificationsBoxPressed(_ sender: Any) {
         
@@ -289,13 +246,7 @@ class CreateEventViewController: UIViewController {
                              content.body = "\(self.eventNameTextField.text!) starts in \(self.reminderChoice)"
                                  content.sound = UNNotificationSound.default
                              //trigger
-                             //calculate the date
-                             //make date picker out of reminderChoice
-                             //triggerTime = startTimePicker.date - reminderChoiceDate
-                             //triggerDate = make date picker out of trigger time
-                             //let dateInfo = Calendar.current.dateComponents([.hour,.minute], from: self.triggerDate.date)
-                             
-                             let dateInfo = Calendar.current.dateComponents([.hour,.minute], from: self.startTimePicker.date)
+                             let dateInfo = Calendar.current.dateComponents([.hour,.minute], from: self.reminderChoicePicker.date)
                              let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
                            //request
                              let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
@@ -356,6 +307,14 @@ class CreateEventViewController: UIViewController {
         endTimeChosen = dateFormatter.string(from: timeChosen)
     }
     
+    @IBAction func reminderTimeChosen(_ sender: Any) {
+        let timeChosen = startTimePicker.date
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        
+        reminderChoice = dateFormatter.string(from: timeChosen)
+    }
     
     // code to enable tapping on the background to remove software keyboard
         func textFieldShouldReturn(textField:UITextField) -> Bool {
