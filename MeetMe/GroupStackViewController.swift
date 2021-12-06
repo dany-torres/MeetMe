@@ -72,9 +72,42 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     }
     
     // Reload stack to show any event edits
-//    override func viewWillAppear(_ animated: Bool) {
-//        eventStack.reloadData()
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
+            docRef.getDocument { (document, error) in
+                guard error == nil else {
+                    print("error", error ?? "")
+                    return
+                }
+
+                if let document = document, document.exists {
+                    let data = document.data()
+                    if let data = data {
+                        if data["mode"] as? Bool ?? false == false {
+                            // light
+                            UIApplication.shared.windows.forEach { window in
+                                window.overrideUserInterfaceStyle = .light
+                            }
+                            self.navigationController?.navigationBar.backgroundColor = UIColor.white
+                            self.navigationController?.navigationBar.tintColor = UIColor.black
+                            self.groupNameLabel.titleLabel?.textColor = UIColor.black
+                            self.groupNameLabel.tintColor = UIColor.black
+                        } else {
+                            // dark
+                            UIApplication.shared.windows.forEach { window in
+                                window.overrideUserInterfaceStyle = .dark
+                            }
+                            self.navigationController?.navigationBar.backgroundColor = UIColor.black
+                            self.navigationController?.navigationBar.tintColor = UIColor.white
+                            self.groupNameLabel.titleLabel?.textColor = UIColor.white
+                            self.groupNameLabel.tintColor = UIColor.white
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     // Initialize the halfHours array
     func initTime(){
