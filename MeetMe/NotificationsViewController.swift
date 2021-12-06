@@ -174,9 +174,10 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
-    //load cells with event/friend request details
+    // Populate tables
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // Check which table you want to populate
         switch tableView {
             
             case friendRequestTableView:
@@ -209,20 +210,20 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             
                 let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: now, to: start!)
                 
-                //if == 0 print happening now
-                //compare start dates
                 let finalDate = Calendar.current.date(from:diffComponents)!
                 let hour = calendar.component(.hour, from: finalDate)
                 let min = calendar.component(.minute, from: finalDate)
+            
+                // TODO: fix que se borre cuando pasa el evento, probs usar eventDate
 
             
-                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(hour) hours and \(min) minutes"
+                cell.upcomingEventLabel.text = "\(event.nameOfGroup)\n\(event.eventName) starts in: \n\(hour) hours and \(min) minutes"
                 // Make image a circle
-            cell.imageView!.layer.borderWidth = 1
-            cell.imageView!.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
-            cell.imageView!.layer.cornerRadius = cell.imageView!.frame.height/2
-            cell.imageView!.clipsToBounds = true
-                // TODO: set group picture
+                cell.imageView!.layer.borderWidth = 1
+                cell.imageView!.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+                cell.imageView!.layer.cornerRadius = cell.imageView!.frame.height/2
+                cell.imageView!.clipsToBounds = true
+                
                 let uid = event.groupHash
                 setPicture(uid:uid, cell:cell)
                 // Format cell, add corners
@@ -235,22 +236,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 return cell
             
             default:
-            // TODO: CReo que ya puedes borrar esto
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as! UpcomingEventTableViewCell
-            let row = indexPath.row
-            let event = eventList[row]
-            
-        
-            let eventDateIntFormat: Int? = Int(event.startTime)
-            let now = Date()
-            let formatter = DateFormatter()
-            formatter.timeStyle = .short
-
-            let modifiedDate = Calendar.current.date(byAdding: .hour, value: -eventDateIntFormat!, to: now)!
-            
-            let dateString = formatter.string(from: modifiedDate)
-            cell.upcomingEventLabel.text = "\(event.eventName) starts in \(dateString)"
-            return cell
+            print("Shouldn't get here")
+            return UITableViewCell()
             
             }
     }

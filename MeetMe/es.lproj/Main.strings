@@ -3,31 +3,31 @@
 "0mJ-XH-dpN.text" = "@usuario";
 
 /* Class = "UINavigationItem"; title = "Group Info"; ObjectID = "0np-d5-0AH"; */
-"0np-d5-0AH.title" = "Información del Grupo";
+"0np-d5-0AH.title" = "Info del Grupo";
 
 /* Class = "UIButton"; configuration.title = "Sign up"; ObjectID = "1BL-I0-oZV"; */
-"1BL-I0-oZV.configuration.title" = "Registrarte";
+"1BL-I0-oZV.configuration.title" = "Registro";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "1BL-I0-oZV"; */
 "1BL-I0-oZV.normalTitle" = "Botón";
 
+/* Class = "UILabel"; text = "Username"; ObjectID = "1BP-XI-9tm"; */
+"1BP-XI-9tm.text" = "Usuario";
+
 /* Class = "UISegmentedControl"; 2OA-1G-eX1.segmentTitles[0] = "English"; ObjectID = "2OA-1G-eX1"; */
-"2OA-1G-eX1.segmentTitles[0]" = "Ingles";
+"2OA-1G-eX1.segmentTitles[0]" = "Inglés";
 
 /* Class = "UISegmentedControl"; 2OA-1G-eX1.segmentTitles[1] = "Spanish"; ObjectID = "2OA-1G-eX1"; */
 "2OA-1G-eX1.segmentTitles[1]" = "Español";
 
 /* Class = "UILabel"; text = "Account Actions"; ObjectID = "2lP-wr-h9n"; */
-"2lP-wr-h9n.text" = "Acciones de Cuenta";
-
-/* Class = "UIButton"; configuration.title = "Add"; ObjectID = "3LP-EH-UaW"; */
-"3LP-EH-UaW.configuration.title" = "Agregar";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3LP-EH-UaW"; */
-"3LP-EH-UaW.normalTitle" = "Botón";
+"2lP-wr-h9n.text" = "Cuenta";
 
 /* Class = "UILabel"; text = "Members"; ObjectID = "3xJ-OK-vcq"; */
 "3xJ-OK-vcq.text" = "Miembros";
+
+/* Class = "UILabel"; text = "Event Name"; ObjectID = "4mE-OU-sxe"; */
+"4mE-OU-sxe.text" = "Nombre de Evento";
 
 /* Class = "UILabel"; text = "MeetMe"; ObjectID = "4nE-62-1RK"; */
 "4nE-62-1RK.text" = "MeetMe";
@@ -39,7 +39,7 @@
 "4yy-bT-kdw.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Location"; ObjectID = "5No-l0-MfA"; */
-"5No-l0-MfA.text" = "Ubicación";
+"5No-l0-MfA.text" = "Lugar";
 
 /* Class = "UIButton"; configuration.title = "Edit"; ObjectID = "6Ul-SR-inv"; */
 "6Ul-SR-inv.configuration.title" = "Editar";
@@ -60,103 +60,79 @@
 "736-UW-ccs.normalTitle" = "Botón";
 
 /* Class = "UIButton"; configuration.title = "Login"; ObjectID = "7Pv-Tk-G5B"; */
-"7Pv-Tk-G5B.configuration.title" = "Acceso";
+"7Pv-Tk-G5B.configuration.title" = "Entrar";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "7Pv-Tk-G5B"; */
 "7Pv-Tk-G5B.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Username"; ObjectID = "7kb-XG-GES"; */
-"7kb-XG-GES.text" = "Nombre de Usuario";
-
-/* Class = "UIButton"; configuration.title = "Set reminder"; ObjectID = "80N-sD-fXI"; */
-"80N-sD-fXI.configuration.title" = "Recordatorio";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "80N-sD-fXI"; */
-"80N-sD-fXI.normalTitle" = "Botón";
+"7kb-XG-GES.text" = "Usuario";
 
 /* Class = "UILabel"; text = "Upcoming Events"; ObjectID = "8Mr-Tw-tXw"; */
-"8Mr-Tw-tXw.text" = "Eventos Futuros";
+"8Mr-Tw-tXw.text" = "Eventos próximos";
 
 /* Class = "UILabel"; text = "Name"; ObjectID = "8ve-vD-low"; */
 "8ve-vD-low.text" = "Nombre";
 
 /* Class = "UILabel"; text = "Full Name"; ObjectID = "9Jt-JK-L9a"; */
-"9Jt-JK-L9a.text" = "Nombre Completo";
+"9Jt-JK-L9a.text" = "Nombre completo";
 
 /* Class = "UILabel"; text = "Tue Oct 12, 2021"; ObjectID = "9tK-el-Hcu"; */
-"9tK-el-Hcu.text" = "Tue Oct 12, 2021";
-
-/* Class = "UILabel"; text = "Edit events"; ObjectID = "As6-DV-Foz"; */
-"As6-DV-Foz.text" = "Editar Eventos";
+"9tK-el-Hcu.text" = "Mar Oct 12, 2021";
 
 /* Class = "UIButton"; configuration.title = "Add Friends"; ObjectID = "AsB-Uy-lHD"; */
-"AsB-Uy-lHD.configuration.title" = "Agregar Amigos";
+"AsB-Uy-lHD.configuration.title" = "Agregar amigos;
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "AsB-Uy-lHD"; */
 "AsB-Uy-lHD.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "username"; ObjectID = "BAw-rh-tu7"; */
-"BAw-rh-tu7.text" = "nombre de usuario";
+"BAw-rh-tu7.text" = "usuario";
 
 /* Class = "UILabel"; text = "Meet"; ObjectID = "BZl-6u-sQg"; */
 "BZl-6u-sQg.text" = "Meet";
 
-/* Class = "UILabel"; text = "Name"; ObjectID = "CI6-Hf-DZ6"; */
-"CI6-Hf-DZ6.text" = "Nombre";
-
 /* Class = "UILabel"; text = "Event Name"; ObjectID = "CJi-PE-Bqa"; */
-"CJi-PE-Bqa.text" = "Nombre del Evento";
+"CJi-PE-Bqa.text" = "Nombre del evento";
 
 /* Class = "UILabel"; text = "Notification Data"; ObjectID = "CLy-C0-3uz"; */
-"CLy-C0-3uz.text" = "Data de Notificaciones";
+"CLy-C0-3uz.text" = "Info de la notificación";
 
 /* Class = "UILabel"; text = "username"; ObjectID = "CM9-HE-N8Q"; */
 "CM9-HE-N8Q.text" = "usuario";
 
 /* Class = "UILabel"; text = "GroupName"; ObjectID = "E4D-k4-62Z"; */
-"E4D-k4-62Z.text" = "NombreGrupo";
+"E4D-k4-62Z.text" = "NombreDelGrupo";
 
 /* Class = "UIButton"; configuration.title = "Accept"; ObjectID = "FUu-vh-nWX"; */
 "FUu-vh-nWX.configuration.title" = "Aceptar";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "FUu-vh-nWX"; */
+/* Class = "UIButton"; normalTitle = "Botón"; ObjectID = "FUu-vh-nWX"; */
 "FUu-vh-nWX.normalTitle" = "Botón";
 
-/* Class = "UILabel"; text = "Create Event"; ObjectID = "G78-rR-WCI"; */
-"G78-rR-WCI.text" = "Crear Evento";
+/* Class = "UILabel"; text = "Label"; ObjectID = "Feb-ad-h6L"; */
+"Feb-ad-h6L.text" = "Label";
 
-/* Class = "UILabel"; text = "Notification Feed"; ObjectID = "GKV-Dw-WdZ"; */
+/* Class = "UILabel"; text = "Crear Evento"; ObjectID = "G78-rR-WCI"; */
+"G78-rR-WCI.text" = "Crear evento";
+
+/* Class = "UILabel"; text = "Notificaciones"; ObjectID = "GKV-Dw-WdZ"; */
 "GKV-Dw-WdZ.text" = "Notificaciones";
 
-/* Class = "UITextField"; text = "1.5 HR"; ObjectID = "GkI-Gc-k9L"; */
-"GkI-Gc-k9L.text" = "1.5 HR";
-
-/* Class = "UITabBarItem"; title = "Groups"; ObjectID = "HCA-uk-QYU"; */
+/* Class = "UITabBarItem"; title = "Grupos"; ObjectID = "HCA-uk-QYU"; */
 "HCA-uk-QYU.title" = "Grupos";
 
-/* Class = "UILabel"; text = "Name"; ObjectID = "HZL-gk-bBd"; */
-"HZL-gk-bBd.text" = "Nombre";
+/* Class = "UILabel"; text = "Crear un"; ObjectID = "Hud-C7-NqJ"; */
+"Hud-C7-NqJ.text" = "Crear un";
 
-/* Class = "UILabel"; text = "Create a"; ObjectID = "Hud-C7-NqJ"; */
-"Hud-C7-NqJ.text" = "Crear";
-
-/* Class = "UIButton"; configuration.title = "Invite Link"; ObjectID = "J3D-6M-Tc3"; */
-"J3D-6M-Tc3.configuration.title" = "Link de Invitación";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "J3D-6M-Tc3"; */
-"J3D-6M-Tc3.normalTitle" = "Botón";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ldh-Cf-ddD"; */
+/* Class = "UIButton"; normalTitle = "Botón"; ObjectID = "Ldh-Cf-ddD"; */
 "Ldh-Cf-ddD.normalTitle" = "Botón";
 
-/* Class = "UILabel"; text = "Username"; ObjectID = "Lld-Hj-8Sb"; */
-"Lld-Hj-8Sb.text" = "Nombre de Usuario";
+/* Class = "UILabel"; text = "Usuario"; ObjectID = "Lld-Hj-8Sb"; */
+"Lld-Hj-8Sb.text" = "Usuario";
 
-/* Class = "UILabel"; text = "Description"; ObjectID = "Lt0-Ta-jpq"; */
+/* Class = "UILabel"; text = "Descripción"; ObjectID = "Lt0-Ta-jpq"; */
 "Lt0-Ta-jpq.text" = "Descripción";
-
-/* Class = "UILabel"; text = "username"; ObjectID = "M42-Uh-DI1"; */
-"M42-Uh-DI1.text" = "usuario";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "NGS-tf-WP7"; */
 "NGS-tf-WP7.title" = "Ajustes";
@@ -165,43 +141,58 @@
 "Nnw-pd-9r8.text" = "Me";
 
 /* Class = "UISearchBar"; placeholder = "Search username"; ObjectID = "O0q-FI-Haw"; */
-"O0q-FI-Haw.placeholder" = "Buscar nombre de usuario";
+"O0q-FI-Haw.placeholder" = "Buscar usuario";
 
 /* Class = "UILabel"; text = "Notifications"; ObjectID = "O7N-pM-CBP"; */
 "O7N-pM-CBP.text" = "Notificaciones";
 
 /* Class = "UITabBarItem"; title = "MyStack"; ObjectID = "OEW-zb-yoN"; */
-"OEW-zb-yoN.title" = "MiStack";
+"OEW-zb-yoN.title" = "MiCalendario";
+
+/* Class = "UILabel"; text = "10:00"; ObjectID = "Pgd-gp-fZH"; */
+"Pgd-gp-fZH.text" = "10:00";
 
 /* Class = "UILabel"; text = "Username"; ObjectID = "Pxv-0C-RsW"; */
-"Pxv-0C-RsW.text" = "Nombre de Usuario";
-
-/* Class = "UILabel"; text = "Event 3"; ObjectID = "S7T-uB-rMh"; */
-"S7T-uB-rMh.text" = "Event 3";
+"Pxv-0C-RsW.text" = "Usuario";
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "SHg-nY-i4q"; */
 "SHg-nY-i4q.text" = "Contraseña";
 
+/* Class = "UIButton"; configuration.title = "Send Request"; ObjectID = "SVB-zH-20M"; */
+"SVB-zH-20M.configuration.title" = "Solicitar";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SVB-zH-20M"; */
+"SVB-zH-20M.normalTitle" = "Botón";
+
 /* Class = "UILabel"; text = "Group Name"; ObjectID = "SYq-ZI-zYU"; */
-"SYq-ZI-zYU.text" = "Nombre de Grupo";
+"SYq-ZI-zYU.text" = "Nombre de grupo";
+
+/* Class = "UILabel"; text = "Location"; ObjectID = "SpK-DI-S5T"; */
+"SpK-DI-S5T.text" = "Lugar";
 
 /* Class = "UILabel"; text = "Group Name"; ObjectID = "Su3-BF-QnV"; */
-"Su3-BF-QnV.text" = "Nombre de Grupo";
-
-/* Class = "UILabel"; text = "Event 1"; ObjectID = "T1R-0g-CqC"; */
-"T1R-0g-CqC.text" = "Event 1";
+"Su3-BF-QnV.text" = "Nombre de grupo";
 
 /* Class = "UILabel"; text = "Tue Oct 12"; ObjectID = "TRS-Fj-oYs"; */
-"TRS-Fj-oYs.text" = "Tue Oct 12";
+"TRS-Fj-oYs.text" = "Mar Oct 12";
 
 /* Class = "UISegmentedControl"; U7d-ZA-GXa.segmentTitles[0] = "Light"; ObjectID = "U7d-ZA-GXa"; */
 "U7d-ZA-GXa.segmentTitles[0]" = "Luz";
 
 /* Class = "UISegmentedControl"; U7d-ZA-GXa.segmentTitles[1] = "Dark"; ObjectID = "U7d-ZA-GXa"; */
-"U7d-ZA-GXa.segmentTitles[1]" = "Oscuro";
+"U7d-ZA-GXa.segmentTitles[1]" = "Obscuro";
+
+/* Class = "UILabel"; text = "Set Reminder"; ObjectID = "Ufo-ZS-P3V"; */
+"Ufo-ZS-P3V.text" = "Recordatorio";
 
 /* Class = "UILabel"; text = "Date"; ObjectID = "VeE-U2-tu3"; */
 "VeE-U2-tu3.text" = "Fecha";
+
+/* Class = "UIButton"; configuration.title = "Save"; ObjectID = "Vov-FJ-hBG"; */
+"Vov-FJ-hBG.configuration.title" = "Guardar";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Vov-FJ-hBG"; */
+"Vov-FJ-hBG.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Friends can"; ObjectID = "Vv9-y1-hvB"; */
 "Vv9-y1-hvB.text" = "Amigos pueden";
@@ -212,8 +203,11 @@
 /* Class = "UILabel"; text = "Settings"; ObjectID = "YZ1-0G-Dz2"; */
 "YZ1-0G-Dz2.text" = "Ajustes";
 
+/* Class = "UILabel"; text = "Name"; ObjectID = "Yd1-xv-wwy"; */
+"Yd1-xv-wwy.text" = "Nombre";
+
 /* Class = "UIButton"; configuration.title = "Join Event"; ObjectID = "Yye-Ya-UnS"; */
-"Yye-Ya-UnS.configuration.title" = "Unirse al Evento";
+"Yye-Ya-UnS.configuration.title" = "Unirse evento";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Yye-Ya-UnS"; */
 "Yye-Ya-UnS.normalTitle" = "Botón";
@@ -225,25 +219,31 @@
 "Zaa-v0-AZT.text" = "Descripción";
 
 /* Class = "UILabel"; text = "Location"; ObjectID = "ZwJ-kF-b6J"; */
-"ZwJ-kF-b6J.text" = "Ubicación";
+"ZwJ-kF-b6J.text" = "Lugar";
 
 /* Class = "UINavigationItem"; title = "New Group"; ObjectID = "a15-Hv-klc"; */
-"a15-Hv-klc.title" = "Nuevo Grupo";
+"a15-Hv-klc.title" = "Grupo Nuevo";
 
 /* Class = "UILabel"; text = "Account"; ObjectID = "anp-rE-6cJ"; */
 "anp-rE-6cJ.text" = "Cuenta";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "awF-n8-Yyy"; */
-"awF-n8-Yyy.normalTitle" = "Botón";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "apj-36-HOp"; */
+"apj-36-HOp.normalTitle" = "Botón";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "awU-vx-uUY"; */
+"awU-vx-uUY.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Location"; ObjectID = "bgK-N7-nha"; */
-"bgK-N7-nha.text" = "Ubicación";
+"bgK-N7-nha.text" = "Lugar";
 
-/* Class = "UILabel"; text = "Duration"; ObjectID = "dGO-9h-ovC"; */
-"dGO-9h-ovC.text" = "Duración";
+/* Class = "UINavigationItem"; title = "More Events"; ObjectID = "cTw-U6-1KM"; */
+"cTw-U6-1KM.title" = "Más eventos";
+
+/* Class = "UILabel"; text = "End Time"; ObjectID = "dGO-9h-ovC"; */
+"dGO-9h-ovC.text" = "Termina";
 
 /* Class = "UILabel"; text = "Friend Requests"; ObjectID = "dKK-6u-l3d"; */
-"dKK-6u-l3d.text" = "Solicitudes de Amistad";
+"dKK-6u-l3d.text" = "Solicitudes";
 
 /* Class = "UIButton"; configuration.title = "Create"; ObjectID = "daj-7o-kNp"; */
 "daj-7o-kNp.configuration.title" = "Crear";
@@ -251,14 +251,14 @@
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "daj-7o-kNp"; */
 "daj-7o-kNp.normalTitle" = "Botón";
 
-/* Class = "UILabel"; text = "Event 2"; ObjectID = "fNA-om-kei"; */
-"fNA-om-kei.text" = "Event 2";
+/* Class = "UITextField"; text = "Event Name"; ObjectID = "fuO-mk-HYi"; */
+"fuO-mk-HYi.text" = "Nombre de evento";
 
 /* Class = "UILabel"; text = "Description"; ObjectID = "fz0-7h-Osl"; */
 "fz0-7h-Osl.text" = "Descripción";
 
 /* Class = "UIButton"; configuration.title = "Decline"; ObjectID = "g07-Qe-PFz"; */
-"g07-Qe-PFz.configuration.title" = "Denegar";
+"g07-Qe-PFz.configuration.title" = "Declinar";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "g07-Qe-PFz"; */
 "g07-Qe-PFz.normalTitle" = "Botón";
@@ -266,14 +266,26 @@
 /* Class = "UILabel"; text = "End Time"; ObjectID = "g4s-Rv-bme"; */
 "g4s-Rv-bme.text" = "Terminar";
 
-/* Class = "UILabel"; text = "Create polls"; ObjectID = "gOB-C7-PdP"; */
-"gOB-C7-PdP.text" = "Crear Encuesta";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "g5T-LP-XOu"; */
+"g5T-LP-XOu.normalTitle" = "Botón";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "g6w-6j-9Ga"; */
+"g6w-6j-9Ga.normalTitle" = "Botón";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gVn-qC-of1"; */
+"gVn-qC-of1.text" = "Label";
 
 /* Class = "UILabel"; text = "Date"; ObjectID = "god-Cl-FiZ"; */
 "god-Cl-FiZ.text" = "Fecha";
 
 /* Class = "UILabel"; text = "Language"; ObjectID = "h3a-d5-Qed"; */
 "h3a-d5-Qed.text" = "Lenguaje";
+
+/* Class = "UIButton"; configuration.title = "Delete Event"; ObjectID = "h9p-VH-HBM"; */
+"h9p-VH-HBM.configuration.title" = "Borrar evento";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "h9p-VH-HBM"; */
+"h9p-VH-HBM.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Account"; ObjectID = "huF-d5-wet"; */
 "huF-d5-wet.text" = "Cuenta";
@@ -290,23 +302,17 @@
 /* Class = "UILabel"; text = "Groups"; ObjectID = "icK-dL-6bm"; */
 "icK-dL-6bm.text" = "Grupos";
 
-/* Class = "UITextField"; text = "11:01 AM"; ObjectID = "j4W-dL-CSa"; */
-"j4W-dL-CSa.text" = "11:01 AM";
-
 /* Class = "UILabel"; text = "Name"; ObjectID = "kYq-sn-1qS"; */
 "kYq-sn-1qS.text" = "Nombre";
 
-/* Class = "UILabel"; text = "Event Name"; ObjectID = "kz7-og-hci"; */
-"kz7-og-hci.text" = "Nombre del Evento";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kae-1k-ua1"; */
+"kae-1k-ua1.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Location"; ObjectID = "l5s-iS-7fp"; */
-"l5s-iS-7fp.text" = "Ubicación";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "l8m-dW-2la"; */
-"l8m-dW-2la.normalTitle" = "Botón";
+"l5s-iS-7fp.text" = "Lugar";
 
 /* Class = "UISegmentedControl"; luX-Ce-a8F.segmentTitles[0] = "Admin Run"; ObjectID = "luX-Ce-a8F"; */
-"luX-Ce-a8F.segmentTitles[0]" = "Con Admin";
+"luX-Ce-a8F.segmentTitles[0]" = "Administrado";
 
 /* Class = "UISegmentedControl"; luX-Ce-a8F.segmentTitles[1] = "Community"; ObjectID = "luX-Ce-a8F"; */
 "luX-Ce-a8F.segmentTitles[1]" = "Comunidad";
@@ -315,28 +321,31 @@
 "mT9-IX-czu.title" = "Notificaciones";
 
 /* Class = "UIButton"; configuration.title = "Sign up"; ObjectID = "mvL-Ix-2N8"; */
-"mvL-Ix-2N8.configuration.title" = "Registrarte";
+"mvL-Ix-2N8.configuration.title" = "Registro";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mvL-Ix-2N8"; */
 "mvL-Ix-2N8.normalTitle" = "Botón";
 
 /* Class = "UINavigationItem"; title = "Event Details"; ObjectID = "nKc-st-9Gw"; */
-"nKc-st-9Gw.title" = "Detalles del Evento";
+"nKc-st-9Gw.title" = "Detalles de evento";
 
 /* Class = "UILabel"; text = "Email"; ObjectID = "ndh-nD-JEH"; */
-"ndh-nD-JEH.text" = "Email";
+"ndh-nD-JEH.text" = "Correo";
+
+/* Class = "UILabel"; text = "Edit event"; ObjectID = "p0b-Oe-29O"; */
+"p0b-Oe-29O.text" = "Editar evento";
 
 /* Class = "UILabel"; text = "Confirm Password"; ObjectID = "piQ-Od-y9n"; */
 "piQ-Od-y9n.text" = "Confirmar Contraseña";
 
 /* Class = "UIButton"; configuration.title = "New Group"; ObjectID = "qeJ-Fz-rKY"; */
-"qeJ-Fz-rKY.configuration.title" = "Nuevo Grupo";
+"qeJ-Fz-rKY.configuration.title" = "Grupo Nuevo";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "qeJ-Fz-rKY"; */
 "qeJ-Fz-rKY.normalTitle" = "Botón";
 
 /* Class = "UIButton"; configuration.title = "Add Friends"; ObjectID = "qfa-5I-kNf"; */
-"qfa-5I-kNf.configuration.title" = "Agregar Amigos";
+"qfa-5I-kNf.configuration.title" = "Agregar amigos";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "qfa-5I-kNf"; */
 "qfa-5I-kNf.normalTitle" = "Botón";
@@ -347,32 +356,29 @@
 /* Class = "UILabel"; text = "10:00"; ObjectID = "roB-ug-XhV"; */
 "roB-ug-XhV.text" = "10:00";
 
-/* Class = "UILabel"; text = "Time"; ObjectID = "sXg-QN-b8q"; */
-"sXg-QN-b8q.text" = "Tiempo";
+/* Class = "UILabel"; text = "Start Time"; ObjectID = "sXg-QN-b8q"; */
+"sXg-QN-b8q.text" = "Empieza";
 
 /* Class = "UILabel"; text = "Attendees"; ObjectID = "tQA-1w-jiD"; */
 "tQA-1w-jiD.text" = "Asistentes";
 
-/* Class = "UILabel"; text = "Send messages"; ObjectID = "tj4-zY-zdo"; */
-"tj4-zY-zdo.text" = "Mander mensajes";
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "v7S-I0-vG7"; */
+"v7S-I0-vG7.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Email"; ObjectID = "vOG-sZ-fS0"; */
-"vOG-sZ-fS0.text" = "Email";
-
-/* Class = "UILabel"; text = "Username"; ObjectID = "vwF-mT-Tcs"; */
-"vwF-mT-Tcs.text" = "Nombre de Usuario";
+"vOG-sZ-fS0.text" = "email";
 
 /* Class = "UIButton"; configuration.title = "Logout"; ObjectID = "wkn-Yi-mth"; */
-"wkn-Yi-mth.configuration.title" = "Cerrar Sesión";
+"wkn-Yi-mth.configuration.title" = "cerrar sesion";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "wkn-Yi-mth"; */
 "wkn-Yi-mth.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Start Time"; ObjectID = "xSz-5d-0IJ"; */
-"xSz-5d-0IJ.text" = "Comenzar";
+"xSz-5d-0IJ.text" = "Empezar";
 
 /* Class = "UIButton"; configuration.title = "Group Name"; ObjectID = "xyq-6E-nTW"; */
-"xyq-6E-nTW.configuration.title" = "Nombre de Grupo";
+"xyq-6E-nTW.configuration.title" = "Nombre de grupo";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "xyq-6E-nTW"; */
 "xyq-6E-nTW.normalTitle" = "Botón";
@@ -384,10 +390,10 @@
 "y2N-Iq-BCZ.normalTitle" = "Botón";
 
 /* Class = "UILabel"; text = "Tue Oct 12, 2021"; ObjectID = "y66-GZ-MCP"; */
-"y66-GZ-MCP.text" = "Tue Oct 12, 2021";
+"y66-GZ-MCP.text" = "Mar Oct 12, 2021";
 
 /* Class = "UISearchBar"; placeholder = "Search username"; ObjectID = "yCh-GE-6eJ"; */
-"yCh-GE-6eJ.placeholder" = "Buscar nombre de usuario";
+"yCh-GE-6eJ.placeholder" = "Buscar usuario";
 
 /* Class = "UILabel"; text = "Location"; ObjectID = "yZb-fB-uPt"; */
-"yZb-fB-uPt.text" = "Ubicación";
+"yZb-fB-uPt.text" = "Lugar";
