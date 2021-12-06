@@ -105,6 +105,7 @@ class SignUpViewController: UIViewController {
                                             "friendRequests": [],
                                             "events": [],
                                             "rgb": self.getRandomColor()
+                                            // TODO: add img here?
                                         ]
                                         self.db.collection("Users").document(uid).setData(userDb)
                                     }

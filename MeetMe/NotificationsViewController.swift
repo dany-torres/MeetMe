@@ -28,9 +28,15 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         // Do any additional setup after loading the view.
         friendRequestTableView.delegate = self
         friendRequestTableView.dataSource = self
+        friendRequestTableView.layer.borderWidth = 0.5
+        friendRequestTableView.layer.cornerRadius = 10
+        friendRequestTableView.layer.borderColor = UIColor(red: 208/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
         
         upcomingEventsTableView.delegate = self
         upcomingEventsTableView.dataSource = self
+        upcomingEventsTableView.layer.borderWidth = 0.5
+        upcomingEventsTableView.layer.cornerRadius = 10
+        upcomingEventsTableView.layer.borderColor = UIColor(red: 208/255, green: 204/255, blue: 204/255, alpha: 1).cgColor
 
         //populate event list and friend request list from database
         
@@ -172,6 +178,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 let friend = friendRequesList[row]
                 cell.name.text = friend.name
                 cell.username.text = "@ \(friend.username)"
+                setUserPicture(uid: friend.hash, cell: cell)
+                
+                // Format cell, add corners
+                cell.contentView.layer.cornerRadius = 5.0
+                cell.contentView.layer.masksToBounds = true
+                cell.layer.cornerRadius = 5.0
+                cell.layer.masksToBounds = false
                 return cell
                 
             case upcomingEventsTableView:
@@ -196,10 +209,19 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
 
             
                 cell.upcomingEventLabel.text = "\(event.eventName) starts in \(hour) hours and \(min) minutes"
+                
+                // TODO: set group picture
+                
+                // Format cell, add corners
+                cell.contentView.layer.cornerRadius = 5.0
+                cell.contentView.layer.masksToBounds = true
+                cell.layer.cornerRadius = 5.0
+                cell.layer.masksToBounds = false
+            
                 return cell
             
             default:
-            
+            // TODO: CReo que ya puedes borrar esto
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as! UpcomingEventTableViewCell
             let row = indexPath.row
             let event = eventList[row]
@@ -220,6 +242,29 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
+    // Sets user picture within cell
+    func setUserPicture(uid:String, cell:FriendRequestTableViewCell){
+        // Make image a circle
+        cell.userPicture.layer.borderWidth = 1
+        cell.userPicture.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        cell.userPicture.layer.cornerRadius = cell.userPicture.frame.height/2
+        cell.userPicture.clipsToBounds = true
+        
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                cell.userPicture.image = image
+            }
+        })
+        task.resume()
+    }
     
     //method for accepting friend request
     func didTapAcceptButton(cell: FriendRequestTableViewCell) {

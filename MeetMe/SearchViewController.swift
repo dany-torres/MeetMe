@@ -53,7 +53,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let data = document.data()
                                     var friends = data!["friends"] as! [String]
                                     friends.append(uid)
-                                    if !friends.contains(newUser.hash){
+                                    if newUser.hash != uid{
                                         self.usersList.append(newUser)
                                         self.resultsTableView.reloadData()
                                     }
@@ -105,20 +105,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Set Picture
         let uid = searchedUser.hash
-        let urlString = UserDefaults.standard.value(forKey: uid) as? String
-        if urlString != nil {
-            let url = URL(string: urlString!)
-            let task = URLSession.shared.dataTask(with: url!, completionHandler: { data, _, error in
-                guard let data = data, error == nil else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data)
-                    cell.userImage.image = image
-                }
-            })
-            task.resume()
-        }
+        setPicture(uid:uid, cell:cell)
         
         //check cases and update button label
         //case 1: searched user is in friendreq list && not in friends list -> button label: requested
@@ -141,18 +128,35 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let data = document.data()
                                     let friends = data!["friends"] as! [String]
                                     let friendRequests = data!["friendRequests"] as! [String]
-                                    //friends.append(uid)
+                                    
+                                    // Cases:
+                                    // You have the friend request
                                     if (friendRequests.contains(searchedUser.hash) && !friends.contains(searchedUser.hash)) {
-                                        cell.requestButton.setTitle("Requested", for: .normal)
-                                        self.resultsTableView.reloadData()
+                                        cell.requestButton.setTitle("Wants to be friends", for: .normal)
                                     }
+                                    
+                                    // You request them
+                                    let ref = self.db.collection("Users").document(searchedUser.hash)
+                                    ref.getDocument { (document, error) in
+                                        if let document = document, document.exists {
+                                            let data = document.data()
+                                            let userFriendRequests = data!["friendRequests"] as! [String]
+                                            if (userFriendRequests.contains(uid) && !friends.contains(searchedUser.hash)) {
+                                                cell.requestButton.setTitle("Requested", for: .normal)
+                                                cell.requestButton.isEnabled = false
+                                            }
+                                        }
+                                    }
+                                    
+                                    // No friend request either side
                                     if(!friendRequests.contains(searchedUser.hash) && !friends.contains(searchedUser.hash)){
                                         cell.requestButton.setTitle("Add", for: .normal)
-                                        self.resultsTableView.reloadData()
                                     }
+                                    
+                                    // You are already friends
                                     if(!friendRequests.contains(searchedUser.hash) && friends.contains(searchedUser.hash)){
                                         cell.requestButton.setTitle("Added", for: .normal)
-                                        self.resultsTableView.reloadData()
+                                        cell.requestButton.isEnabled = false
                                     }
                                 }
                             }
@@ -165,6 +169,23 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
 
+    // Sets user picture within cell
+    func setPicture(uid:String, cell:UserRequestTableViewCell){
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                cell.userImage.image = image
+            }
+        })
+        task.resume()
+    }
     
     //when button is clicked, add the uid of curr user to clicked users friend request list
     //when loading the table view, we want to set the title of the button based on wether the searched user is in
@@ -210,6 +231,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 }
             }
+        } else if (buttonStatus == "Wants to be friends"){
+            // go to notifications
+            performSegue(withIdentifier: "searchNotificationsSegue", sender: nil)
             
         }
         

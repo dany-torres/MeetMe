@@ -31,7 +31,15 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
         locationLabel.text! = "📍 "
         setDayLabel()
         setUserInfo()
+        setUserPicture()
         initTime()
+        
+        // make image a circle
+        // Make image a circle
+        displayPicture.layer.borderWidth = 1
+        displayPicture.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
+        displayPicture.layer.cornerRadius = displayPicture.frame.height/2
+        displayPicture.clipsToBounds = true
         
         // set array of accepted events
         if Auth.auth().currentUser != nil {
@@ -56,6 +64,7 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
         self.eventList = fetchedEvents
     }
     
+    
     // Sets the name, location and picture fields TODO: set picture
     func setUserInfo(){
         if Auth.auth().currentUser != nil {
@@ -74,6 +83,30 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
                         self.locationLabel.text! += data["location"] as? String ?? ""
                     }
                 }
+            }
+        }
+    }
+    
+    // Function that sets the user's picture
+    func setUserPicture() {
+        if Auth.auth().currentUser != nil {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let uid = user.uid
+                guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+                      let url = URL(string: urlString) else {
+                          return
+                      }
+                let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: data)
+                        self.displayPicture.image = image
+                    }
+                })
+                task.resume()
             }
         }
     }

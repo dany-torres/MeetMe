@@ -17,7 +17,7 @@ protocol DeleteEvent {
 }
 
 protocol UpdateEvent {
-    func updateEvent(event: Event)
+    func updateEvent(cell: StackTableViewCell, event:Event)
 }
 
 protocol UpdateGroup {
@@ -26,7 +26,8 @@ protocol UpdateGroup {
 
 class GroupStackViewController: UIViewController, UITableViewDataSource,
                                     UITableViewDelegate, AddNewEvent, DeleteEvent,
-                                    UpdateEvent, UpdateGroup, MyStackCellDelegate {
+                                UpdateEvent, UpdateGroup, MyStackCellDelegate {
+    
     public var eventList:[Event] = []
     var delegate: UITableView!
     var currGroup: Group!
@@ -64,8 +65,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                 let myNormalAttributedTitle = NSAttributedString(string: self.currGroup.groupName,
                     attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 17)!])
                 self.groupNameLabel.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+                self.rePopulateEventStack()
             }
-            self.rePopulateEventStack()
+//            self.rePopulateEventStack()
         }
     }
     
@@ -177,7 +179,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     // Set the events block in the cells accordingly
     func setEvents(cell:StackTableViewCell, events:[Event]) {
         hideUnusedEvents(cell:cell)
-        print(">> GOT IN SET EVENTS, eventsCount: \(events.count)")
+//        print(">> GOT IN SET EVENTS, eventsCount: \(events.count)")
         
         switch events.count {
         case 0:
@@ -324,6 +326,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventOne
              destination.currGroup = currGroup
+             destination.cell = currCell
+             destination.eventBlockNum = 1
          }
          
          // Check if we are navigating to the event 2 details
@@ -332,6 +336,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventTwo
              destination.currGroup = currGroup
+             destination.cell = currCell
+             destination.eventBlockNum = 2
          }
          
          // Check if we are navigating to the event 3 details
@@ -340,6 +346,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventThree[0]
              destination.currGroup = currGroup
+             destination.cell = currCell
+             destination.eventBlockNum = 3
          }
          
          // Check if we are navigating to the event 3 details
@@ -348,6 +356,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.events = currCell.eventThree
              destination.currGroup = currGroup
+             destination.cell = currCell
          }
          
      }
@@ -449,7 +458,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     }
     
     // Updates event in local list
-    func updateEvent(event: Event) {
+    func updateEvent(cell: StackTableViewCell, event: Event) {
+        let indexPath = self.eventStack.indexPath(for: cell)
+//        eventStack.reloadRows(at: [indexPath], with: .top)
         if let elem = eventList.first(where: {$0.eventHash == event.eventHash}) {
             elem.eventName = event.eventName
             elem.startTime = event.startTime
@@ -468,3 +479,4 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     }
          
 }
+
