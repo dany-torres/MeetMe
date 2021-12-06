@@ -105,20 +105,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Set Picture
         let uid = searchedUser.hash
-        let urlString = UserDefaults.standard.value(forKey: uid) as? String
-        if urlString != nil {
-            let url = URL(string: urlString!)
-            let task = URLSession.shared.dataTask(with: url!, completionHandler: { data, _, error in
-                guard let data = data, error == nil else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    let image = UIImage(data: data)
-                    cell.userImage.image = image
-                }
-            })
-            task.resume()
-        }
+        setPicture(uid:uid, cell:cell)
         
         //check cases and update button label
         //case 1: searched user is in friendreq list && not in friends list -> button label: requested
@@ -165,6 +152,23 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
 
+    // Sets user picture within cell
+    func setPicture(uid:String, cell:UserRequestTableViewCell){
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                cell.userImage.image = image
+            }
+        })
+        task.resume()
+    }
     
     //when button is clicked, add the uid of curr user to clicked users friend request list
     //when loading the table view, we want to set the title of the button based on wether the searched user is in

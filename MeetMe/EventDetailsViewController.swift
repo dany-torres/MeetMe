@@ -25,6 +25,8 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     var event:Event? = nil
     var currGroup: Group!
+    var cell:StackTableViewCell!
+    var eventBlockNum:Int = 0
     
     var delegate: UIViewController!
 
@@ -262,7 +264,22 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         
         // Update event locally with protocol
         let otherVC = delegate as! UpdateEvent
-        otherVC.updateEvent(event: self.event!)
+        otherVC.updateEvent(cell:cell, event:event!)
+        
+        let myNormalAttributedTitle = NSAttributedString(string: self.event!.eventName,
+            attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 14)!])
+        
+        switch eventBlockNum {
+        case 1:
+            cell.button1.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+        case 2:
+            cell.button2.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+        case 3:
+            cell.button3.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+        default:
+            break // should not get here
+        }
+        
     }
     
     // Function to check if new information is allowed
