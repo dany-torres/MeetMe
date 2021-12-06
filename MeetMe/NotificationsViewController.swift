@@ -211,12 +211,14 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 cell.upcomingEventLabel.text = "\(event.eventName) starts in \(hour) hours and \(min) minutes"
                 
                 // TODO: set group picture
-                
+                let uid = event.groupHash
+                setPicture(uid:uid, cell:cell)
                 // Format cell, add corners
                 cell.contentView.layer.cornerRadius = 5.0
                 cell.contentView.layer.masksToBounds = true
                 cell.layer.cornerRadius = 5.0
                 cell.layer.masksToBounds = false
+                
             
                 return cell
             
@@ -261,6 +263,24 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             DispatchQueue.main.async {
                 let image = UIImage(data: data)
                 cell.userPicture.image = image
+            }
+        })
+        task.resume()
+    }
+    
+    // Sets user picture within cell
+    func setPicture(uid:String, cell:UpcomingEventTableViewCell){
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
+              let url = URL(string: urlString) else {
+                  return
+              }
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                cell.imageView?.image = image
             }
         })
         task.resume()
