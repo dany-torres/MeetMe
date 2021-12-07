@@ -243,8 +243,19 @@ class CreateEventViewController: UIViewController {
                              let content = UNMutableNotificationContent()
                                  content.title = "MeetMe"
                              
-                             content.body = "\(self.eventNameTextField.text!) starts in \(self.reminderChoice)"
-                                 content.sound = UNNotificationSound.default
+                             //calculate difference between start and reminder choice
+                             let diffs = Calendar.current.dateComponents([.hour, .minute], from: self.reminderChoicePicker.date, to: self.startTimePicker.date)
+                             let finalDate = Calendar.current.date(from:diffs)!
+                             let calendar = Calendar.current
+                             let hour = calendar.component(.hour, from: finalDate)
+                             let min = calendar.component(.minute, from: finalDate)
+                             
+                             if(hour == 0){
+                                 content.body = "\(self.eventNameTextField.text!) starts in \(min) minutes"
+                             }else{
+                                 content.body = "\(self.eventNameTextField.text!) starts in \(hour) hours and \(min) minutes"
+                             }
+                             content.sound = UNNotificationSound.default
                              //trigger
                              let dateInfo = Calendar.current.dateComponents([.hour,.minute], from: self.reminderChoicePicker.date)
                              let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
