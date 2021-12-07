@@ -80,6 +80,7 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             editButton.isHidden = false
             deleteButton.isHidden = false
             joinButton.isHidden = true
+            saveButton.isHidden = false
         } else if (!currGroup.adminRun && event!.editEvents) ||
                   (!event!.editEvents && event?.eventCreator == Auth.auth().currentUser!.uid) ||
                   (currGroup.adminRun && currGroup.groupCreator == Auth.auth().currentUser!.uid) {
@@ -206,6 +207,7 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         cell.contentView.layer.masksToBounds = true
         cell.layer.cornerRadius = 5.0
         cell.layer.masksToBounds = false
+        
         return cell
     }
     

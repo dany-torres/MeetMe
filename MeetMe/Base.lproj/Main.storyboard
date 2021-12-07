@@ -1751,7 +1751,7 @@
                                                             <buttonConfiguration key="configuration" style="plain" title=""/>
                                                             <connections>
                                                                 <action selector="didTapCellButton1MyStack:" destination="xse-ec-TWe" eventType="touchUpInside" id="Ter-Cs-d6u"/>
-                                                                <segue destination="O6s-m2-AMY" kind="show" identifier="eventOneSegue" id="E8j-yD-Rol"/>
+                                                                <segue destination="O6s-m2-AMY" kind="show" identifier="event1Segue" id="E8j-yD-Rol"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kae-1k-ua1">
@@ -1761,7 +1761,7 @@
                                                             <buttonConfiguration key="configuration" style="plain" title=""/>
                                                             <connections>
                                                                 <action selector="didTapCellButton2MyStack:" destination="xse-ec-TWe" eventType="touchUpInside" id="Tt6-mU-1U9"/>
-                                                                <segue destination="O6s-m2-AMY" kind="presentation" identifier="eventTwoSegue" id="TnS-fh-lYC"/>
+                                                                <segue destination="O6s-m2-AMY" kind="presentation" identifier="event2Segue" id="TnS-fh-lYC"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5T-LP-XOu">
@@ -1771,7 +1771,7 @@
                                                             <buttonConfiguration key="configuration" style="plain" title=""/>
                                                             <connections>
                                                                 <action selector="didTapCellButton3MyStack:" destination="xse-ec-TWe" eventType="touchUpInside" id="5f3-So-MgJ"/>
-                                                                <segue destination="O6s-m2-AMY" kind="show" identifier="singleEvent3" id="s1b-5j-cqU"/>
+                                                                <segue destination="O6s-m2-AMY" kind="show" identifier="event3Segue" id="s1b-5j-cqU"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -1871,7 +1871,7 @@
                         <outlet property="locationLabel" destination="bgK-N7-nha" id="e3H-uu-wE7"/>
                         <outlet property="myStack" destination="zii-hF-8JW" id="elf-Hi-9w2"/>
                         <outlet property="nameLabel" destination="9Jt-JK-L9a" id="xqd-jl-qtP"/>
-                        <segue destination="tsb-qf-L9L" kind="show" identifier="eventsListSegue" id="yGi-aS-iRG"/>
+                        <segue destination="tsb-qf-L9L" kind="show" identifier="toEventListSegue" id="yGi-aS-iRG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gjK-hd-b4I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

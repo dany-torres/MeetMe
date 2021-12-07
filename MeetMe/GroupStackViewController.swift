@@ -487,14 +487,12 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     
     // Updates event in local list
     func updateEvent(event: Event) {
-//        let indexPath = self.eventStack.indexPath(for: cell)
-////        eventStack.reloadRows(at: [indexPath], with: .top)
-//        if let elem = eventList.first(where: {$0.eventHash == event.eventHash}) {
-//            elem.eventName = event.eventName
-//            elem.startTime = event.startTime
-//            elem.endTime = event.endTime
-//            elem.location = event.location
-//        }
+        if let elem = eventList.first(where: {$0.eventHash == event.eventHash}) {
+            elem.eventName = event.eventName
+            elem.startTime = event.startTime
+            elem.endTime = event.endTime
+            elem.location = event.location
+        }
         eventStack.reloadData()
     }
     
