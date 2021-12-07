@@ -25,7 +25,7 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     var event:Event? = nil
     var currGroup: Group!
-    var cell:StackTableViewCell!
+//    var cell:StackTableViewCell!
     var eventBlockNum:Int = 0
     
     var delegate: UIViewController!
@@ -73,21 +73,22 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         // Case 1: Community Run AND event is editable
         // Case 2: Admin Run AND group creator is trying to edit
         // Case 3: Check if uneditable, but user is event creator
-        if (!currGroup.adminRun && event!.editEvents) ||
-            (!event!.editEvents && event?.eventCreator == Auth.auth().currentUser!.uid) ||
-            (currGroup.adminRun && currGroup.groupCreator == Auth.auth().currentUser!.uid) {
-            editButton.isHidden = false
-            saveButton.isHidden = false
-        }
-        
         // Check if it's the event creator
+        print("**BEFOREE")
         if (event?.eventCreator == Auth.auth().currentUser!.uid){
+            print(">>>GOT HERE")
+            editButton.isHidden = false
             deleteButton.isHidden = false
             joinButton.isHidden = true
-        }
-        
-        // Check if current user is already part of the event
-        if (event!.listOfAttendees.contains(Auth.auth().currentUser!.uid)){
+        } else if (!currGroup.adminRun && event!.editEvents) ||
+                  (!event!.editEvents && event?.eventCreator == Auth.auth().currentUser!.uid) ||
+                  (currGroup.adminRun && currGroup.groupCreator == Auth.auth().currentUser!.uid) {
+            print(">>>GOT HERE 2")
+            editButton.isHidden = false
+            saveButton.isHidden = false
+        } else if (event!.listOfAttendees.contains(Auth.auth().currentUser!.uid)){
+            print(">>>GOT HERE 3")
+            // Check if current user is already part of the event
             let myNormalAttributedTitle = NSAttributedString(string: "Unjoin",
                 attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 13)!])
             joinButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
@@ -298,22 +299,22 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         if (eventBlockNum != 4){
             // Update event locally with protocol
             let otherVC = delegate as! UpdateEvent
-            otherVC.updateEvent(cell:cell, event:event!)
+            otherVC.updateEvent(event:event!)
         }
         
         let myNormalAttributedTitle = NSAttributedString(string: self.event!.eventName,
             attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 14)!])
         
-        switch eventBlockNum {
-        case 1:
-            cell.button1.setAttributedTitle(myNormalAttributedTitle, for: .normal)
-        case 2:
-            cell.button2.setAttributedTitle(myNormalAttributedTitle, for: .normal)
-        case 3:
-            cell.button3.setAttributedTitle(myNormalAttributedTitle, for: .normal)
-        default:
-            break // should not get here
-        }
+//        switch eventBlockNum {
+//        case 1:
+//            cell.button1.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+//        case 2:
+//            cell.button2.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+//        case 3:
+//            cell.button3.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+//        default:
+//            break // should not get here
+//        }
         
     }
     

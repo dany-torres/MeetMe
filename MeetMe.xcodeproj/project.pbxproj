@@ -17,6 +17,7 @@
 		A11FC8FC271E25C3005C37B1 /* GroupsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FB271E25C3005C37B1 /* GroupsClass.swift */; };
 		A11FC8FE271E279F005C37B1 /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FC8FD271E279F005C37B1 /* UserClass.swift */; };
 		A153D6312733611D00DE247E /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A153D6302733611C00DE247E /* GroupsTableViewCell.swift */; };
+		B64F5039275EDBF10037AAF9 /* MyStackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F5038275EDBF10037AAF9 /* MyStackTableViewCell.swift */; };
 		B67AA47727509187009FEEAE /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67AA47627509187009FEEAE /* EventListViewController.swift */; };
 		B698C9C8274EB0C100B608D6 /* StackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B698C9C7274EB0C000B608D6 /* StackTableViewCell.swift */; };
 		B6ED5CAD2722682600D33A08 /* README.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B6ED5CAC2722682600D33A08 /* README.pdf */; };
@@ -55,6 +56,7 @@
 		A153D6302733611C00DE247E /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
 		B64F5036275ED13C0037AAF9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		B64F5037275ED13C0037AAF9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		B64F5038275EDBF10037AAF9 /* MyStackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStackTableViewCell.swift; sourceTree = "<group>"; };
 		B67AA47627509187009FEEAE /* EventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		B698C9C7274EB0C000B608D6 /* StackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackTableViewCell.swift; sourceTree = "<group>"; };
 		B6ED5CAC2722682600D33A08 /* README.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = README.pdf; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				B6F25535271BE43A0089FF17 /* SettingsViewController.swift */,
 				B6F25539271BE4690089FF17 /* NotificationsViewController.swift */,
 				B6F2553B271BE4800089FF17 /* MyStackViewController.swift */,
+				B64F5038275EDBF10037AAF9 /* MyStackTableViewCell.swift */,
 				B6F255312715F6DE0089FF17 /* GroupSettingsViewController.swift */,
 				B6F2552F271542F80089FF17 /* GroupStackViewController.swift */,
 				B6F2552D2715395A0089FF17 /* FriendListViewController.swift */,
@@ -310,6 +313,7 @@
 				B6F2552E2715395A0089FF17 /* FriendListViewController.swift in Sources */,
 				B6F255112713DF400089FF17 /* AppDelegate.swift in Sources */,
 				B6F255342716916C0089FF17 /* CreateEventViewController.swift in Sources */,
+				B64F5039275EDBF10037AAF9 /* MyStackTableViewCell.swift in Sources */,
 				B6F25538271BE4530089FF17 /* SearchViewController.swift in Sources */,
 				B6F255132713DF400089FF17 /* SceneDelegate.swift in Sources */,
 				B6F25530271542F80089FF17 /* GroupStackViewController.swift in Sources */,

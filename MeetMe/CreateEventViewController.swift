@@ -18,7 +18,6 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var createEventLabel: UILabel!
     @IBOutlet weak var eventNameLabel: UILabel!
     
-    @IBOutlet weak var notificationsButton: UIButton!
     @IBOutlet weak var editEventButton: UIButton!
     
     @IBOutlet weak var startTimePicker: UIDatePicker!
@@ -46,10 +45,7 @@ class CreateEventViewController: UIViewController {
         // Setting up button images for selected state
         let checkmark = UIImage(systemName: "checkmark.square")
         let square = UIImage(systemName: "square")
-        notificationsButton.setImage(checkmark, for: .selected)
-        notificationsButton.setImage(square, for: .normal)
         
-
         editEventButton.setImage(checkmark, for: .selected)
         editEventButton.setImage(square, for: .normal)
         
@@ -65,18 +61,6 @@ class CreateEventViewController: UIViewController {
         
         currentDateLabel.text = "\(weekdayText) \(monthText)"
     }
-    
-    
-    @IBAction func notificationsBoxPressed(_ sender: Any) {
-        
-        if(notificationsButton.isSelected){
-            notificationsButton.isSelected = false
-        }else{
-            notificationsButton.isSelected = true
-        }
-        
-    }
-    
 
     
     @IBAction func editBoxPressed(_ sender: Any) {
@@ -198,7 +182,6 @@ class CreateEventViewController: UIViewController {
                                 "eventDate" : self.currentDateLabel.text!,
                                 "startTime" : self.startTimeChosen,
                                 "endTime"   : self.endTimeChosen,
-                                "notifications" : self.notificationsButton.isSelected,
                                 "reminderChoice" : self.reminderChoice,
                                 "editable" : self.editEventButton.isSelected,
                                 "creator": uid,
@@ -224,7 +207,6 @@ class CreateEventViewController: UIViewController {
                              startTime:self.startTimeChosen,
                              endTime:self.endTimeChosen,
                              location:self.locationTextField.text!,
-                             notifications: self.notificationsButton.isSelected,
                              reminderChoice: self.reminderChoice,
                              editEvents:self.editEventButton.isSelected,
                              eventCreator: uid,

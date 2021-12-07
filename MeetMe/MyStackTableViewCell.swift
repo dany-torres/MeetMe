@@ -1,20 +1,20 @@
 //
-//  StackTableViewCell.swift
+//  MyStackTableViewCell.swift
 //  MeetMe
 //
-//  Created by Daniela Torres on 11/3/21.
+//  Created by Daniela Torres on 12/6/21.
 //
-import UIKit
-import Firebase
 
-protocol MyStackCellDelegate: AnyObject {
-    func didTapCellButton1(cell: StackTableViewCell)
-    func didTapCellButton2(cell: StackTableViewCell)
-    func didTapCellButton3(cell: StackTableViewCell)
+import UIKit
+
+protocol MyStackDelegate: AnyObject {
+    func didTapCellButton1MyStack(cell: MyStackTableViewCell)
+    func didTapCellButton2MyStack(cell: MyStackTableViewCell)
+    func didTapCellButton3MyStack(cell: MyStackTableViewCell)
 }
 
-class StackTableViewCell: UITableViewCell {
-
+class MyStackTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var event1: UILabel!
     @IBOutlet weak var event2: UILabel!
@@ -23,13 +23,11 @@ class StackTableViewCell: UITableViewCell {
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     
-    
     var eventOne:Event? = nil
     var eventTwo:Event? = nil
     var eventThree:[Event] = []
     
-    weak var delegate : MyStackCellDelegate?
-    
+    weak var delegate : MyStackDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,18 +42,16 @@ class StackTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    @IBAction func didTapCellButton1(_ sender: Any) {
-        delegate?.didTapCellButton1(cell: self)
+
+    @IBAction func didTapCellButton1MyStack(_ sender: Any) {
+        delegate?.didTapCellButton1MyStack(cell: self)
     }
     
-    @IBAction func didTapCellButton2(_ sender: Any) {
-        delegate?.didTapCellButton2(cell: self)
+    @IBAction func didTapCellButton2MyStack(_ sender: Any) {
+        delegate?.didTapCellButton2MyStack(cell: self)
     }
     
-    @IBAction func didTapCellButton3(_ sender: Any) {
-        delegate?.didTapCellButton3(cell: self)
+    @IBAction func didTapCellButton3MyStack(_ sender: Any) {
+        delegate?.didTapCellButton3MyStack(cell: self)
     }
-    
-    
 }

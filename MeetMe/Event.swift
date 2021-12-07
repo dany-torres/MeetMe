@@ -15,7 +15,6 @@ class Event{
     var startTime: String
     var endTime: String
     var location: String
-    var notifications: Bool
     var reminderTime: String
     var editEvents: Bool
     var eventCreator: String
@@ -25,14 +24,13 @@ class Event{
     var groupHash: String
     var eventColor: [Int] = []
     
-    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, notifications: Bool, reminderChoice: String, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String, groupHash: String, eventColor:[Int]){
+    init(eventName: String, eventDate: String, startTime: String, endTime: String, location: String, reminderChoice: String, editEvents: Bool, eventCreator: String, nameOfGroup: String, listOfAttendees: [String], eventHash: String, groupHash: String, eventColor:[Int]){
         
         self.eventName = eventName
         self.eventDate = eventDate
         self.startTime = startTime
         self.endTime = endTime
         self.location = location
-        self.notifications = notifications
         self.reminderTime = reminderChoice
         self.editEvents = editEvents
         self.eventCreator = eventCreator

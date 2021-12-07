@@ -66,7 +66,7 @@ class EventListViewController: UIViewController, UITableViewDelegate, UITableVie
             destination.event = events[eventIndex]
             destination.currGroup = currGroup
             destination.delegate = self
-            destination.cell = cell
+//            destination.cell = cell
             destination.eventBlockNum = 4
         }
     }

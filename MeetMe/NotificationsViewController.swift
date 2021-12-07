@@ -122,7 +122,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         let startTime = eventData!["startTime"] as! String
                                         let endTime = eventData!["endTime"] as! String
                                         let location = eventData!["location"] as! String
-                                        let notifications = eventData!["notifications"] as! Bool
                                         let reminderChoice = eventData!["reminderChoice"] as! String
                                         let editEvents = eventData!["editable"] as! Bool
                                         let eventCreator = eventData!["creator"] as! String
@@ -131,7 +130,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         let eventHash = eventData!["uid"] as! String
                                         let groupHash = eventData!["groupHash"] as! String
                                         
-                                        let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, notifications: notifications, reminderChoice: reminderChoice, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash, groupHash: groupHash, eventColor:[216, 180, 252])
+                                        let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, reminderChoice: reminderChoice, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash, groupHash: groupHash, eventColor:[216, 180, 252])
                                         self.eventList.append(newEvent)
                                         
                                         self.upcomingEventsTableView.reloadData()
@@ -215,7 +214,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 let min = calendar.component(.minute, from: finalDate)
             
                 // TODO: fix que se borre cuando pasa el evento, probs usar eventDate
-
+                
             
                 cell.upcomingEventLabel.text = "\(event.nameOfGroup)\n\(event.eventName) starts in: \n\(hour) hours and \(min) minutes"
                 // Make image a circle

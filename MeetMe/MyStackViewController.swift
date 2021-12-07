@@ -8,7 +8,16 @@
 import UIKit
 import Firebase
 
-class MyStackViewController:  UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MyStackViewController:  UIViewController, UITableViewDataSource, UITableViewDelegate, MyStackDelegate {
+    
+    var fetchedEvents:[Event] = []
+    
+    var halfHours:[String] = []
+    var currCell:MyStackTableViewCell!
+    
+    var delegate: UITableView!
+    
+    let db = Firestore.firestore()
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -16,11 +25,6 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var myStack: UITableView!
     
-    var halfHours:[String] = []
-    var eventList:[Event] = []
-    var fetchedEvents:[Event] = []
-    
-    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +38,13 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
         setUserPicture()
         initTime()
         
-        // make image a circle
         // Make image a circle
         displayPicture.layer.borderWidth = 1
         displayPicture.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
         displayPicture.layer.cornerRadius = displayPicture.frame.height/2
         displayPicture.clipsToBounds = true
         
-        // set array of accepted events
+        // Set array of accepted events
         if Auth.auth().currentUser != nil {
             let docRef = db.collection("Users").document(Auth.auth().currentUser!.uid)
             docRef.getDocument { (document, error) in
@@ -53,15 +56,75 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
                 if let document = document, document.exists {
                     let data = document.data()
                     if let data = data {
-                        print("data", data)
-                        self.fetchedEvents = data["events"] as? Array ?? []
+                        let events = data["events"] as! [String]
+                        
+                        // Iterate accepted events to create local array
+                        for event in events {
+                            // Get event info from DB
+                            let eventRef = self.db.collection("Events").document(event)
+                            eventRef.getDocument { [self] (document, error) in
+                            if let document = document, document.exists {
+                                    let eventData = document.data()
+                                    let newEvent = Event(eventName: eventData!["name"] as! String,
+                                                         eventDate: eventData!["eventDate"] as! String,
+                                                         startTime: eventData!["startTime"] as! String,
+                                                         endTime: eventData!["endTime"] as! String,
+                                                         location: eventData!["location"] as! String,
+                                                         reminderChoice: eventData!["reminderChoice"] as! String,
+                                                         editEvents: eventData!["editable"] as! Bool,
+                                                         eventCreator: eventData!["creator"] as! String,
+                                                         nameOfGroup: eventData!["groupName"] as! String,
+                                                         listOfAttendees: eventData!["attendees"] as! [String],
+                                                         eventHash: eventData!["uid"] as! String,
+                                                         groupHash: eventData!["groupHash"] as! String,
+                                                         eventColor: eventData!["eventColor"] as! [Int]
+                                                    )
+                                
+                                    // Check if event is for the current date
+                                    if newEvent.eventDate == self.getTodaysDate() {
+                                        self.addEventLocally(newEvent: newEvent)
+                                    } else {
+                                        // Event is old, remove from DB
+                                        self.db.collection("Events").document(event).delete()
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
+//            // Update db with valid event
+//            self.db.collection("Users").document(Auth.auth().currentUser!.uid).updateData([
+//            "events": self.fetchedEvents
+//            ])
         }
         
-//        print(fetchedEvents)
-        self.eventList = fetchedEvents
+        // REMOVE LATER
+        print(">>>PRINTING FETCHED EVENTS:")
+        for event in fetchedEvents {
+            print ("\t\(event.eventName)")
+        }
+        
+    }
+            
+    // Function that adds event to fetched events
+    func addEventLocally(newEvent: Event){
+        print("ADDED EVENTS TO FETCHED EVENTS")
+        fetchedEvents.append(newEvent)
+    }
+            
+    // Func that gets today's date formatted string
+    func getTodaysDate() -> String {
+        let today = Date()
+        let weekday = Calendar.current.component(.weekday, from: today)
+        let month = Calendar.current.component(.month, from: today)
+        let date = Calendar.current.component(.day, from: today)
+
+        let weekdayText = Calendar.current.shortWeekdaySymbols[weekday-1]
+        let monthText = "\(Calendar.current.shortMonthSymbols[month-1]) \(date)"
+        
+        let todayCheck = "\(weekdayText) \(monthText)"
+        return todayCheck
     }
     
     
@@ -152,80 +215,131 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
         myStack.reloadData()
     }
     
+    // Create rows for all half hours of the day
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return halfHours.count
     }
     
+    // Populate cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myStackCell", for: indexPath) as! StackTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myStackCell", for: indexPath) as! MyStackTableViewCell
         let row = indexPath.row
         let time = halfHours[row]
+        
+        // Set time and delegate for cell
         cell.time.text = time
+        cell.delegate = self
+        
+        // Get the events that happen at the current cell time
         let events = getEventsAtCellTime(startTime: time)
         setEvents(cell:cell, events:events)
+        
         return cell
     }
     
-    // function to make something unselectable
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
+    // Check if the first event button was clicked
+    func didTapCellButton1MyStack(cell: MyStackTableViewCell) {
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.myStack.indexPath(for: cell)
+        let cell = myStack.cellForRow(at: indexPath!) as! MyStackTableViewCell
+        currCell = cell
+    }
+    
+    // Check if the second event button was clicked
+    func didTapCellButton2MyStack(cell: MyStackTableViewCell) {
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.myStack.indexPath(for: cell)
+        let cell = myStack.cellForRow(at: indexPath!) as! MyStackTableViewCell
+        currCell = cell
+    }
+    
+    // Check if the third event button was clicked
+    func didTapCellButton3MyStack(cell: MyStackTableViewCell) {
+        //Get the indexpath of cell where button was tapped
+        let indexPath = self.myStack.indexPath(for: cell)
+        let cell = myStack.cellForRow(at: indexPath!) as! MyStackTableViewCell
+        currCell = cell
+        
+        if (currCell != nil && currCell.eventThree.count == 1) {
+            self.performSegue(withIdentifier: "singleEvent3", sender: nil)
+        } else {
+            self.performSegue(withIdentifier: "eventsListSegue", sender: nil)
+        }
     }
     
     // Set the events block in the cells accordingly
-    func setEvents(cell:StackTableViewCell, events:[Event]) {
+    func setEvents(cell:MyStackTableViewCell, events:[Event]) {
         hideUnusedEvents(cell:cell)
         switch events.count {
         case 1:
+            cell.button1.isHidden = false
             setFirstEventBlock(cell:cell, event:events[0])
         case 2:
+            cell.button1.isHidden = false
+            cell.button2.isHidden = false
             setFirstEventBlock(cell:cell, event:events[0])
             setSecondEventBlock(cell:cell, event:events[1])
         case 3:
+            cell.button1.isHidden = false
+            cell.button2.isHidden = false
+            cell.button3.isHidden = false
             setFirstEventBlock(cell:cell, event:events[0])
             setSecondEventBlock(cell:cell, event:events[1])
             setThirdEventBlock(cell:cell, event:events[2])
         default:
+            cell.button1.isHidden = false
+            cell.button2.isHidden = false
+            cell.button3.isHidden = false
             if events.count > 3 {
                 setFirstEventBlock(cell:cell, event:events[0])
                 setSecondEventBlock(cell:cell, event:events[1])
-                setMoreThanThreeEvents(cell:cell, extraEvents:events.count - 2)
+                setMoreThanThreeEvents(cell:cell, extraEvents:Array(events[2...events.count-1]))
             }
             break
         }
     }
     
     // Set the first event block
-    func setFirstEventBlock(cell:StackTableViewCell, event:Event){
+    func setFirstEventBlock(cell:MyStackTableViewCell, event:Event){
         cell.event1.isHidden = false
-        cell.event1.text = event.eventName
+        // Check if not a longer event
+        if event.startTime == cell.time.text {
+            cell.event1.text = event.eventName
+        }
+        cell.eventOne = event
     }
     
     // Set the second event block
-    func setSecondEventBlock(cell:StackTableViewCell, event:Event){
+    func setSecondEventBlock(cell:MyStackTableViewCell, event:Event){
         cell.event2.isHidden = false
-        cell.event2.text = event.eventName
+        if event.startTime == cell.time.text {
+            cell.event2.text = event.eventName
+        }
+        cell.eventTwo = event
     }
     
     // Set the third event block
-    func setThirdEventBlock(cell:StackTableViewCell, event:Event){
+    func setThirdEventBlock(cell:MyStackTableViewCell, event:Event){
         cell.event3.isHidden = false
-        cell.event3.text = event.eventName
+        if event.startTime == cell.time.text {
+            cell.event3.text = event.eventName
+        }
+        cell.eventThree = [event]
     }
     
     // Set the third event block when there are more events
-    func setMoreThanThreeEvents(cell:StackTableViewCell, extraEvents:Int){
+    func setMoreThanThreeEvents(cell:MyStackTableViewCell, extraEvents:[Event]){
         cell.event3.isHidden = false
-        cell.event3.text = String(extraEvents) + " More Events"
+        cell.event3.text = String(extraEvents.count) + " More Events"
+        cell.eventThree = extraEvents
     }
     
-    
     // Hide any event blocks that are not being used
-    func hideUnusedEvents(cell:StackTableViewCell) {
+    func hideUnusedEvents(cell:MyStackTableViewCell) {
         cell.event1.isHidden = true
         cell.event2.isHidden = true
         cell.event3.isHidden = true
     }
-    
     
     // Get all events that start at a given time
     func getEventsAtCellTime(startTime:String) -> [Event]{
@@ -234,22 +348,71 @@ class MyStackViewController:  UIViewController, UITableViewDataSource, UITableVi
         
         var eventsAtTime = [Event]()
         
-        for event in eventList {
+        for event in fetchedEvents {
             let start = dateFormatter.date(from: event.startTime)
             let end = dateFormatter.date(from: event.endTime)
             let startTimeDate = dateFormatter.date(from: startTime)
             
+            // Checks if current cell block applies
             if event.startTime == startTime {
                 eventsAtTime.append(event)
             }
             
+            // Check if this cells occurs between start time and end time
             if start! < startTimeDate! && end! > startTimeDate! {
                 eventsAtTime.append(event)
-                // TODO: fix so that it looks like one event box
             }
+        }
+        
+        // Sort from longest duration, to shortest
+        eventsAtTime.sort {
+            dateFormatter.date(from:$0.endTime)! >= dateFormatter.date(from:$1.endTime)!
         }
         
         return eventsAtTime
     }
-
+    
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Check if we are navigating to the event 1 details
+         if segue.identifier == "eventOneSegue" && currCell != nil,
+            let destination = segue.destination as? EventDetailsViewController {
+             destination.delegate = self
+             destination.event = currCell.eventOne
+//             destination.currGroup = currGroup
+//             destination.cell = currCell as? StackTableViewCell
+//             destination.eventBlockNum = 1
+         }
+         
+         // Check if we are navigating to the event 2 details
+         if segue.identifier == "eventTwoSegue" && currCell != nil,
+            let destination = segue.destination as? EventDetailsViewController {
+             destination.delegate = self
+             destination.event = currCell.eventTwo
+//             destination.currGroup = currGroup
+//             destination.cell = currCell as? StackTableViewCell
+//             destination.eventBlockNum = 2
+         }
+         
+         // Check if we are navigating to the event 3 details
+         if segue.identifier == "singleEvent3" && currCell != nil && currCell.eventThree.count == 1,
+            let destination = segue.destination as? EventDetailsViewController {
+             destination.delegate = self
+             destination.event = currCell.eventThree[0]
+//             destination.currGroup = currGroup
+//             destination.cell = currCell as? StackTableViewCell
+//             destination.eventBlockNum = 3
+         }
+         
+         // Check if we are navigating to the event 3 details
+         if segue.identifier == "eventsListSegue" && currCell != nil && currCell.eventThree.count > 1,
+            let destination = segue.destination as? EventListViewController {
+             destination.delegate = self
+             destination.events = currCell.eventThree
+//             destination.currGroup = currGroup
+//             destination.cell = currCell as? StackTableViewCell
+         }
+         
+     }
 }

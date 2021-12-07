@@ -397,7 +397,6 @@ class SettingsViewController: UIViewController {
                                                          startTime: eventData!["startTime"] as! String,
                                                          endTime: eventData!["endTime"] as! String,
                                                          location: eventData!["location"] as! String,
-                                                         notifications: eventData!["notifications"] as! Bool,
                                                          reminderChoice: eventData!["reminderChoice"] as! String,
                                                          editEvents: eventData!["editable"] as! Bool,
                                                          eventCreator: eventData!["creator"] as! String,

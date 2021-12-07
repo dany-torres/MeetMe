@@ -17,7 +17,7 @@ protocol DeleteEvent {
 }
 
 protocol UpdateEvent {
-    func updateEvent(cell: StackTableViewCell, event:Event)
+    func updateEvent(event:Event)
 }
 
 protocol UpdateGroup {
@@ -160,10 +160,15 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         let cell = tableView.dequeueReusableCell(withIdentifier: "stackCell", for: indexPath) as! StackTableViewCell
         let row = indexPath.row
         let time = halfHours[row]
+        
+        // Set time and delegate for cell
         cell.time.text = time
         cell.delegate = self
+        
+        // Get the events that happen at the current cell time
         let events = getEventsAtCellTime(startTime: time)
         setEvents(cell:cell, events:events)
+        
         return cell
     }
     
@@ -197,23 +202,9 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         }
     }
     
-    // Get hour to the nearest half hour
-    func getCurrentTime() -> String{
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "h:mm a"
-        formatter.amSymbol = "AM"
-        formatter.pmSymbol = "PM"
-
-        let dateString = formatter.string(from: Date())
-        return dateString
-    }
-    
     // Set the events block in the cells accordingly
     func setEvents(cell:StackTableViewCell, events:[Event]) {
         hideUnusedEvents(cell:cell)
-//        print(">> GOT IN SET EVENTS, eventsCount: \(events.count)")
-        
         switch events.count {
         case 0:
             break
@@ -254,6 +245,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
         }
         cell.eventOne = event
         
+        // Set background color to user color
         cell.event1.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
@@ -264,6 +256,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             cell.event2.text = event.eventName
         }
         cell.eventTwo = event
+        
+        // Set background color to user color
         cell.event2.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
@@ -274,6 +268,8 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
             cell.event3.text = event.eventName
         }
         cell.eventThree = [event]
+        
+        // Set background color to user color
         cell.event3.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
@@ -359,7 +355,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventOne
              destination.currGroup = currGroup
-             destination.cell = currCell
+//             destination.cell = currCell
              destination.eventBlockNum = 1
          }
          
@@ -369,7 +365,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventTwo
              destination.currGroup = currGroup
-             destination.cell = currCell
+//             destination.cell = currCell
              destination.eventBlockNum = 2
          }
          
@@ -379,7 +375,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventThree[0]
              destination.currGroup = currGroup
-             destination.cell = currCell
+//             destination.cell = currCell
              destination.eventBlockNum = 3
          }
          
@@ -389,7 +385,7 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.events = currCell.eventThree
              destination.currGroup = currGroup
-             destination.cell = currCell
+//             destination.cell = currCell
          }
          
      }
@@ -417,7 +413,6 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
                                                  startTime: eventData!["startTime"] as! String,
                                                  endTime: eventData!["endTime"] as! String,
                                                  location: eventData!["location"] as! String,
-                                                 notifications: eventData!["notifications"] as! Bool,
                                                  reminderChoice: eventData!["reminderChoice"] as! String,
                                                  editEvents: eventData!["editable"] as! Bool,
                                                  eventCreator: eventData!["creator"] as! String,
@@ -491,15 +486,15 @@ class GroupStackViewController: UIViewController, UITableViewDataSource,
     }
     
     // Updates event in local list
-    func updateEvent(cell: StackTableViewCell, event: Event) {
-        let indexPath = self.eventStack.indexPath(for: cell)
-//        eventStack.reloadRows(at: [indexPath], with: .top)
-        if let elem = eventList.first(where: {$0.eventHash == event.eventHash}) {
-            elem.eventName = event.eventName
-            elem.startTime = event.startTime
-            elem.endTime = event.endTime
-            elem.location = event.location
-        }
+    func updateEvent(event: Event) {
+//        let indexPath = self.eventStack.indexPath(for: cell)
+////        eventStack.reloadRows(at: [indexPath], with: .top)
+//        if let elem = eventList.first(where: {$0.eventHash == event.eventHash}) {
+//            elem.eventName = event.eventName
+//            elem.startTime = event.startTime
+//            elem.endTime = event.endTime
+//            elem.location = event.location
+//        }
         eventStack.reloadData()
     }
     
