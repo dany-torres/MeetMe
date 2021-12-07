@@ -129,10 +129,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                                         let groupHash = eventData!["groupHash"] as! String
                                         
                                         let newEvent = Event(eventName: name, eventDate: eventDate, startTime: startTime, endTime: endTime, location: location, notifications: notifications, reminderChoice: reminderChoice, editEvents: editEvents, eventCreator: eventCreator, nameOfGroup: nameOfGroup, listOfAttendees: listOfAttendees, eventHash: eventHash, groupHash: groupHash, eventColor:[216, 180, 252])
-                                        self.eventList.append(newEvent)
                                         
-                                        self.upcomingEventsTableView.reloadData()
-                                        print(name)
+                                        if (self.checkTime(event: newEvent)){
+                                            self.eventList.append(newEvent)
+                                            self.upcomingEventsTableView.reloadData()
+                                        }
+                                        
+//                                        print(name)
                                     } else {
                                         print("Upcoming event does not exist")
                                     }
@@ -147,6 +150,29 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         print(self.eventList.count)
         
+    }
+    
+    func checkTime(event: Event) -> Bool{
+        let now = Date()
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+    
+        let start = formatter.date(from: event.startTime)
+        
+        let startTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute], from: start!))
+        let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute], from: now))
+        
+        
+        let startHour = calendar.component(.hour, from: startTime!)
+        let startMin = calendar.component(.minute, from: startTime!)
+        let nowHour = calendar.component(.hour, from: nowTime!)
+        let nowMin = calendar.component(.minute, from: nowTime!)
+        
+        if(startHour < nowHour && startMin < nowMin){
+            return false
+        }
+        return true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -207,8 +233,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 let hour = calendar.component(.hour, from: finalDate)
                 let min = calendar.component(.minute, from: finalDate)
 
-            
+            if (hour == 0){
+                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(min) minutes"
+            } else {
                 cell.upcomingEventLabel.text = "\(event.eventName) starts in \(hour) hours and \(min) minutes"
+            }
                 // Make image a circle
             cell.imageView!.layer.borderWidth = 1
             cell.imageView!.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
