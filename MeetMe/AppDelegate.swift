@@ -8,11 +8,12 @@
 import UIKit
 import CoreData
 import Firebase
+import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
-
+    let notificationCenter = UNUserNotificationCenter.current()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,6 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let targetLang = UserDefaults.standard.object(forKey: "selectedLanguage") as? String
                 Bundle.setLanguage((targetLang != nil) ? targetLang! : "en")
         return true
+    }
+    
+    func requestAuthForLocalNotifications(){
+         notificationCenter.delegate = self
+         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+         notificationCenter.requestAuthorization(options: options) { (didAllow, error) in
+              if !didAllow {
+                   print("User has declined notification")
+              }
+         }
     }
 
     // MARK: UISceneSession Lifecycle
