@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class EventListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -14,6 +15,8 @@ class EventListViewController: UIViewController, UITableViewDelegate, UITableVie
     var cell:StackTableViewCell!
     
     var delegate: UIViewController!
+    
+    let db = Firestore.firestore()
     
     @IBOutlet weak var eventTableView: UITableView!
     
@@ -64,11 +67,31 @@ class EventListViewController: UIViewController, UITableViewDelegate, UITableVie
            let destination = segue.destination as? EventDetailsViewController,
            let eventIndex = eventTableView.indexPathForSelectedRow?.row {
             destination.event = events[eventIndex]
-            destination.currGroup = currGroup
+            destination.currGroup = getGroupFromDB(hash:events[eventIndex].groupHash)
             destination.delegate = self
 //            destination.cell = cell
             destination.eventBlockNum = 4
         }
+    }
+    
+    // Gets group
+    func getGroupFromDB (hash: String) -> Group {
+        let currGroup = Group()
+        let groupRef = self.db.collection("Groups").document(hash)
+        groupRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let groupsData = document.data()
+                currGroup.groupHASH = groupsData!["uid"] as! String
+                currGroup.groupName = groupsData!["name"] as! String
+                currGroup.groupDescr = groupsData!["description"] as! String
+                currGroup.adminRun = groupsData!["admin"] as! Bool
+                currGroup.groupCreator = groupsData!["creator"] as! String
+                
+                currGroup.members = groupsData!["peopleInGroup"] as! [String]
+                currGroup.events = groupsData!["events"] as! [String]
+            }
+        }
+        return currGroup
     }
 
 }

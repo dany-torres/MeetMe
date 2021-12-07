@@ -96,6 +96,7 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
                 }
             }
         }
+//        myStack.reloadData()
     }
     
     // Reload stack to show any event edits
@@ -105,7 +106,6 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
             
     // Function that adds event to fetched events
     func addEventLocally(newEvent: Event){
-        print("ADDED EVENTS TO FETCHED EVENTS")
         fetchedEvents.append(newEvent)
         myStack.reloadData()
     }
@@ -226,10 +226,6 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
         // Set time and delegate for cell
         cell.time.text = time
         cell.delegate = self
-//        cell.button1.isEnabled = false
-//        cell.button2.isEnabled = false
-//        cell.button3.isEnabled = false
-//        print("***cell.button1 is enabled? \(cell.button1.isEnabled)")
         
         // Get the events that happen at the current cell time
         let events = getEventsAtCellTime(startTime: time)
@@ -318,6 +314,9 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
             cell.event1.text = event.eventName
         }
         cell.eventOne = event
+        
+        // Set background color to user color
+        cell.event1.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
     // Set the second event block
@@ -328,6 +327,9 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
             cell.event2.text = event.eventName
         }
         cell.eventTwo = event
+        
+        // Set background color to user color
+        cell.event2.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
     // Set the third event block
@@ -338,6 +340,9 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
             cell.event3.text = event.eventName
         }
         cell.eventThree = [event]
+        
+        // Set background color to user color
+        cell.event3.backgroundColor = getColor(rgbArray: event.eventColor)
     }
     
     // Set the third event block when there are more events
@@ -356,6 +361,14 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
         cell.button1.isHidden = true
         cell.button2.isHidden = true
         cell.button3.isHidden = true
+    }
+    
+    // Func to get the color of the event block based on User color
+    func getColor(rgbArray:[Int]) -> UIColor {
+        let red:CGFloat = CGFloat(rgbArray[0])/CGFloat(255)
+        let green:CGFloat = CGFloat(rgbArray[1])/CGFloat(255)
+        let blue:CGFloat = CGFloat(rgbArray[2])/CGFloat(255)
+        return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
     // Get all events that start at a given time
@@ -398,6 +411,7 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventOne
 //             destination.cell = currCell as? StackTableViewCell
+             destination.currGroup = getGroupFromDB(hash:currCell.eventOne!.groupHash)
              destination.eventBlockNum = 1
          }
          
@@ -407,6 +421,7 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventTwo
 //             destination.cell = currCell as? StackTableViewCell
+             destination.currGroup = getGroupFromDB(hash:currCell.eventTwo!.groupHash)
              destination.eventBlockNum = 2
          }
          
@@ -416,6 +431,7 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
              destination.delegate = self
              destination.event = currCell.eventThree[0]
 //             destination.cell = currCell as? StackTableViewCell
+             destination.currGroup = getGroupFromDB(hash:currCell.eventThree[0].groupHash)
              destination.eventBlockNum = 3
          }
          
@@ -428,6 +444,26 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
          }
          
      }
+    
+    // Gets group
+    func getGroupFromDB (hash: String) -> Group {
+        let currGroup = Group()
+        let groupRef = self.db.collection("Groups").document(hash)
+        groupRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let groupsData = document.data()
+                currGroup.groupHASH = groupsData!["uid"] as! String
+                currGroup.groupName = groupsData!["name"] as! String
+                currGroup.groupDescr = groupsData!["description"] as! String
+                currGroup.adminRun = groupsData!["admin"] as! Bool
+                currGroup.groupCreator = groupsData!["creator"] as! String
+                
+                currGroup.members = groupsData!["peopleInGroup"] as! [String]
+                currGroup.events = groupsData!["events"] as! [String]
+            }
+        }
+        return currGroup
+    }
     
     // Deletes event from local list
     func deleteEvent(event: Event) {

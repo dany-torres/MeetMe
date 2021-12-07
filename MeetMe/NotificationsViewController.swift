@@ -241,9 +241,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 let min = calendar.component(.minute, from: finalDate)
 
             if (hour == 0){
-                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(min) minutes"
+                cell.upcomingEventLabel.text = "\(event.nameOfGroup)\n\"\(event.eventName)\" starts in \(min) minutes"
             } else {
-                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(hour) hours and \(min) minutes"
+                cell.upcomingEventLabel.text = "\(event.nameOfGroup)\n\"\(event.eventName)\" starts in \(hour) hours and \(min) minutes"
             }
                 // Make image a circle
                 cell.imageView!.layer.borderWidth = 1
