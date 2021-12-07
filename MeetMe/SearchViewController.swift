@@ -90,7 +90,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 // If dataItem matches the searchText, return true to include it
                 return item.username.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
-            usersList = filteredData
+
             resultsTableView.reloadData()
         }
     
@@ -224,10 +224,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         //check status of button
         let buttonStatus = cell.requestButton.titleLabel?.text
-        print("INSIDE DELEGATE METHOD")
         if(buttonStatus == "Add"){
-            
-            print("INSIDE IF ADD STATEMENT")
             //change button status
             cell.requestButton.setTitle("Requested", for: .normal)
                 
@@ -235,7 +232,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
             let row = (indexPath?.row)!
             
-            let newFriendRequest = usersList[row]
+            let newFriendRequest = filteredData[row]
             let newFriendRequestHash = newFriendRequest.hash
             
             if Auth.auth().currentUser != nil {
