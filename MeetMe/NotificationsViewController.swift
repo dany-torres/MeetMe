@@ -51,10 +51,14 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 self.populateUpcomingEventsTable()
             }
         }
+//        upcomingEventsTableView.reloadData()
 
-        
+    }
+    
+    // Reload data
+    override func viewWillAppear(_ animated: Bool) {
         upcomingEventsTableView.reloadData()
-
+        friendRequestTableView.reloadData()
     }
     
     func populateFriendRequestTable(){
@@ -337,10 +341,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 
                 // Search for the user and append it to existing array
                 self.db.collection("Users").document(uid).updateData(["friends": FieldValue.arrayUnion([newFriendHash])])
+
+                // Search for the user and append it to existing array
+                self.db.collection("Users").document(newFriendHash).updateData(["friends": FieldValue.arrayUnion([uid])])
                 
                 //remove from friend request list in DB
-                self.db.collection("Users").document(uid).updateData(["friendRequests": FieldValue.arrayRemove([newFriendHash])
-                                                                     ])
+                self.db.collection("Users").document(uid).updateData(["friendRequests": FieldValue.arrayRemove([newFriendHash])])
+                
                 self.friendRequestTableView.reloadData()
             }
             

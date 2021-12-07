@@ -54,7 +54,34 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         
         // Set Picture
         let uid = event?.eventCreator
-        guard let urlString = UserDefaults.standard.value(forKey: uid!) as? String,
+        setEventCreatorPicture(uid:uid!)
+
+        // Check if user can't edit event
+        // Case 1: Check if it's the event creator
+        // Case 2: Community Run AND event is editable
+        if (event?.eventCreator == Auth.auth().currentUser!.uid){
+            editButton.isHidden = false
+            deleteButton.isHidden = false
+            joinButton.isHidden = true
+            saveButton.isHidden = false
+        } else if (!currGroup.adminRun && event!.editEvents) ||
+                  (currGroup.adminRun && currGroup.groupCreator == Auth.auth().currentUser!.uid) {
+            editButton.isHidden = false
+            saveButton.isHidden = false
+        } else if (event!.listOfAttendees.contains(Auth.auth().currentUser!.uid)){
+            // Check if current user is already part of the event
+            let myNormalAttributedTitle = NSAttributedString(string: "Unjoin",
+                attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 13)!])
+            joinButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+            
+        }
+        
+        setTextFieldsInfo()
+    }
+    
+    // Function that sets the user's picture
+    func setEventCreatorPicture(uid: String) {
+        guard let urlString = UserDefaults.standard.value(forKey: uid) as? String,
               let url = URL(string: urlString) else {
                   return
               }
@@ -68,35 +95,6 @@ class EventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             }
         })
         task.resume()
-
-        // Check if user can't edit event
-        // Case 1: Community Run AND event is editable
-        // Case 2: Admin Run AND group creator is trying to edit
-        // Case 3: Check if uneditable, but user is event creator
-        // Check if it's the event creator
-        print("**BEFOREE")
-        if (event?.eventCreator == Auth.auth().currentUser!.uid){
-            print(">>>GOT HERE")
-            editButton.isHidden = false
-            deleteButton.isHidden = false
-            joinButton.isHidden = true
-            saveButton.isHidden = false
-        } else if (!currGroup.adminRun && event!.editEvents) ||
-                  (!event!.editEvents && event?.eventCreator == Auth.auth().currentUser!.uid) ||
-                  (currGroup.adminRun && currGroup.groupCreator == Auth.auth().currentUser!.uid) {
-            print(">>>GOT HERE 2")
-            editButton.isHidden = false
-            saveButton.isHidden = false
-        } else if (event!.listOfAttendees.contains(Auth.auth().currentUser!.uid)){
-            print(">>>GOT HERE 3")
-            // Check if current user is already part of the event
-            let myNormalAttributedTitle = NSAttributedString(string: "Unjoin",
-                attributes: [NSAttributedString.Key.font: UIFont(name: "Futura-Medium", size: 13)!])
-            joinButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
-            
-        }
-        
-        setTextFieldsInfo()
     }
     
     // Set event info on text fields, make it uneditable

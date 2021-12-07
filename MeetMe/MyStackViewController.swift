@@ -97,6 +97,11 @@ class MyStackViewController:  UIViewController, UITableViewDataSource,
             }
         }
     }
+    
+    // Reload stack to show any event edits
+    override func viewWillAppear(_ animated: Bool) {
+        myStack.reloadData()
+    }
             
     // Function that adds event to fetched events
     func addEventLocally(newEvent: Event){
