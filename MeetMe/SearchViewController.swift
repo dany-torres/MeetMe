@@ -90,7 +90,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 // If dataItem matches the searchText, return true to include it
                 return item.username.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
             }
-            
+            usersList = filteredData
             resultsTableView.reloadData()
         }
     
