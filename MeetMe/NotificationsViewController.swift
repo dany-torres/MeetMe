@@ -156,6 +156,29 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
+    func checkTime(event: Event) -> Bool{
+        let now = Date()
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+    
+        let start = formatter.date(from: event.startTime)
+        
+        let startTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute], from: start!))
+        let nowTime = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute], from: now))
+        
+        
+        let startHour = calendar.component(.hour, from: startTime!)
+        let startMin = calendar.component(.minute, from: startTime!)
+        let nowHour = calendar.component(.hour, from: nowTime!)
+        let nowMin = calendar.component(.minute, from: nowTime!)
+        
+        if(startHour < nowHour && startMin < nowMin){
+            return false
+        }
+        return true
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch tableView {
@@ -212,11 +235,12 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 let finalDate = Calendar.current.date(from:diffComponents)!
                 let hour = calendar.component(.hour, from: finalDate)
                 let min = calendar.component(.minute, from: finalDate)
-            
-                // TODO: fix que se borre cuando pasa el evento, probs usar eventDate
-                
-            
-                cell.upcomingEventLabel.text = "\(event.nameOfGroup)\n\(event.eventName) starts in: \n\(hour) hours and \(min) minutes"
+
+            if (hour == 0){
+                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(min) minutes"
+            } else {
+                cell.upcomingEventLabel.text = "\(event.eventName) starts in \(hour) hours and \(min) minutes"
+            }
                 // Make image a circle
                 cell.imageView!.layer.borderWidth = 1
                 cell.imageView!.layer.borderColor = UIColor(red: 166/255, green: 109/255, blue: 237/255, alpha: 1).cgColor
