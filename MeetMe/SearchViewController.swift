@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UserRequestTableViewCellDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UserRequestTableViewCellDelegate {
     
     
     var usersList: [User] = []
@@ -21,13 +21,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var resultsTableView: UITableView!
     
     var currCell: UserRequestTableViewCell!
+    var filteredData: [User]!
+    
+//    func populateStrings(){
+//        for username in usersList {
+//            print(username.username)
+////            data.append(username.username)
+////            filteredData.append(username.username)
+//        }
+//    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
-        
+        searchBar.delegate = self
         
         db.collection("Users").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -65,8 +74,25 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         print(usersList)
+//        populateStrings()
+        filteredData = usersList
         // Do any additional setup after loading the view.
     }
+    
+    // This method updates filteredData based on the text in the Search Box
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            // When there is no text, filteredData is the same as the original data
+            // When user has entered text into the search box
+            // Use the filter method to iterate over all items in the data array
+            // For each item, return true if the item should be included and false if the
+            // item should NOT be included
+            filteredData = searchText.isEmpty ? usersList : usersList.filter { (item: User) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                return item.username.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+            
+            resultsTableView.reloadData()
+        }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let selectedUser = usersList[indexPath.row]
@@ -83,7 +109,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usersList.count
+        return filteredData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,7 +118,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.delegate = self
         
         let row = indexPath.row
-        let searchedUser = usersList[row]
+        let searchedUser = filteredData[row]
         cell.nameLabel.text = searchedUser.name
         cell.usernameLabel.text = "@" + searchedUser.username
         cell.locationLabel.text = searchedUser.location
