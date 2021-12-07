@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class FriendListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FriendListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     var usersList: [String] = []
     
     let db = Firestore.firestore()
@@ -20,6 +20,8 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
     var fromSettings = true
     var currentMembers: [String] = []
     
+    var filteredData: [String]!
+
     @IBOutlet weak var friendSearchBar: UISearchBar!
     @IBOutlet var friendsTableView: UITableView!
     
@@ -27,6 +29,7 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
+        friendSearchBar.delegate = self
         
         let queue = DispatchQueue(label: "curr")
         queue.async {
@@ -35,17 +38,34 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             self.populateFriendTable()
         }
+        
+        filteredData = usersList
 
     }
     
+    // This method updates filteredData based on the text in the Search Box
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            // When there is no text, filteredData is the same as the original data
+            // When user has entered text into the search box
+            // Use the filter method to iterate over all items in the data array
+            // For each item, return true if the item should be included and false if the
+            // item should NOT be included
+            filteredData = searchText.isEmpty ? usersList : usersList.filter { (item: String) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            }
+            
+            friendsTableView.reloadData()
+        }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedUser = usersList[indexPath.row]
+        let selectedUser = filteredData[indexPath.row]
         if fromSettings {
             db.collection("Groups").document(group.groupHASH).updateData(["peopleInGroup": FieldValue.arrayUnion([selectedUser])])
             db.collection("Users").document(selectedUser).updateData(["groupsAll": FieldValue.arrayUnion([group.groupHASH])])
         }
         currentMembers.append(selectedUser)
-        usersList = usersList.filter {$0 != selectedUser}
+        filteredData = filteredData.filter {$0 != selectedUser}
         let otherVC = delegate as! addFriends
         otherVC.addFriends(newUser: selectedUser)
         friendsTableView.reloadData()
@@ -86,13 +106,13 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usersList.count
+        return filteredData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UserCellIdentifier, for: indexPath) as! AddFriendTableViewCell
         let row = indexPath.row
-        let user = usersList[row]
+        let user = filteredData[row]
         let friendRef = self.db.collection("Users").document(user)
         friendRef.getDocument { (document, error) in
             if let document = document, document.exists {
