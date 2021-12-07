@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         let targetLang = UserDefaults.standard.object(forKey: "selectedLanguage") as? String
                 Bundle.setLanguage((targetLang != nil) ? targetLang! : "en")
+        requestAuthForLocalNotifications()
         return true
     }
     
